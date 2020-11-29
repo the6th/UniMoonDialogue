@@ -76,19 +76,27 @@ namespace UniMoonAdventure
         /// <summary>
         /// メッセージ表示中か？
         /// </summary>
-        public bool isRunning => coroutine.Coroutine.State != CoroutineState.Dead;
+        public bool isRunning => coroutine?.Coroutine.State != CoroutineState.Dead;
         //Step表示実行中か？
         private bool isStepping = false;
         //Step表示を中止するか？（早送り表示)
         public bool skipStep { private set; get; } = false;
 
         public UnityAction<ScenarioType, string, float> OnMessageUpdate;
+        public UnityAction OnMessageStart;
+        public UnityAction OnMessageEnd;
+        public UnityAction<string[]> OnChoiceStart;
+
+
 
         private void UpdateScenario(ScenarioType type, string[] messageArray)
         {
             scenarioType = type;
-
-            if (!StepScenario)
+            if(type == ScenarioType.Select)
+            {
+                OnChoiceStart?.Invoke(messageArray);
+            }
+            else if (!StepScenario)
             {
                 currentText = messageArray[0];
                 OnMessageUpdate?.Invoke(scenarioType, currentText, 1f);
@@ -135,18 +143,23 @@ namespace UniMoonAdventure
             skipStep = false;
         }
 
-        public void StartScenario(LuaTextAsset lua)
+        public void StartScenario(LuaTextAsset lua,bool forceRefresh = false)
         {
+            if (coroutine != null ) return;
+
             UserData.RegisterAssembly(typeof(LuaEventData).Assembly);
             Script script = new Script();
             script.Globals["scene"] = new LuaEventData();
-
+          
             //var scenario = LoadScenario();
             var scenario = LoadScenario(lua);
 
             DynValue function = script.DoString(scenario);
             coroutine = script.CreateCoroutine(function);
+            OnMessageStart?.Invoke();
+
             coroutine.Coroutine.Resume();
+
         }
 
         #endregion
@@ -157,11 +170,13 @@ namespace UniMoonAdventure
             if (AutoStart) StartScenario(luaScript);
         }
 
-
-
-
+        /// <summary>
+        /// ユーザーイベント、クリックや選択が発生
+        /// </summary>
+        /// <param name="choice"></param>
         public void ScenarioSelect(ScenarioChoice choice)
         {
+            //Debug.Log("ScenarioSelect" + choice.ToString());
             if (coroutine.Coroutine.State != CoroutineState.Dead && scenarioType != ScenarioType.None)
             {
                 if (StepScenario && isStepping)
@@ -174,6 +189,13 @@ namespace UniMoonAdventure
                     coroutine.Coroutine.Resume((int)scenarioChoice);
                 }
             }
+            else if (scenarioType != ScenarioType.None)
+            {
+                scenarioType = ScenarioType.None;
+                coroutine = null;
+                OnMessageEnd?.Invoke();
+            }
+
         }
 
         private string LoadScenario(LuaTextAsset luaTextAsset)

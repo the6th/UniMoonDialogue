@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 250065373}
   - component: {fileID: 250065372}
   - component: {fileID: 250065371}
+  - component: {fileID: 250065374}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -240,6 +241,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 250065369}
   m_CullTransparentMesh: 0
+--- !u!114 &250065374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250065369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9825089f484f4474b9a55dfde3913a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonText: {fileID: 0}
+  button: {fileID: 0}
+  choice: 0
 --- !u!1 &318440691
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,7 +430,6 @@ GameObject:
   m_Component:
   - component: {fileID: 571429167}
   - component: {fileID: 571429166}
-  - component: {fileID: 571429168}
   m_Layer: 0
   m_Name: ScenarioLua
   m_TagString: Untagged
@@ -449,7 +464,7 @@ MonoBehaviour:
       )\r\n\u2003\u2003  coroutine.yield()\r\nelseif selected == 3 then\r\n\u2003\u2003 
       scene.msg( '\u305D\u3093\u306A\u3053\u3068\u8A00\u308F\u306A\u3044\u3067' )\r\n\u2003\u2003 
       coroutine.yield()\r\nend\r\nscene.msg( '\u3055\u3063\u304D\u3082\u8A00\u3063\u305F\u3051\u3069\u3001\u79C1\u306F\u3001\u8D64\u3061\u3083\u3093\u3067\u3059\u3002\u30D0\u30D6\u30D0\u30D6\u3002'
-      )\r\ncoroutine.yield()\r\nscene.msg( '\u3082\u3046\u304A\u308F\u308A' )\r\nend"
+      )\r\ncoroutine.yield()\r\nscene.msg( '\u3082\u3046\u304A\u308F\u308A' )\r\n\r\nend"
     byteString: "return function()\r\nscene.msg( 'Hello????????????????????????????????????????????????'
       )\r\ncoroutine.yield()\r\n\r\nscene.msg( '?????????????????????????????????'
       )\r\ncoroutine.yield()\r\n???\r\nscene.choice( '???????????????' , 'Tokyo',
@@ -460,8 +475,8 @@ MonoBehaviour:
       scene.msg( '????????????????????????????????????' )\r\n??????  coroutine.yield()\r\nelseif
       selected == 3 then\r\n??????  scene.msg( '??????????????????????????????' )\r\n?????? 
       coroutine.yield()\r\nend\r\nscene.msg( '???????????????????????????????????????????????????????????????????????????'
-      )\r\ncoroutine.yield()\r\nscene.msg( '???????????????' )\r\nend"
-  AutoStart: 1
+      )\r\ncoroutine.yield()\r\nscene.msg( '???????????????' )\r\n\r\nend"
+  AutoStart: 0
   StepScenario: 1
   stepSpeed: 0.1
 --- !u!4 &571429167
@@ -478,21 +493,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &571429168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571429165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ad76913902cd2e4e9d8ab968d410959, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  messageText: {fileID: 318440693}
-  NextUI: {fileID: 1394392680}
-  voiceClip: {fileID: 8300000, guid: d19d803e4ea20444098bc6338024f50b, type: 3}
 --- !u!1 &630508874
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,6 +504,7 @@ GameObject:
   - component: {fileID: 630508877}
   - component: {fileID: 630508876}
   - component: {fileID: 630508875}
+  - component: {fileID: 630508878}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -576,6 +577,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &630508878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630508874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &882858496
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,9 +680,11 @@ GameObject:
   - component: {fileID: 1207480551}
   - component: {fileID: 1207480550}
   - component: {fileID: 1207480549}
+  - component: {fileID: 1207480553}
   - component: {fileID: 1207480548}
   - component: {fileID: 1207480547}
   - component: {fileID: 1207480546}
+  - component: {fileID: 1207480552}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -775,6 +794,72 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1207480552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207480545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1207480553}
+          m_MethodName: StartScenario
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1207480553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207480545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a60ed211ec37824469997eb391fbc806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  luaScript:
+    path: Assets/UniMoonAdventure/Examples/Resources/Sample1.lua
+    textString: "return function()\r\nscene.msg( 'Hello\u3002\u79C1\u306F\u3001\u8D64\u3061\u3083\u3093\u3067\u3059\u3002\u30D0\u30D6\u30D0\u30D6\u3002'
+      )\r\ncoroutine.yield()\r\n\r\nscene.msg( '\u4ECA\u65E5\u306F\u3069\u3053\u304B\u3089\u6765\u305F\u306E\uFF1F'
+      )\r\ncoroutine.yield()\r\n\u2003\r\nscene.choice( '\u3069\u3053\u304B\u3089\uFF1F'
+      , 'Tokyo', 'Hakata', 'Nagoya' )\r\nlocal selected = coroutine.yield()\r\n\r\nif
+      selected == 0 then\r\n    scene.msg( '\u3078\u3048\u3002\u5730\u5143\u306A\u3093\u3060'
+      )\r\n    coroutine.yield()\r\n\r\nelseif selected == 1 then\r\n\u2003\u2003 
+      scene.msg( '\u3078\u3047\u3002\u3088\u3046\u3053\u305D\u3002\u3044\u3089\u3063\u3057\u3083\u3044'
+      )\r\n\u2003\u2003  coroutine.yield()\r\n\r\nelseif selected == 2 then\r\n\u2003\u2003 
+      scene.msg( '\u9060\u3044\u3068\u3053\u308D\u304B\u3089\u3042\u308A\u304C\u3068\u3046'
+      )\r\n\u2003\u2003  coroutine.yield()\r\nelseif selected == 3 then\r\n\u2003\u2003 
+      scene.msg( '\u305D\u3093\u306A\u3053\u3068\u8A00\u308F\u306A\u3044\u3067' )\r\n\u2003\u2003 
+      coroutine.yield()\r\nend\r\nscene.msg( '\u3055\u3063\u304D\u3082\u8A00\u3063\u305F\u3051\u3069\u3001\u79C1\u306F\u3001\u8D64\u3061\u3083\u3093\u3067\u3059\u3002\u30D0\u30D6\u30D0\u30D6\u3002'
+      )\r\ncoroutine.yield()\r\nscene.msg( '\u3082\u3046\u304A\u308F\u308A' )\r\n\r\nend"
+    byteString: "return function()\r\nscene.msg( 'Hello????????????????????????????????????????????????'
+      )\r\ncoroutine.yield()\r\n\r\nscene.msg( '?????????????????????????????????'
+      )\r\ncoroutine.yield()\r\n???\r\nscene.choice( '???????????????' , 'Tokyo',
+      'Hakata', 'Nagoya' )\r\nlocal selected = coroutine.yield()\r\n\r\nif selected
+      == 0 then\r\n    scene.msg( '????????????????????????' )\r\n    coroutine.yield()\r\n\r\nelseif
+      selected == 1 then\r\n??????  scene.msg( '??????????????????????????????????????????'
+      )\r\n??????  coroutine.yield()\r\n\r\nelseif selected == 2 then\r\n?????? 
+      scene.msg( '????????????????????????????????????' )\r\n??????  coroutine.yield()\r\nelseif
+      selected == 3 then\r\n??????  scene.msg( '??????????????????????????????' )\r\n?????? 
+      coroutine.yield()\r\nend\r\nscene.msg( '???????????????????????????????????????????????????????????????????????????'
+      )\r\ncoroutine.yield()\r\nscene.msg( '???????????????' )\r\n\r\nend"
 --- !u!1 &1394392679
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,6 +1056,7 @@ GameObject:
   - component: {fileID: 1763293031}
   - component: {fileID: 1763293030}
   - component: {fileID: 1763293029}
+  - component: {fileID: 1763293033}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1059,6 +1145,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1763293033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763293028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad76913902cd2e4e9d8ab968d410959, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 882858497}
+  choiceButtonSeed: {fileID: 250065374}
+  messageText: {fileID: 318440693}
+  NextButton: {fileID: 2115694322}
+  voiceClip: {fileID: 8300000, guid: d19d803e4ea20444098bc6338024f50b, type: 3}
 --- !u!1 &1881616737
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,7 +1281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1237,6 +1340,7 @@ GameObject:
   - component: {fileID: 2115694321}
   - component: {fileID: 2115694320}
   - component: {fileID: 2115694319}
+  - component: {fileID: 2115694322}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1344,3 +1448,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2115694317}
   m_CullTransparentMesh: 0
+--- !u!114 &2115694322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2115694317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9825089f484f4474b9a55dfde3913a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonText: {fileID: 0}
+  button: {fileID: 0}
+  choice: 0
