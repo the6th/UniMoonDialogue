@@ -80,7 +80,7 @@ namespace UniMoonAdventure
         //Step表示実行中か？
         private bool isStepping = false;
         //Step表示を中止するか？（早送り表示)
-        private bool skipStep = false;
+        public bool skipStep { private set; get; } = false;
 
         public UnityAction<ScenarioType, string, float> OnMessageUpdate;
 
@@ -114,7 +114,6 @@ namespace UniMoonAdventure
 
                 if (scenarioType == ScenarioType.Select)
                 {
-                    Debug.Log($"{scenarioType.ToString()} {progress:N2}");
                     if (progress == 1f)
                     {
                         currentText += "\r\n";
