@@ -1,24 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 using static UniMoonAdventure.ScenarioEngine;
 
 namespace UniMoonAdventure
 {
-    [RequireComponent(typeof(AudioSource))]
     public class ScenarioToCanvasText : MonoBehaviour
     {
         [SerializeField]
-        Text messageText;
+        private Text messageText;
 
         [SerializeField]
-        RectTransform NextUI;
+        private RectTransform NextUI;
 
         [SerializeField]
-        AudioClip voiceClip;
-        AudioSource audioSource;
+        private AudioClip voiceClip;
 
+        private AudioSource audioSource = null;
         private ScenarioEngine engine = null;
 
 
@@ -28,7 +26,8 @@ namespace UniMoonAdventure
             engine.OnMessageUpdate += OnMessageUpdate;
             messageText.text = "";
 
-            audioSource = GetComponent<AudioSource>();
+            if (voiceClip != null && !gameObject.TryGetComponent<AudioSource>(out audioSource))
+                audioSource = gameObject.AddComponent<AudioSource>();
         }
 
         private void OnMessageUpdate(ScenarioEngine.ScenarioType arg0, string arg1, float progress)
