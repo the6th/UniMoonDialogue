@@ -177,7 +177,7 @@ namespace UniMoonAdventure
         public void ScenarioSelect(ScenarioChoice choice)
         {
             //Debug.Log("ScenarioSelect" + choice.ToString());
-            if (coroutine.Coroutine.State != CoroutineState.Dead && scenarioType != ScenarioType.None)
+            if (isRunning && scenarioType != ScenarioType.None)
             {
                 if (StepScenario && isStepping)
                 {

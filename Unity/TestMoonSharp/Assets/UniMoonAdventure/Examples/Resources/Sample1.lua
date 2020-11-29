@@ -9,18 +9,18 @@ scene.choice( 'どこから？' , 'Tokyo', 'Hakata', 'Nagoya' )
 local selected = coroutine.yield()
 
 if selected == 0 then
-    scene.msg( 'へえ。地元なんだ' )
+    scene.msg( 'へえ。教えてくれないの、、、' )
     coroutine.yield()
 
 elseif selected == 1 then
-    scene.msg( 'へぇ。ようこそ。いらっしゃい' )
+    scene.msg( 'へぇ。東京なんだ' )
     coroutine.yield()
 
 elseif selected == 2 then
-    scene.msg( '遠いところからありがとう' )
+    scene.msg( '博多から来てくれてありがとう' )
     coroutine.yield()
 elseif selected == 3 then
-    scene.msg( 'そんなこと言わないで' )
+    scene.msg( '愛知県だよね。' )
     coroutine.yield()
 end
 scene.msg( 'さっきも言ったけど、私は、赤ちゃんです。バブバブ。' )
