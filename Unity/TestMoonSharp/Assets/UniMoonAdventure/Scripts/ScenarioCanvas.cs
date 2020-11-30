@@ -135,8 +135,8 @@ namespace UniMoonAdventure
                 NextButton.gameObject.SetActive(true);
             }
 
-            if (progress != 1f) NextButton?.gameObject.SetActive(false);
-            else NextButton?.gameObject.SetActive(true);
+            //if (progress != 1f) NextButton?.gameObject.SetActive(false);
+            //else NextButton?.gameObject.SetActive(true);
 
             messageText.text = arg1;
 
@@ -160,7 +160,7 @@ namespace UniMoonAdventure
         private void Update()
         {
             if (!ScenarioEngine.Instance.isRunning) return;
-            CheckKey();
+            //CheckKey();
         }
 
         private void CheckKey()
