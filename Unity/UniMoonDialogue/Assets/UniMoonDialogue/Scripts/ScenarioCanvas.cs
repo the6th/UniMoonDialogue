@@ -24,30 +24,6 @@ namespace UniMoonDialogue
         private List<ScenarioChoiceButton> activeChoiceButtonList = new List<ScenarioChoiceButton>();
         private void Awake()
         {
-            engine = ScenarioEngine.Instance;
-
-            engine.OnMessageUpdate += OnMessageUpdate;
-            engine.OnMessageStart += () =>
-            {
-                StartCoroutine("ShowDialoguePanel", true);
-            };
-            engine.OnMessageEnd += () =>
-            {
-                StartCoroutine("ShowDialoguePanel", false);
-
-            };
-            engine.OnChoiceStart += (string[] messages) =>
-            {
-                NextButton.gameObject.SetActive(false);
-                activeChoiceButtonList.Clear();
-                for (int i = 1; i < messages.Length; i++)
-                {
-                    var choice = GameObject.Instantiate(choiceButtonSeed, choiceButtonSeed.transform.parent) as ScenarioChoiceButton;
-                    choice.SetupChoiceButton(messages[i], i,audioSource);
-                    activeChoiceButtonList.Add(choice);
-                }
-            };
-
             messageText.text = "";
 
             if (voiceClip != null && !gameObject.TryGetComponent<AudioSource>(out audioSource))
@@ -58,10 +34,28 @@ namespace UniMoonDialogue
 
             NextButton.SetupChoiceButton("次へ", 0, audioSource);
 
-
             defaultDialoguePanelScaleX = dialoguePanel.localScale.x;
             dialoguePanel.gameObject.SetActive(false);
             choiceButtonSeed.gameObject.SetActive(false);
+
+            engine = ScenarioEngine.Instance;
+
+            engine.OnMessageStart += (_) => StartCoroutine("ShowDialoguePanel", true);
+            engine.OnMessageEnd += (_) => StartCoroutine("ShowDialoguePanel", false);
+
+            engine.OnMessageUpdate += OnMessageUpdate;
+
+            engine.OnChoiceStart += (EventData data, string[] messages) =>
+            {
+                NextButton.gameObject.SetActive(false);
+                activeChoiceButtonList.Clear();
+                for (int i = 1; i < messages.Length; i++)
+                {
+                    var choice = GameObject.Instantiate(choiceButtonSeed, choiceButtonSeed.transform.parent) as ScenarioChoiceButton;
+                    choice.SetupChoiceButton(messages[i], i, audioSource);
+                    activeChoiceButtonList.Add(choice);
+                }
+            };
         }
 
         IEnumerator ShowDialoguePanel(bool b)
@@ -99,26 +93,20 @@ namespace UniMoonDialogue
             while (diff < durationToOpen)
             {
                 //Canceled
-                if (!isCoroutineRunnning)
-                {
-                    //dialoguePanel.localScale = startScale;
-                    yield break;
-                }
+                if (!isCoroutineRunnning) yield break;
 
                 diff = Time.time - startTime;
-
                 dialoguePanel.localScale = Vector3.Lerp(startScale, endScale, diff / durationToOpen);
                 yield return null;
             }
+
             dialoguePanel.localScale = endScale;
-            if (!b)
-            {
-                dialoguePanel.gameObject.SetActive(false);
-            }
             isCoroutineRunnning = false;
+
+            if (!b) dialoguePanel.gameObject.SetActive(false);
         }
 
-        private void OnMessageUpdate(ScenarioEngine.ScenarioType arg0, string arg1, float progress)
+        private void OnMessageUpdate(EventData data, ScenarioEngine.ScenarioType arg0, string arg1, float progress)
         {
             if (activeChoiceButtonList.Count > 0)
             {
@@ -130,7 +118,7 @@ namespace UniMoonDialogue
                 NextButton.gameObject.SetActive(true);
             }
 
-            messageText.text = arg1;
+            messageText.text = $"<i>{data.displayName}:</i> {arg1}";
 
             if (voiceClip == null) return;
             if (progress == 1f || audioVaild(arg1) && !engine.skipStep)

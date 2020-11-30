@@ -8,15 +8,31 @@ namespace UniMoonDialogue
     public class ScenarioEngine : SingletonMonoBehaviour<ScenarioEngine>
     {
         [MoonSharp.Interpreter.MoonSharpUserData]
-        public class LuaEventData
+        public class EventData
         {
+            public GameObject gameObject;
+            public string displayName = "";
+            public EventData(GameObject gameObject, string displayName = "")
+            {
+                this.gameObject = gameObject;
+
+                if (displayName == "")
+                    this.displayName = gameObject.name;
+                else
+                    this.displayName = displayName;
+            }
+
             /// <summary>
             /// 画面にセリフを表示
             /// </summary>
             /// <param name="mes"></param>
             public void msg(string mes)
             {
-                ScenarioEngine.Instance.UpdateScenario(ScenarioType.TapToNext, new string[] { mes });
+                ScenarioEngine.Instance.UpdateScenario(
+                    type: ScenarioType.TapToNext,
+                    messages: new string[] { mes },
+                    data: this
+                );
             }
 
             /// <summary>
@@ -29,7 +45,11 @@ namespace UniMoonDialogue
                 var message = new string[choices.Length + 1];
                 message[0] = title;
                 choices.CopyTo(message, 1);
-                ScenarioEngine.Instance.UpdateScenario(ScenarioType.Select, message);
+                ScenarioEngine.Instance.UpdateScenario(
+                    type: ScenarioType.Select,
+                    messages: message,
+                    data: this
+                );
             }
         }
 
@@ -52,60 +72,69 @@ namespace UniMoonDialogue
             }
             get { return m_scenarioType; }
         }
-
-        //[SerializeField]
+        [SerializeField]
         private ScenarioType m_scenarioType = ScenarioType.None;
 
-        [SerializeField]
-        private LuaTextAsset luaScript = null;
-
-        [SerializeField]
-        private bool AutoStart = false;
-        [SerializeField]
-        private bool StepScenario = true;
-        [SerializeField]
-        private float stepSpeed = 0.1f;
+        [SerializeField] private LuaTextAsset luaScript = null;
+        [SerializeField] private bool AutoStart = false;
+        [SerializeField] private bool StepScenario = true;
+        [SerializeField] private float stepSpeed = 0.1f;
 
         private ScenarioChoice scenarioChoice = ScenarioChoice.None;
         private DynValue coroutine;
         private string[] currentMessages;
         private string currentText;
+        private EventData currentEventData;
 
         #region Public Method
         /// <summary>
         /// メッセージ表示中か？
         /// </summary>
-        public bool isRunning => coroutine?.Coroutine.State != CoroutineState.Dead;
+        public bool isRunning
+        {
+            get
+            {
+                //Debug.Log($"{isMonoRunning}");
+                //Debug.Log($"{coroutine?.Coroutine.State != CoroutineState.Dead}");
+                if (isMonoRunning == true) return true;
+                if (coroutine == null) return false;
+                return (coroutine.Coroutine.State != CoroutineState.Dead);
+            }
+        }
         //Step表示実行中か？
         private bool isStepRunning = false;
+        [SerializeField]
+        private bool isMonoRunning = false;
         //Step表示を中止するか？（早送り表示)
         public bool skipStep { private set; get; } = false;
 
-        public UnityAction<ScenarioType, string, float> OnMessageUpdate;
-        public UnityAction OnMessageStart;
-        public UnityAction OnMessageEnd;
-        public UnityAction<string[]> OnChoiceStart;
 
-        private void UpdateScenario(ScenarioType type, string[] messageArray)
+        public UnityAction<EventData, ScenarioType, string, float> OnMessageUpdate;
+        public UnityAction<EventData> OnMessageStart;
+        public UnityAction<EventData> OnMessageEnd;
+        public UnityAction<EventData, string[]> OnChoiceStart;
+        public UnityAction<EventData, ScenarioChoice> OnUserInput;
+
+        private void UpdateScenario(ScenarioType type, string[] messages, EventData data)
         {
             scenarioType = type;
             if (type == ScenarioType.Select)
             {
-                OnChoiceStart?.Invoke(messageArray);
+                OnChoiceStart?.Invoke(data, messages);
             }
             else if (!StepScenario)
             {
-                currentText = messageArray[0];
-                OnMessageUpdate?.Invoke(scenarioType, currentText, 1f);
+                currentText = messages[0];
+                OnMessageUpdate?.Invoke(data, scenarioType, currentText, 1f);
             }
             else
             {
-                currentMessages = messageArray;
-                StartCoroutine("StepMessage");
+                currentMessages = messages;
+                StartCoroutine("StepMessage", data);
             }
         }
 
-        IEnumerator StepMessage()
+        IEnumerator StepMessage(EventData data)
         {
             int messageCount = 0; //現在表示中の文字数
             currentText = "";
@@ -135,7 +164,7 @@ namespace UniMoonDialogue
                     }
                 }
 
-                OnMessageUpdate?.Invoke(scenarioType, currentText, progress);
+                OnMessageUpdate?.Invoke(data, scenarioType, currentText, progress);
 
                 if (skipStep)
                 {
@@ -149,23 +178,40 @@ namespace UniMoonDialogue
             isStepRunning = false;
         }
 
-        public void StartScenario(LuaTextAsset lua, bool forceRefresh = false)
+        public void StartScenario(LuaTextAsset lua, GameObject owner, string displayOwnername = "")
         {
-            if (coroutine != null) return;
+            //if (isRunning) return;
+            if (coroutine != null || isMonoRunning) return;
 
-            UserData.RegisterAssembly(typeof(LuaEventData).Assembly);
+            UserData.RegisterAssembly(typeof(EventData).Assembly);
             Script script = new Script();
-            script.Globals["scene"] = new LuaEventData();
+            currentEventData = new EventData(owner, displayOwnername);
+            script.Globals["scene"] = currentEventData;
 
             //var scenario = LoadScenario();
             var scenario = LoadScenario(lua);
             //Debug.Log(scenario);
             DynValue function = script.DoString(scenario);
             coroutine = script.CreateCoroutine(function);
-            OnMessageStart?.Invoke();
+            OnMessageStart?.Invoke(currentEventData);
 
-            coroutine.Coroutine.Resume();
+            coroutine?.Coroutine.Resume();
+        }
 
+        public bool StartScenario(EventData data)
+        {
+            if (isRunning) return false;
+
+            isMonoRunning = true;
+            currentEventData = data;
+            OnMessageStart?.Invoke(currentEventData);
+            return true;
+        }
+        public void StopScenario()
+        {
+            scenarioType = ScenarioType.None;
+            isMonoRunning = false;
+            OnMessageEnd?.Invoke(currentEventData);
         }
 
         #endregion
@@ -173,7 +219,7 @@ namespace UniMoonDialogue
 
         private void Start()
         {
-            if (AutoStart) StartScenario(luaScript);
+            if (AutoStart) StartScenario(luaScript, gameObject);
         }
 
         /// <summary>
@@ -192,16 +238,16 @@ namespace UniMoonDialogue
                 else
                 {
                     scenarioChoice = choice;
-                    coroutine.Coroutine.Resume((int)scenarioChoice);
+                    coroutine?.Coroutine.Resume((int)scenarioChoice);
+                    OnUserInput?.Invoke(currentEventData, scenarioChoice);
                 }
             }
             else if (scenarioType != ScenarioType.None)
             {
                 scenarioType = ScenarioType.None;
                 coroutine = null;
-                OnMessageEnd?.Invoke();
+                OnMessageEnd?.Invoke(currentEventData);
             }
-
         }
 
         private string LoadScenario(LuaTextAsset luaTextAsset)
