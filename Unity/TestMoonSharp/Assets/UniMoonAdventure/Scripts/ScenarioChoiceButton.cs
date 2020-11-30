@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,11 +12,13 @@ namespace UniMoonAdventure
         Button button;
         [SerializeField]
         ScenarioEngine.ScenarioChoice choice;
+
         void Awake()
         {
             if (ButtonText == null) ButtonText = GetComponentInChildren<Text>();
             if (button == null) button = GetComponent<Button>();
         }
+
         public void SetupChoiceButton(string text, int index)
         {
             ButtonText.text = text;
@@ -30,6 +30,5 @@ namespace UniMoonAdventure
                 ScenarioEngine.Instance.ScenarioSelect(choice);
             });
         }
-
     }
 }
