@@ -21,6 +21,7 @@ namespace UniMoonDialogue
 
         [SerializeField] private string byteString = "";
 
+        public string Path => path;
         public string text => textString;
 
         public byte[] bytes => Encoding.ASCII.GetBytes(byteString);

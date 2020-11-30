@@ -256,6 +256,7 @@ MonoBehaviour:
   ButtonText: {fileID: 0}
   button: {fileID: 0}
   choice: 0
+  ClickClip: {fileID: 8300000, guid: b8ad86ec459bcd04eb71641c89da4fa8, type: 3}
 --- !u!1 &318440691
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +288,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1529538898}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -308,7 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.6556604, g: 1, b: 0.9818516, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -464,44 +465,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be6a738c04bd3554aa13b5d7608830d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_scenarioType: 2
   luaScript:
-    path: Assets/UniMoonAdventure/Examples/Resources/Sample1.lua
-    textString: "return function()\r\nscene.msg( 'Hello\u3002\u79C1\u306F\u3001<color=red>\u8D64\u3061\u3083\u3093X</color>\u3067\u3059\u3002\\r\\n<size=30>\u30D0\u30D6\u30D0\u30D6\u3002</size>'
-      )\r\ncoroutine.yield()\r\n\r\nscene.msg( '\u4ECA\u65E5\u306F\u3069\u3053\u304B\u3089\u6765\u305F\u306E\uFF1FLorem
-      ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-      ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-      in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-      mollit anim id est laborum.' )\r\ncoroutine.yield()\r\n\u2003\r\nscene.choice(
-      '\u3069\u3053\u304B\u3089\uFF1F' , 'Tokyo', 'Hakata', 'Nagoya' )\r\nlocal selected
-      = coroutine.yield()\r\n\r\nif selected == 0 then\r\n    scene.msg( '\u3078\u3048\u3002\u6559\u3048\u3066\u304F\u308C\u306A\u3044\u306E\u3001\u3001\u3001'
-      )\r\n    coroutine.yield()\r\n\r\nelseif selected == 1 then\r\n\u2003\u2003 
-      scene.msg( '\u3078\u3047\u3002\u6771\u4EAC\u306A\u3093\u3060' )\r\n\u2003\u2003 
-      coroutine.yield()\r\n\r\nelseif selected == 2 then\r\n\u2003\u2003  scene.msg(
-      '\u535A\u591A\u304B\u3089\u6765\u3066\u304F\u308C\u3066\u3042\u308A\u304C\u3068\u3046'
-      )\r\n\u2003\u2003  coroutine.yield()\r\nelseif selected == 3 then\r\n\u2003\u2003 
-      scene.msg( '\u611B\u77E5\u770C\u3060\u3088\u306D\u3002' )\r\n\u2003\u2003 
-      coroutine.yield()\r\nend\r\nscene.msg( '\u3055\u3063\u304D\u3082\u8A00\u3063\u305F\u3051\u3069\u3001\u79C1\u306F\u3001\u8D64\u3061\u3083\u3093\u3067\u3059\u3002\u30D0\u30D6\u30D0\u30D6\u3002'
-      )\r\ncoroutine.yield()\r\nscene.msg( '\u3082\u3046\u304A\u308F\u308A' )\r\nend"
-    byteString: "return function()\r\nscene.msg( 'Hello????????????<color=red>????????????X</color>?????????\\r\\n<size=30>???????????????</size>'
-      )\r\ncoroutine.yield()\r\n\r\nscene.msg( '?????????????????????????????????Lorem
-      ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-      ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-      in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-      mollit anim id est laborum.' )\r\ncoroutine.yield()\r\n???\r\nscene.choice(
-      '???????????????' , 'Tokyo', 'Hakata', 'Nagoya' )\r\nlocal selected = coroutine.yield()\r\n\r\nif
-      selected == 0 then\r\n    scene.msg( '??????????????????????????????????????????'
-      )\r\n    coroutine.yield()\r\n\r\nelseif selected == 1 then\r\n??????  scene.msg(
-      '????????????????????????' )\r\n??????  coroutine.yield()\r\n\r\nelseif selected
-      == 2 then\r\n??????  scene.msg( '??????????????????????????????????????????'
-      )\r\n??????  coroutine.yield()\r\nelseif selected == 3 then\r\n??????  scene.msg(
-      '?????????????????????' )\r\n??????  coroutine.yield()\r\nend\r\nscene.msg(
-      '???????????????????????????????????????????????????????????????????????????'
-      )\r\ncoroutine.yield()\r\nscene.msg( '???????????????' )\r\nend"
+    path: 
+    textString: 
+    byteString: 
   AutoStart: 0
   StepScenario: 1
   stepSpeed: 0.1
@@ -860,31 +827,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   luaScript:
-    path: Assets/UniMoonAdventure/Examples/Resources/Sample1.lua
-    textString: "return function()\r\nscene.msg( 'Hello\u3002\u79C1\u306F\u3001\u8D64\u3061\u3083\u3093\u3067\u3059\u3002\u30D0\u30D6\u30D0\u30D6\u3002'
-      )\r\ncoroutine.yield()\r\n\r\nscene.msg( '\u4ECA\u65E5\u306F\u3069\u3053\u304B\u3089\u6765\u305F\u306E\uFF1F'
-      )\r\ncoroutine.yield()\r\n\u2003\r\nscene.choice( '\u3069\u3053\u304B\u3089\uFF1F'
-      , 'Tokyo', 'Hakata', 'Nagoya' )\r\nlocal selected = coroutine.yield()\r\n\r\nif
-      selected == 0 then\r\n    scene.msg( '\u3078\u3048\u3002\u5730\u5143\u306A\u3093\u3060'
+    path: Assets/UniMoonDialogue/Examples/Resources/Sample1.lua
+    textString: "return function()\r\nscene.msg( 'Hello\u3002\u79C1\u306F\u3001<color=red>\u8D64\u3061\u3083\u3093X</color>\u3067\u3059\u3002\\r\\n<size=30>\u30D0\u30D6\u30D0\u30D6\u3002</size>'
+      )\r\ncoroutine.yield()\r\n\r\nscene.msg( '\u4ECA\u65E5\u306F\u3069\u3053\u304B\u3089\u6765\u305F\u306E\uFF1FLorem
+      ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+      ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+      in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+      mollit anim id est laborum.' )\r\ncoroutine.yield()\r\n\u2003\r\nscene.choice(
+      '\u3069\u3053\u304B\u3089\uFF1F' , 'Tokyo', 'Hakata', 'Nagoya' )\r\nlocal selected
+      = coroutine.yield()\r\n\r\nif selected == 0 then\r\n    scene.msg( '\u3078\u3048\u3002\u6559\u3048\u3066\u304F\u308C\u306A\u3044\u306E\u3001\u3001\u3001'
       )\r\n    coroutine.yield()\r\n\r\nelseif selected == 1 then\r\n\u2003\u2003 
-      scene.msg( '\u3078\u3047\u3002\u3088\u3046\u3053\u305D\u3002\u3044\u3089\u3063\u3057\u3083\u3044'
-      )\r\n\u2003\u2003  coroutine.yield()\r\n\r\nelseif selected == 2 then\r\n\u2003\u2003 
-      scene.msg( '\u9060\u3044\u3068\u3053\u308D\u304B\u3089\u3042\u308A\u304C\u3068\u3046'
+      scene.msg( '\u3078\u3047\u3002\u6771\u4EAC\u306A\u3093\u3060' )\r\n\u2003\u2003 
+      coroutine.yield()\r\n\r\nelseif selected == 2 then\r\n\u2003\u2003  scene.msg(
+      '\u535A\u591A\u304B\u3089\u6765\u3066\u304F\u308C\u3066\u3042\u308A\u304C\u3068\u3046'
       )\r\n\u2003\u2003  coroutine.yield()\r\nelseif selected == 3 then\r\n\u2003\u2003 
-      scene.msg( '\u305D\u3093\u306A\u3053\u3068\u8A00\u308F\u306A\u3044\u3067' )\r\n\u2003\u2003 
+      scene.msg( '\u611B\u77E5\u770C\u3060\u3088\u306D\u3002' )\r\n\u2003\u2003 
       coroutine.yield()\r\nend\r\nscene.msg( '\u3055\u3063\u304D\u3082\u8A00\u3063\u305F\u3051\u3069\u3001\u79C1\u306F\u3001\u8D64\u3061\u3083\u3093\u3067\u3059\u3002\u30D0\u30D6\u30D0\u30D6\u3002'
-      )\r\ncoroutine.yield()\r\nscene.msg( '\u3082\u3046\u304A\u308F\u308A' )\r\n\r\nend"
-    byteString: "return function()\r\nscene.msg( 'Hello????????????????????????????????????????????????'
-      )\r\ncoroutine.yield()\r\n\r\nscene.msg( '?????????????????????????????????'
-      )\r\ncoroutine.yield()\r\n???\r\nscene.choice( '???????????????' , 'Tokyo',
-      'Hakata', 'Nagoya' )\r\nlocal selected = coroutine.yield()\r\n\r\nif selected
-      == 0 then\r\n    scene.msg( '????????????????????????' )\r\n    coroutine.yield()\r\n\r\nelseif
-      selected == 1 then\r\n??????  scene.msg( '??????????????????????????????????????????'
-      )\r\n??????  coroutine.yield()\r\n\r\nelseif selected == 2 then\r\n?????? 
-      scene.msg( '????????????????????????????????????' )\r\n??????  coroutine.yield()\r\nelseif
-      selected == 3 then\r\n??????  scene.msg( '??????????????????????????????' )\r\n?????? 
-      coroutine.yield()\r\nend\r\nscene.msg( '???????????????????????????????????????????????????????????????????????????'
-      )\r\ncoroutine.yield()\r\nscene.msg( '???????????????' )\r\n\r\nend"
+      )\r\ncoroutine.yield()\r\nscene.msg( '\u3082\u3046\u304A\u308F\u308A' )\r\nend"
+    byteString: "return function()\r\nscene.msg( 'Hello????????????<color=red>????????????X</color>?????????\\r\\n<size=30>???????????????</size>'
+      )\r\ncoroutine.yield()\r\n\r\nscene.msg( '?????????????????????????????????Lorem
+      ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+      ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+      in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+      mollit anim id est laborum.' )\r\ncoroutine.yield()\r\n???\r\nscene.choice(
+      '???????????????' , 'Tokyo', 'Hakata', 'Nagoya' )\r\nlocal selected = coroutine.yield()\r\n\r\nif
+      selected == 0 then\r\n    scene.msg( '??????????????????????????????????????????'
+      )\r\n    coroutine.yield()\r\n\r\nelseif selected == 1 then\r\n??????  scene.msg(
+      '????????????????????????' )\r\n??????  coroutine.yield()\r\n\r\nelseif selected
+      == 2 then\r\n??????  scene.msg( '??????????????????????????????????????????'
+      )\r\n??????  coroutine.yield()\r\nelseif selected == 3 then\r\n??????  scene.msg(
+      '?????????????????????' )\r\n??????  coroutine.yield()\r\nend\r\nscene.msg(
+      '???????????????????????????????????????????????????????????????????????????'
+      )\r\ncoroutine.yield()\r\nscene.msg( '???????????????' )\r\nend"
 --- !u!1 &1394392679
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,7 +898,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -9.999756, y: 10}
+  m_AnchoredPosition: {x: -9.999695, y: 10}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1394392681
@@ -1007,8 +985,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2115694318}
   - {fileID: 318440692}
+  - {fileID: 2115694318}
   m_Father: {fileID: 1773288120}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1330,8 +1308,8 @@ MonoBehaviour:
   m_Content: {fileID: 318440692}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 2
-  m_Elasticity: 0.1
+  m_MovementType: 1
+  m_Elasticity: 0.02
   m_Inertia: 1
   m_DecelerationRate: 0.135
   m_ScrollSensitivity: 1
@@ -1484,7 +1462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -10, y: 16}
+  m_AnchoredPosition: {x: -9.999939, y: 16}
   m_SizeDelta: {x: -20.00001, y: 200}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2035897462
@@ -1581,7 +1559,7 @@ RectTransform:
   m_Children:
   - {fileID: 1394392680}
   m_Father: {fileID: 1529538898}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1680,6 +1658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9825089f484f4474b9a55dfde3913a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonText: {fileID: 0}
-  button: {fileID: 0}
+  ButtonText: {fileID: 1394392681}
+  button: {fileID: 2115694319}
   choice: 0
+  ClickClip: {fileID: 8300000, guid: b8ad86ec459bcd04eb71641c89da4fa8, type: 3}

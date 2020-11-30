@@ -16,7 +16,7 @@ namespace UniMoonDialogue
         /// <returns></returns>
         public static bool isNormalString(string text)
         {
-            return (isKatakana(text) && isEisu(text) && isHiragana(text) && isKanji(text));
+            return (isKatakana(text) || isEisu(text) || isHiragana(text) || isKanji(text));
         }
 
         /// <summary>

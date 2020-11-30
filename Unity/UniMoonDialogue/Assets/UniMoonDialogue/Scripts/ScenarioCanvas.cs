@@ -43,34 +43,29 @@ namespace UniMoonDialogue
                 for (int i = 1; i < messages.Length; i++)
                 {
                     var choice = GameObject.Instantiate(choiceButtonSeed, choiceButtonSeed.transform.parent) as ScenarioChoiceButton;
-                    choice.SetupChoiceButton(messages[i], i);
+                    choice.SetupChoiceButton(messages[i], i,audioSource);
                     activeChoiceButtonList.Add(choice);
                 }
             };
-
-            NextButton.GetComponent<Button>().onClick.AddListener(() =>
-            {
-                engine.ScenarioSelect(ScenarioChoice.SKIP);
-            });
-
 
             messageText.text = "";
 
             if (voiceClip != null && !gameObject.TryGetComponent<AudioSource>(out audioSource))
                 audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.playOnAwake = false;
-            audioSource.volume = 0.02f;
+            audioSource.volume = 0.5f;
             audioSource.pitch = 2f;
+
+            NextButton.SetupChoiceButton("次へ", 0, audioSource);
+
 
             defaultDialoguePanelScaleX = dialoguePanel.localScale.x;
             dialoguePanel.gameObject.SetActive(false);
             choiceButtonSeed.gameObject.SetActive(false);
         }
 
-
         IEnumerator ShowDialoguePanel(bool b)
         {
-
             var startTime = Time.time;
             var scale = dialoguePanel.localScale;
             Vector3 startScale = Vector3.zero;
@@ -135,43 +130,36 @@ namespace UniMoonDialogue
                 NextButton.gameObject.SetActive(true);
             }
 
-            //if (progress != 1f) NextButton?.gameObject.SetActive(false);
-            //else NextButton?.gameObject.SetActive(true);
-
             messageText.text = arg1;
 
             if (voiceClip == null) return;
-            if (progress == 1 || audioVaild(arg1) && !engine.skipStep)
+            if (progress == 1f || audioVaild(arg1) && !engine.skipStep)
             {
-                if (audioSource.isPlaying) audioSource.Stop();
                 audioSource.PlayOneShot(voiceClip);
-                //Debug.Log("Sound");
-
             }
         }
 
         private bool audioVaild(string text)
         {
             var last = text.Substring(text.Length - 1);
-
             return StringChecker.isNormalString(last);
         }
 
-        private void Update()
-        {
-            if (!ScenarioEngine.Instance.isRunning) return;
-            //CheckKey();
-        }
+        //private void Update()
+        //{
+        //    if (!ScenarioEngine.Instance.isRunning) return;
+        //    CheckKey();
+        //}
 
-        private void CheckKey()
-        {
-            switch (engine.scenarioType)
-            {
-                case ScenarioType.TapToNext:
-                    if (Input.GetMouseButtonDown(0)) engine.ScenarioSelect(ScenarioChoice.SKIP);
-                    break;
-            }
-        }
+        //private void CheckKey()
+        //{
+        //    switch (engine.scenarioType)
+        //    {
+        //        case ScenarioType.TapToNext:
+        //            if (Input.GetMouseButtonDown(0)) engine.ScenarioSelect(ScenarioChoice.SKIP);
+        //            break;
+        //    }
+        //}
 
     }
 }

@@ -41,7 +41,6 @@ namespace UniMoonDialogue
             SELECT_2,
             SELECT_3,
             SELECT_4,
-            SELECT_5,
             None
         };
 
@@ -54,7 +53,7 @@ namespace UniMoonDialogue
             get { return m_scenarioType; }
         }
 
-        [SerializeField]
+        //[SerializeField]
         private ScenarioType m_scenarioType = ScenarioType.None;
 
         [SerializeField]
@@ -78,7 +77,7 @@ namespace UniMoonDialogue
         /// </summary>
         public bool isRunning => coroutine?.Coroutine.State != CoroutineState.Dead;
         //Step表示実行中か？
-        private bool isStepping = false;
+        private bool isStepRunning = false;
         //Step表示を中止するか？（早送り表示)
         public bool skipStep { private set; get; } = false;
 
@@ -86,8 +85,6 @@ namespace UniMoonDialogue
         public UnityAction OnMessageStart;
         public UnityAction OnMessageEnd;
         public UnityAction<string[]> OnChoiceStart;
-
-
 
         private void UpdateScenario(ScenarioType type, string[] messageArray)
         {
@@ -112,7 +109,7 @@ namespace UniMoonDialogue
         {
             int messageCount = 0; //現在表示中の文字数
             currentText = "";
-            isStepping = true;
+            isStepRunning = true;
             float progress = 0f;
 
             //一文字ずつ表示する場合はタグがあると、おかしくなるため一時的にタグ除去を行う
@@ -123,7 +120,6 @@ namespace UniMoonDialogue
                 messageCount++;//現在の文字数
                 progress = (float)messageCount / stripped.Length;
 
-                
                 if (progress == 1f)
                 {
                     //最後まで読んだらタグ除去を解除する
@@ -142,12 +138,15 @@ namespace UniMoonDialogue
                 OnMessageUpdate?.Invoke(scenarioType, currentText, progress);
 
                 if (skipStep)
-                    yield return new WaitForSeconds(0);//任意の時間待つ
+                {
+                    messageCount = stripped.Length - 1;
+                    skipStep = false;
+                    yield return null;
+                }
                 else
                     yield return new WaitForSeconds(stepSpeed);//任意の時間待つ
             }
-            isStepping = false;
-            skipStep = false;
+            isStepRunning = false;
         }
 
         public void StartScenario(LuaTextAsset lua, bool forceRefresh = false)
@@ -186,7 +185,7 @@ namespace UniMoonDialogue
             //Debug.Log("ScenarioSelect" + choice.ToString());
             if (isRunning && scenarioType != ScenarioType.None)
             {
-                if (StepScenario && isStepping)
+                if (StepScenario && isStepRunning)
                 {
                     skipStep = true;
                 }
@@ -207,50 +206,7 @@ namespace UniMoonDialogue
 
         private string LoadScenario(LuaTextAsset luaTextAsset)
         {
-            return luaScript.text;
-        }
-
-        private string LoadScenario()
-        {
-            string code =
-            @"
-            return function()
- 
-            event.serif( 'やあ。ウチは[word:15000]から来た[name:10103]やで' )
-            coroutine.yield()
- 
-            event.serif( '自分はどっからきたん？' )
-            coroutine.yield()
- 
-            event.select( 'どこから？', 'ここが地元', '別の島', '[word:15000]', 'わからない' )
-            local selected = coroutine.yield()
-            if selected == 0 then
- 
-                event.serif( 'へえ。じゃあウチよりこの辺には詳しそうやね' )
-                coroutine.yield()
- 
-            elseif selected == 1 then
- 
-                event.serif( 'この島へは何しにきたんやろなあ' )
-                coroutine.yield()
- 
-            elseif selected == 2 then
- 
-                event.serif( '同郷やね。でもそんな風には見えへんなあ？' )
-                coroutine.yield()
- 
-            elseif selected == 3 then
- 
-                event.serif( 'どういうこっちゃ' )
-                coroutine.yield()
- 
-            end
-            event.serif( 'おしまい' )
- 
-            end
-        ";
-            return code;
-
+            return luaTextAsset.text;
         }
 
     }
