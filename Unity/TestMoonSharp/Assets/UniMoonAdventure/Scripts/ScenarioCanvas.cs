@@ -9,20 +9,13 @@ namespace UniMoonAdventure
 {
     public class ScenarioCanvas : MonoBehaviour
     {
-        [SerializeField]
-        private RectTransform dialoguePanel;
-        [SerializeField]
-        private ScenarioChoiceButton choiceButtonSeed;
+        [SerializeField] private RectTransform dialoguePanel = null;
+        [SerializeField] private ScenarioChoiceButton choiceButtonSeed = null;
+        [SerializeField] private Text messageText = null;
+        [SerializeField] private ScenarioChoiceButton NextButton = null;
 
+        [SerializeField] private AudioClip voiceClip = null;
 
-        [SerializeField]
-        private Text messageText;
-
-        [SerializeField]
-        private ScenarioChoiceButton NextButton;
-
-        [SerializeField]
-        private AudioClip voiceClip;
         private AudioSource audioSource = null;
         private ScenarioEngine engine = null;
         private float defaultDialoguePanelScaleX = 0f;
@@ -56,7 +49,8 @@ namespace UniMoonAdventure
                 }
             };
 
-            NextButton.GetComponent<Button>().onClick.AddListener(() => {
+            NextButton.GetComponent<Button>().onClick.AddListener(() =>
+            {
                 engine.ScenarioSelect(ScenarioChoice.SKIP);
             });
 
@@ -132,9 +126,9 @@ namespace UniMoonAdventure
 
         private void OnMessageUpdate(ScenarioEngine.ScenarioType arg0, string arg1, float progress)
         {
-            if(activeChoiceButtonList.Count > 0)
+            if (activeChoiceButtonList.Count > 0)
             {
-                foreach(var c in activeChoiceButtonList)
+                foreach (var c in activeChoiceButtonList)
                 {
                     Destroy(c.gameObject);
                 }

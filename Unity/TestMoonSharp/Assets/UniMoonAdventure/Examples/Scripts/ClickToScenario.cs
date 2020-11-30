@@ -4,8 +4,7 @@ namespace UniMoonAdventure.Example
 {
     public class ClickToScenario : MonoBehaviour
     {
-        [SerializeField]
-        LuaTextAsset luaScript;
+        [SerializeField] private LuaTextAsset luaScript = null;
 
         public void StartScenario()
         {

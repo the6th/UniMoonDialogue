@@ -15,11 +15,11 @@ namespace UniMoonAdventure
 
         public const string Extension = ".lua";
 
-        [SerializeField] private string path;
+        [SerializeField] private string path = "";
 
-        [SerializeField] private string textString;
+        [SerializeField] private string textString = "";
 
-        [SerializeField] private string byteString;
+        [SerializeField] private string byteString = "";
 
         public string text => textString;
 

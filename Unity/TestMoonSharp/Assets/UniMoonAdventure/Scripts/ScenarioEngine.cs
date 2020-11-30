@@ -58,7 +58,7 @@ namespace UniMoonAdventure
         private ScenarioType m_scenarioType = ScenarioType.None;
 
         [SerializeField]
-        private LuaTextAsset luaScript;
+        private LuaTextAsset luaScript = null;
 
         [SerializeField]
         private bool AutoStart = false;
