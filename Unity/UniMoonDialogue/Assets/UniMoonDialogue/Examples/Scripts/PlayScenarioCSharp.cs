@@ -13,7 +13,6 @@ namespace UniMoonDialogue
             "last message ,thanks.",
         };
 
-        [SerializeField]
         private int cnt = 0;
         public void StartScenario()
         {
