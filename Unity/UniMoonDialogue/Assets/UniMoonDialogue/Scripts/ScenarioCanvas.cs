@@ -49,6 +49,7 @@ namespace UniMoonDialogue
             {
                 NextButton.gameObject.SetActive(false);
                 activeChoiceButtonList.Clear();
+                messageText.text = $"<i>[質問]:</i>\r\n{messages[0]}";
                 for (int i = 1; i < messages.Length; i++)
                 {
                     var choice = GameObject.Instantiate(choiceButtonSeed, choiceButtonSeed.transform.parent) as ScenarioChoiceButton;

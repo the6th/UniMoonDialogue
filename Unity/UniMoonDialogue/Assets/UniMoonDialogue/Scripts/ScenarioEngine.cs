@@ -103,11 +103,9 @@ namespace UniMoonDialogue
         }
         //Step表示実行中か？
         private bool isStepRunning = false;
-        [SerializeField]
         private bool isMonoRunning = false;
         //Step表示を中止するか？（早送り表示)
         public bool skipStep { private set; get; } = false;
-
 
         public UnityAction<EventData, ScenarioType, string, float> OnMessageUpdate;
         public UnityAction<EventData> OnMessageStart;

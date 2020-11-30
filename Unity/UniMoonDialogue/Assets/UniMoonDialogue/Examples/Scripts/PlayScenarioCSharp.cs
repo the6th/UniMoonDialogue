@@ -43,17 +43,20 @@ namespace UniMoonDialogue
         private void OnMessageStart(ScenarioEngine.EventData data)
         {
             if (data.gameObject != gameObject) return;
-            Debug.Log("OnMessageStart" + data.displayName);
+            //Debug.Log("OnMessageStart" + data.displayName);
+            ExampleCommon.RotateByForce(gameObject, true);
+
         }
 
         private void OnMessageEnd(ScenarioEngine.EventData data)
         {
             if (data.gameObject != gameObject) return;
 
-            Debug.Log("OnMessageEnd" + data.displayName);
+            //Debug.Log("OnMessageEnd" + data.displayName);
             ScenarioEngine.Instance.OnMessageStart -= OnMessageStart;
             ScenarioEngine.Instance.OnMessageEnd -= OnMessageEnd;
             ScenarioEngine.Instance.OnUserInput -= OnUserInput;
+            ExampleCommon.RotateByForce(gameObject, false);
         }
     }
 }
