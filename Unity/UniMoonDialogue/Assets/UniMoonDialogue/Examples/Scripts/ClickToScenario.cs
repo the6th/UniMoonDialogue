@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UniMoonAdventure.Example
+namespace UniMoonDialogue.Example
 {
     public class ClickToScenario : MonoBehaviour
     {

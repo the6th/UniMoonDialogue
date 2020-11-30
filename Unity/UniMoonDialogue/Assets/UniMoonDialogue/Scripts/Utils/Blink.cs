@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace UniMoonAdventure
+namespace UniMoonDialogue
 {
     public class Blink : MonoBehaviour
     {

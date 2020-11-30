@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UniMoonAdventure.ScenarioEngine;
+using static UniMoonDialogue.ScenarioEngine;
 
-namespace UniMoonAdventure
+namespace UniMoonDialogue
 {
     public class ScenarioCanvas : MonoBehaviour
     {

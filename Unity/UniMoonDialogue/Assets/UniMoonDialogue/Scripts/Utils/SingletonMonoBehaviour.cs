@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-namespace UniMoonAdventure
+namespace UniMoonDialogue
 {
     public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {

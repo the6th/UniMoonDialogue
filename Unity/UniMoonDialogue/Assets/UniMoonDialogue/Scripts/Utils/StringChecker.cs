@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace UniMoonAdventure
+namespace UniMoonDialogue
 {
     public class StringChecker
     {

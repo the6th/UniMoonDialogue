@@ -7,7 +7,7 @@ using Object = UnityEngine.Object;
 using UnityEditor;
 #endif
 
-namespace UniMoonAdventure
+namespace UniMoonDialogue
 {
     [Serializable]
     public class LuaTextAsset

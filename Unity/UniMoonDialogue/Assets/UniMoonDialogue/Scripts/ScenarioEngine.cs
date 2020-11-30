@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace UniMoonAdventure
+namespace UniMoonDialogue
 {
     public class ScenarioEngine : SingletonMonoBehaviour<ScenarioEngine>
     {
