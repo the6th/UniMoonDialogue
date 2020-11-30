@@ -92,7 +92,7 @@ namespace UniMoonAdventure
         private void UpdateScenario(ScenarioType type, string[] messageArray)
         {
             scenarioType = type;
-            if(type == ScenarioType.Select)
+            if (type == ScenarioType.Select)
             {
                 OnChoiceStart?.Invoke(messageArray);
             }
@@ -114,15 +114,22 @@ namespace UniMoonAdventure
             currentText = "";
             isStepping = true;
             float progress = 0f;
-            while (currentMessages[0].Length > messageCount)//文字をすべて表示していない場合ループ
-            {
-                currentText += currentMessages[0][messageCount];//一文字追加
-                messageCount++;//現在の文字数
-                progress = (float)messageCount / currentMessages[0].Length;
 
-                if (scenarioType == ScenarioType.Select)
+            //一文字ずつ表示する場合はタグがあると、おかしくなるため一時的にタグ除去を行う
+            var stripped = StringChecker.StripHTMLTags(currentMessages[0]);
+            while (stripped.Length > messageCount)//文字をすべて表示していない場合ループ
+            {
+                currentText += stripped[messageCount];//一文字追加
+                messageCount++;//現在の文字数
+                progress = (float)messageCount / stripped.Length;
+
+                
+                if (progress == 1f)
                 {
-                    if (progress == 1f)
+                    //最後まで読んだらタグ除去を解除する
+                    currentText = currentMessages[0];
+                    //選択式の場合は選択文も文字列に追加する
+                    if (scenarioType == ScenarioType.Select)
                     {
                         currentText += "\r\n";
                         for (int i = 1; i < currentMessages.Length; i++)
@@ -143,17 +150,17 @@ namespace UniMoonAdventure
             skipStep = false;
         }
 
-        public void StartScenario(LuaTextAsset lua,bool forceRefresh = false)
+        public void StartScenario(LuaTextAsset lua, bool forceRefresh = false)
         {
-            if (coroutine != null ) return;
+            if (coroutine != null) return;
 
             UserData.RegisterAssembly(typeof(LuaEventData).Assembly);
             Script script = new Script();
             script.Globals["scene"] = new LuaEventData();
-          
+
             //var scenario = LoadScenario();
             var scenario = LoadScenario(lua);
-
+            //Debug.Log(scenario);
             DynValue function = script.DoString(scenario);
             coroutine = script.CreateCoroutine(function);
             OnMessageStart?.Invoke();

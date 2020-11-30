@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 using static UniMoonAdventure.ScenarioEngine;
@@ -155,29 +154,7 @@ namespace UniMoonAdventure
         {
             var last = text.Substring(text.Length - 1);
 
-            //英数記号
-            if (Regex.IsMatch(last, @"^[0-9a-zA-Z]+$"))
-                return true;
-            //漢字
-            if (IsKanji(last[0]))
-                return true;
-            //カタカナ
-            if (Regex.IsMatch(last, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
-                return true;
-            //ひらがな
-            if (Regex.IsMatch(last, @"^\p{IsHiragana}+$"))
-                return true;
-
-            //Debug.Log($"invaild: '{last}'");
-            return false;
-        }
-
-        public static bool IsKanji(char c)
-        {
-            //CJK統合漢字、CJK互換漢字、CJK統合漢字拡張Aの範囲にあるか調べる
-            return ('\u4E00' <= c && c <= '\u9FCF')
-                || ('\uF900' <= c && c <= '\uFAFF')
-                || ('\u3400' <= c && c <= '\u4DBF');
+            return StringChecker.isNormalString(last);
         }
 
         private void Update()
