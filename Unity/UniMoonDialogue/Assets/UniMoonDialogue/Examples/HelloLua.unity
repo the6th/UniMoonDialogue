@@ -130,13 +130,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 243445060}
+  - component: {fileID: 243445057}
   - component: {fileID: 243445059}
   - component: {fileID: 243445058}
   - component: {fileID: 243445056}
   - component: {fileID: 243445055}
   - component: {fileID: 243445054}
   - component: {fileID: 243445053}
-  - component: {fileID: 243445057}
   m_Layer: 0
   m_Name: Cube3
   m_TagString: Untagged
@@ -225,7 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa1e3e444fadf1e45b83093539e13fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cnt: 0
 --- !u!23 &243445058
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -396,13 +395,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 902885532}
+  - component: {fileID: 902885529}
+  - component: {fileID: 902885525}
   - component: {fileID: 902885531}
   - component: {fileID: 902885530}
-  - component: {fileID: 902885529}
   - component: {fileID: 902885528}
   - component: {fileID: 902885527}
   - component: {fileID: 902885526}
-  - component: {fileID: 902885525}
   m_Layer: 0
   m_Name: Cube2
   m_TagString: Untagged
@@ -590,13 +589,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1207480551}
+  - component: {fileID: 1207480553}
+  - component: {fileID: 1207480552}
   - component: {fileID: 1207480550}
   - component: {fileID: 1207480549}
-  - component: {fileID: 1207480553}
   - component: {fileID: 1207480548}
   - component: {fileID: 1207480547}
   - component: {fileID: 1207480546}
-  - component: {fileID: 1207480552}
   m_Layer: 0
   m_Name: Cube1
   m_TagString: Untagged
