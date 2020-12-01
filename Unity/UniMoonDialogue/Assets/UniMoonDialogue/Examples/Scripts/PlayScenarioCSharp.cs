@@ -7,10 +7,12 @@ namespace UniMoonDialogue
 {
     public class PlayScenarioCSharp : MonoBehaviour
     {
+        private int index = 0;
+
         Scenario scenario = new Scenario(
             dialogs: new Dictionary<int, Dialogue>
             {
-                {1,  new Dialogue("こんにちは")},
+                {1,  new Dialogue("こんにちは。私はC#で書かれています。")},
                 {2,  new Dialogue("次のメッセージ")},
                 {3,  new Dialogue("質問です！",
                     choices: new List<Choice>
@@ -20,12 +22,11 @@ namespace UniMoonDialogue
                     }
                 )},
                 {4,  new Dialogue("「はい」を選びましたね",6)},
-                {5,  new Dialogue("「いいえ」を選びましたね",1)},
+                {5,  new Dialogue("「いいえ」を選びましたね",6)},
                 {6,  new Dialogue("おしまい")}
             }
         );
 
-        private int cnt = 0;
         public void StartScenario()
         {
             ScenarioEngine.Instance.OnMessageStart += OnMessageStart;
@@ -35,8 +36,8 @@ namespace UniMoonDialogue
             var data = new EventData(gameObject);
             if (ScenarioEngine.Instance.StartScenario(data))
             {
-                cnt = scenario.dialogs.Keys.Min();
-                ShowDialogue(data, cnt);
+                index = scenario.dialogs.Keys.Min();
+                ShowDialogue(data, index);
             }
         }
 
@@ -45,17 +46,17 @@ namespace UniMoonDialogue
             if (data.gameObject != gameObject) return;
 
             //ユーザが質問に答えて、次のIDが指定されている場合
-            if ((int)choice > 0 && scenario.dialogs[cnt].choices[(int)choice - 1].nextID > 0)
-                cnt = scenario.dialogs[cnt].choices[(int)choice - 1].nextID;
+            if ((int)choice > 0 && scenario.dialogs[index].choices[(int)choice - 1].nextID > 0)
+                index = scenario.dialogs[index].choices[(int)choice - 1].nextID;
             //そのまま次に進む
-            else if (scenario.dialogs[cnt].nextID < 1)
-                cnt++;
+            else if (scenario.dialogs[index].nextID < 1)
+                index++;
             //次のIDが指定されている場合
             else
-                cnt = scenario.dialogs[cnt].nextID;
+                index = scenario.dialogs[index].nextID;
 
-            if (scenario.dialogs.Keys.Max() >= cnt)
-                ShowDialogue(data, cnt);
+            if (scenario.dialogs.Keys.Max() >= index)
+                ShowDialogue(data, index);
             else
                 ScenarioEngine.Instance.StopScenario();
         }
@@ -72,7 +73,6 @@ namespace UniMoonDialogue
                     choices: choiceTexts
                 );
             }
-
         }
 
         private void OnMessageStart(ScenarioEngine.EventData data)
