@@ -51,3 +51,6 @@ public void StartScenario()
     }
 }
 ```
+## License
+* MIT License
+* Copyright (c) 2020 Tomoki Hayashi
