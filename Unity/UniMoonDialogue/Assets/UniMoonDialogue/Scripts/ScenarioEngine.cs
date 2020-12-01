@@ -72,6 +72,8 @@ namespace UniMoonDialogue
             }
             get { return m_scenarioType; }
         }
+        public EventData currentEventData { private set; get; }
+
         [SerializeField]
         private ScenarioType m_scenarioType = ScenarioType.None;
 
@@ -84,7 +86,6 @@ namespace UniMoonDialogue
         private DynValue coroutine;
         private string[] currentMessages;
         private string currentText;
-        private EventData currentEventData;
 
         #region Public Method
         /// <summary>
