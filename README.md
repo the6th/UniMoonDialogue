@@ -26,7 +26,7 @@
 4. Assets/UniMoonDialogue/Example/HelloUniMoonDialogue.scene をPlayして、中央のLua Sample1 のCubeをクリックしてください。
 ## Example
 
-* Csharpによる記述例 (PlayScenarioCSharp.cs)
+* Csharpによる記述例 - [PlayScenarioCSharp.cs](Unity/UniMoonDialogue/Assets/UniMoonDialogue/Examples/Scripts/PlayScenarioCSharp.cs)
 ```cs
 private int index = 0;
 
@@ -50,20 +50,19 @@ Scenario scenario = new Scenario(
 
 public void StartScenario()
 {
-    ScenarioEngine.Instance.OnMessageStart += OnMessageStart;
-    ScenarioEngine.Instance.OnMessageEnd += OnMessageEnd;
-    ScenarioEngine.Instance.OnUserInput += OnUserInput;
-
     var data = new EventData(gameObject);
     if (ScenarioEngine.Instance.StartScenario(data))
     {
+        ScenarioEngine.Instance.OnMessageStart += OnMessageStart;
+        ScenarioEngine.Instance.OnMessageEnd += OnMessageEnd;
+        ScenarioEngine.Instance.OnUserInput += OnUserInput;
         index = scenario.dialogs.Keys.Min();
         ShowDialogue(data, index);
     }
 }
 ```
 
-* Luaによる記述例 (Sample1.lua)
+* Luaによる記述例 - [Sample1.lua](Unity/UniMoonDialogue/Assets/UniMoonDialogue/Examples/Resources/Sample1.lua)
 
 ```lua
 return function()
