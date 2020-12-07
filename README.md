@@ -1,21 +1,32 @@
 # UniMoonDialogue
 
 * Unityで動作するノベル風シナリオ進行ダイアログのフレームワーク
-* C# と Lua でシナリオを記述できます。
+* C# と Lua でシナリオを記述できます。  
     ![](docs/images/UniMoonDialogue.gif)
 
 * 開発中のプロジェクトなので、大幅な変更が入る可能性があります
 
-## How to Use
+## How to Use 
+### C#による記述
+* 初期状態ではC#によるシナリオ記述にのみ対応しています。
+* サンプルの実行は Assets/UniMoonDialogue/Example/HelloUniMoonDialogue.scene をPlayして、右端の CshparのCubeをクリックしてください。
+* C# によるシナリオ記述方法は、以下、Example　> Csharpによる記述例を参考にしてください。
+
+### Lua による記述
+* Luaスクリプトの読み込みはデフォルト状態では、利用できません。
 * Luaスクリプトのパースは[MoonSharp](https://github.com/moonsharp-devs/moonsharp)を利用しています。
+* 以下の手順で Luaの実行を有効にしてください。
 
-1. Download [moonsharp_release_2.0.0.0.zip](https://github.com/moonsharp-devs/moonsharp/releases/tag/v2.0.0.0)
+1. [moonsharp_release_2.0.0.0.zip](https://github.com/moonsharp-devs/moonsharp/releases/tag/v2.0.0.0)　をダウンロード
 
-2. Import MoonSharp_2.0.0.0.unitypackage in the zip to your project.
+2. MoonSharp_2.0.0.0.unitypackage をProjectにインポートしてください。/Plugins/MoonSharp/に配置されます。
 
+3. ProjectSettings > Other Settings > Scripting Define Symbols に 'ENABLE_MoonSharp' を追加してください。
+
+4. Assets/UniMoonDialogue/Example/HelloUniMoonDialogue.scene をPlayして、中央のLua Sample1 のCubeをクリックしてください。
 ## Example
 
-* Csharpによる記述例
+* Csharpによる記述例 (PlayScenarioCSharp.cs)
 ```cs
 private int index = 0;
 
@@ -50,6 +61,40 @@ public void StartScenario()
         ShowDialogue(data, index);
     }
 }
+```
+
+* Luaによる記述例 (Sample1.lua)
+
+```lua
+return function()
+scene.msg( 'Hello。私は、<color=red>赤ちゃんX</color>です。\r\n<size=30>バブバブ。</size>' )
+coroutine.yield()
+
+scene.msg( '今日はどこから来たの？' )
+coroutine.yield()
+ 
+scene.choice( 'どこから？' , 'Tokyo', 'Hakata', 'Nagoya' )
+local selected = coroutine.yield()
+
+if selected == 0 then
+    scene.msg( 'へえ。教えてくれないの、、、' )
+    coroutine.yield()
+
+elseif selected == 1 then
+    scene.msg( 'へぇ。東京なんだ' )
+    coroutine.yield()
+
+elseif selected == 2 then
+    scene.msg( '博多から来てくれてありがとう' )
+    coroutine.yield()
+elseif selected == 3 then
+    scene.msg( '愛知県だよね。' )
+    coroutine.yield()
+end
+scene.msg( 'さっきも言ったけど、私は、赤ちゃんです。バブバブ。' )
+coroutine.yield()
+scene.msg( 'もうおわり' )
+end
 ```
 ## License
 * MIT License

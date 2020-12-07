@@ -59,4 +59,4 @@ sysinfo.txt
 crashlytics-build.properties
 
 Assets/Plugins/MoonSharp/*
-!.gitkeep
+!MoonSharp.asmdef*

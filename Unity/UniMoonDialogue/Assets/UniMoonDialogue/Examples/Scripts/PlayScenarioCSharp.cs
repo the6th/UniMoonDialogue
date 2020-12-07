@@ -29,13 +29,15 @@ namespace UniMoonDialogue
 
         public void StartScenario()
         {
-            ScenarioEngine.Instance.OnMessageStart += OnMessageStart;
-            ScenarioEngine.Instance.OnMessageEnd += OnMessageEnd;
-            ScenarioEngine.Instance.OnUserInput += OnUserInput;
+            if (ScenarioEngine.Instance.isRunning) return;
 
             var data = new EventData(gameObject);
             if (ScenarioEngine.Instance.StartScenario(data))
             {
+                ScenarioEngine.Instance.OnMessageStart += OnMessageStart;
+                ScenarioEngine.Instance.OnMessageEnd += OnMessageEnd;
+                ScenarioEngine.Instance.OnUserInput += OnUserInput;
+
                 index = scenario.dialogs.Keys.Min();
                 ShowDialogue(data, index);
             }
