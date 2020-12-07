@@ -70,6 +70,7 @@ namespace UniMoonDialogue
             //openDialogue
             if (b)
             {
+                messageText.text = "";
                 startScale = new Vector3(0, scale.y, scale.z);
                 endScale = new Vector3(defaultDialoguePanelScaleX, scale.y, scale.z);
                 dialoguePanel.localScale = startScale;
@@ -91,8 +92,10 @@ namespace UniMoonDialogue
             }
             isCoroutineRunnning = true;
 
+            ScenarioEngine.Instance.isPaused = true;
             while (diff < durationToOpen)
             {
+                
                 //Canceled
                 if (!isCoroutineRunnning) yield break;
 
@@ -100,6 +103,7 @@ namespace UniMoonDialogue
                 dialoguePanel.localScale = Vector3.Lerp(startScale, endScale, diff / durationToOpen);
                 yield return null;
             }
+            ScenarioEngine.Instance.isPaused = false;
 
             dialoguePanel.localScale = endScale;
             isCoroutineRunnning = false;
@@ -133,22 +137,5 @@ namespace UniMoonDialogue
             var last = text.Substring(text.Length - 1);
             return StringChecker.isNormalString(last);
         }
-
-        //private void Update()
-        //{
-        //    if (!ScenarioEngine.Instance.isRunning) return;
-        //    CheckKey();
-        //}
-
-        //private void CheckKey()
-        //{
-        //    switch (engine.scenarioType)
-        //    {
-        //        case ScenarioType.TapToNext:
-        //            if (Input.GetMouseButtonDown(0)) engine.ScenarioSelect(ScenarioChoice.SKIP);
-        //            break;
-        //    }
-        //}
-
     }
 }

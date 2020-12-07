@@ -1,13 +1,17 @@
-﻿using MoonSharp.Interpreter;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+#if ENABLE_MoonSharp
+using MoonSharp.Interpreter;
+#endif
 
 namespace UniMoonDialogue
 {
     public class ScenarioEngine : SingletonMonoBehaviour<ScenarioEngine>
     {
+#if ENABLE_MoonSharp
         [MoonSharp.Interpreter.MoonSharpUserData]
+#endif
         public class EventData
         {
             public GameObject gameObject;
@@ -83,7 +87,9 @@ namespace UniMoonDialogue
         [SerializeField] private float stepSpeed = 0.1f;
 
         private ScenarioChoice scenarioChoice = ScenarioChoice.None;
+#if ENABLE_MoonSharp
         private DynValue coroutine;
+#endif
         private string[] currentMessages;
         private string currentText;
 
@@ -95,18 +101,22 @@ namespace UniMoonDialogue
         {
             get
             {
-                //Debug.Log($"{isMonoRunning}");
-                //Debug.Log($"{coroutine?.Coroutine.State != CoroutineState.Dead}");
+#if ENABLE_MoonSharp
                 if (isMonoRunning == true) return true;
                 if (coroutine == null) return false;
                 return (coroutine.Coroutine.State != CoroutineState.Dead);
+#else
+                return (isMonoRunning == true);
+#endif
             }
         }
+
         //Step表示実行中か？
         private bool isStepRunning = false;
         private bool isMonoRunning = false;
         //Step表示を中止するか？（早送り表示)
         public bool skipStep { private set; get; } = false;
+        public bool isPaused = false;
 
         public UnityAction<EventData, ScenarioType, string, float> OnMessageUpdate;
         public UnityAction<EventData> OnMessageStart;
@@ -144,6 +154,8 @@ namespace UniMoonDialogue
             var stripped = StringChecker.StripHTMLTags(currentMessages[0]);
             while (stripped.Length > messageCount)//文字をすべて表示していない場合ループ
             {
+                while (isPaused) yield return null;
+
                 currentText += stripped[messageCount];//一文字追加
                 messageCount++;//現在の文字数
                 progress = (float)messageCount / stripped.Length;
@@ -177,9 +189,13 @@ namespace UniMoonDialogue
             isStepRunning = false;
         }
 
+
+
         public void StartScenario(LuaTextAsset lua, GameObject owner, string displayOwnername = "")
         {
-            //if (isRunning) return;
+#if !ENABLE_MoonSharp
+            Debug.Assert(false, "Plugin [MoonSharp] is disabled. set symbol `ENABLE_MoonSharp` to scripting define symbols on Player Settings.. > Other settings > Scripting Define Symbols");
+#else
             if (coroutine != null || isMonoRunning) return;
 
             UserData.RegisterAssembly(typeof(EventData).Assembly);
@@ -195,6 +211,7 @@ namespace UniMoonDialogue
             OnMessageStart?.Invoke(currentEventData);
 
             coroutine?.Coroutine.Resume();
+#endif
         }
 
         public bool StartScenario(EventData data)
@@ -237,14 +254,18 @@ namespace UniMoonDialogue
                 else
                 {
                     scenarioChoice = choice;
+#if ENABLE_MoonSharp
                     coroutine?.Coroutine.Resume((int)scenarioChoice);
+#endif
                     OnUserInput?.Invoke(currentEventData, scenarioChoice);
                 }
             }
             else if (scenarioType != ScenarioType.None)
             {
                 scenarioType = ScenarioType.None;
+#if ENABLE_MoonSharp
                 coroutine = null;
+#endif
                 OnMessageEnd?.Invoke(currentEventData);
             }
         }
