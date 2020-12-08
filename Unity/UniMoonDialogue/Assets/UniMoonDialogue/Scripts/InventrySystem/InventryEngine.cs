@@ -3,44 +3,46 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace UniMoonDialogue.Enventry
+namespace UniMoonDialogue.Inventry
 {
-    public class EnventryEngine : SingletonMonoBehaviour<EnventryEngine>
+    public class InventryEngine : SingletonMonoBehaviour<InventryEngine>
     {
-        public UnityAction<ItemType, EnventryItemBase> OnMyEnventryUpdated;
+        public UnityAction<ItemType, InventryItemBase> OnMyEnventryUpdated;
 
         [SerializeField]
-        EnventryItemList EntentryItem;
+        private List<Inv_Item> allItems;
+        [SerializeField]
+        private List<Inv_Mission> AllMissions;
 
-        private List<Item> myItems = new List<Item>();
-        private List<Mission> myMissions = new List<Mission>();
+        private List<Inv_Item> myItems = new List<Inv_Item>();
+        private List<Inv_Mission> myMissions = new List<Inv_Mission>();
 
         public enum ItemType { Item, Mission }
         public enum ItemStoreResult { Success = 0, Notpermmit, NotFound, AlreadyMax }
 
-        public List<Item> GetAllItemList()
+        public List<Inv_Item> GetAllItemList()
         {
-            return EntentryItem.Items;
+            return allItems;
         }
-        public List<Mission> GetAllMissions()
+        public List<Inv_Mission> GetAllMissions()
         {
-            return EntentryItem.Missions;
+            return AllMissions;
         }
-        public List<Item> GetMyItemList()
+        public List<Inv_Item> GetMyItemList()
         {
             return myItems;
         }
-        public List<Mission> GetMyMission()
+        public List<Inv_Mission> GetMyMission()
         {
             return myMissions;
         }
 
-        public bool GetItem(string itemName,  out ItemStoreResult result)
+        public bool GetItem(string itemName, out ItemStoreResult result)
         {
-            var item = EntentryItem.Items.First(x => x.name == itemName);
+            var item = allItems.First(x => x.name == itemName);
             if (item != null)
             {
-                var ownedItem = myItems.FirstOrDefault(_ => _.name == item.name );
+                var ownedItem = myItems.FirstOrDefault(_ => _.name == item.name);
 
                 //持ってなかったら新規で取得
                 if (ownedItem == null)
@@ -72,7 +74,7 @@ namespace UniMoonDialogue.Enventry
             return false;
         }
 
-        public bool UseItem(string itemName,  out ItemStoreResult result)
+        public bool UseItem(string itemName, out ItemStoreResult result)
         {
             var ownedItem = myItems.FirstOrDefault(_ => _.name == itemName);
             //持ってない場合

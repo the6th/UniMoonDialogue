@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using Bolt;
+using UnityEngine;
 
 namespace UniMoonDialogue
 {
+    [UnitCategory("UniMoonDialogue")]
+
     public class ExampleCommon
     {
         public static void RotateByForce(GameObject gameObject, bool enable)

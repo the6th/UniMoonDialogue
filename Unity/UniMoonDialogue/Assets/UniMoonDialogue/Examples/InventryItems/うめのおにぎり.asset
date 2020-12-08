@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: "\u3046\u3081\u306E\u304A\u306B\u304E\u308A"
+  m_EditorClassIdentifier: Assembly-CSharp:UniMoonDialogue.Inventry:Inv_Item
+  guid: 
+  name: "\u3046\u3081\u306E\u304A\u306B\u304E\u308A"
+  description: "4\u3064\u307E\u3067\u6301\u3066\u307E\u3059"
+  maxStore: 4
+  currentStore: 0
+  Thumbnail: {fileID: 0}

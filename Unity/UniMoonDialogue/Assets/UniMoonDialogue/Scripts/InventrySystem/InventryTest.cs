@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-namespace UniMoonDialogue.Enventry
+namespace UniMoonDialogue.Inventry
 {
-    public class EnventryTest : MonoBehaviour
+    public class InventryTest : MonoBehaviour
     {
-        EnventryEngine enventry;
+        InventryEngine enventry;
         // Start is called before the first frame update
         void Start()
         {
@@ -15,7 +15,7 @@ namespace UniMoonDialogue.Enventry
 
         void Test1()
         {
-            enventry = EnventryEngine.Instance;
+            enventry = InventryEngine.Instance;
 
             foreach (var item in enventry.GetAllItemList())
             {
@@ -25,7 +25,7 @@ namespace UniMoonDialogue.Enventry
 
         void Test2()
         {
-            EnventryEngine.ItemStoreResult result;
+            InventryEngine.ItemStoreResult result;
             enventry.GetItem(enventry.GetAllItemList()[0].name, out result);
             Debug.Log(result);
             enventry.GetItem(enventry.GetAllItemList()[0].name, out result);
@@ -46,7 +46,7 @@ namespace UniMoonDialogue.Enventry
 
         void Test3()
         {
-            EnventryEngine.ItemStoreResult result;
+            InventryEngine.ItemStoreResult result;
             enventry.UseItem(enventry.GetAllItemList()[0].name, out result);
             Debug.Log(result);
             enventry.UseItem(enventry.GetAllItemList()[0].name, out result);

@@ -60,3 +60,11 @@ crashlytics-build.properties
 
 Assets/Plugins/MoonSharp/*
 !MoonSharp.asmdef*
+
+
+## Bolt
+
+# Always exclude these files, because they are part of the plugin
+
+Assets/Install Bolt*
+Assets/Ludiq*
