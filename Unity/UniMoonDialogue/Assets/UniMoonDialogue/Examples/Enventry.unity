@@ -305,10 +305,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1855120764}
-  - component: {fileID: 1855120763}
   - component: {fileID: 1855120765}
+  - component: {fileID: 1855120763}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: EnventryEngine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
