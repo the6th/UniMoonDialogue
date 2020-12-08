@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace UniMoonDialogue.Enventry
@@ -8,43 +9,38 @@ namespace UniMoonDialogue.Enventry
     {
         public UnityAction<ItemType, EnventryItemBase> OnMyEnventryUpdated;
 
-        public EnventryEngine()
-        {
-            BuildDataBase();
-        }
+        [SerializeField]
+        EnventryItemList EntentryItem;
 
-        private List<EnventryItemBase> items = new List<EnventryItemBase>();
-        private List<EnventryItemBase> myItems = new List<EnventryItemBase>();
-
-        void BuildDataBase()
-        {
-            items = new List<EnventryItemBase>
-            {
-                new Item( name:"Sord1",maxStore:1),
-                new Item( name:"Sord2",maxStore:2),
-                new Item( name:"Sord3",maxStore:3)
-            };
-        }
+        private List<Item> myItems = new List<Item>();
+        private List<Mission> myMissions = new List<Mission>();
 
         public enum ItemType { Item, Mission }
         public enum ItemStoreResult { Success = 0, Notpermmit, NotFound, AlreadyMax }
 
-        public List<EnventryItemBase> GetAllItemList(ItemType type)
+        public List<Item> GetAllItemList()
         {
-            return items.Where(item => item.type == type).ToList();
+            return EntentryItem.Items;
+        }
+        public List<Mission> GetAllMissions()
+        {
+            return EntentryItem.Missions;
+        }
+        public List<Item> GetMyItemList()
+        {
+            return myItems;
+        }
+        public List<Mission> GetMyMission()
+        {
+            return myMissions;
         }
 
-        public List<EnventryItemBase> GetMyItemList(ItemType type)
+        public bool GetItem(string itemName,  out ItemStoreResult result)
         {
-            return myItems.Where(item => item.type == type).ToList();
-        }
-
-        public bool GetItem(string itemName, ItemType type, out ItemStoreResult result)
-        {
-            var item = items.First(x => x.name == itemName && x.type == type);
+            var item = EntentryItem.Items.First(x => x.name == itemName);
             if (item != null)
             {
-                var ownedItem = myItems.FirstOrDefault(_ => _.name == item.name && _.type == type);
+                var ownedItem = myItems.FirstOrDefault(_ => _.name == item.name );
 
                 //持ってなかったら新規で取得
                 if (ownedItem == null)
@@ -52,7 +48,7 @@ namespace UniMoonDialogue.Enventry
                     item.currentStore = 1;
                     myItems.Add(item);
                     result = ItemStoreResult.Success;
-                    OnMyEnventryUpdated?.Invoke(type, item);
+                    OnMyEnventryUpdated?.Invoke(ItemType.Item, item);
                     return true;
                 }
                 //持ってたら追加
@@ -60,7 +56,7 @@ namespace UniMoonDialogue.Enventry
                 {
                     ownedItem.currentStore++;
                     result = ItemStoreResult.Success;
-                    OnMyEnventryUpdated?.Invoke(type, ownedItem);
+                    OnMyEnventryUpdated?.Invoke(ItemType.Item, ownedItem);
 
                     return true;
                 }
@@ -76,9 +72,9 @@ namespace UniMoonDialogue.Enventry
             return false;
         }
 
-        public bool UseItem(string itemName, ItemType type, out ItemStoreResult result)
+        public bool UseItem(string itemName,  out ItemStoreResult result)
         {
-            var ownedItem = myItems.FirstOrDefault(_ => _.name == itemName && _.type == type);
+            var ownedItem = myItems.FirstOrDefault(_ => _.name == itemName);
             //持ってない場合
             if (ownedItem == null)
             {
@@ -92,7 +88,7 @@ namespace UniMoonDialogue.Enventry
                     myItems.Remove(ownedItem);
                 result = ItemStoreResult.Success;
 
-                OnMyEnventryUpdated?.Invoke(type, ownedItem);
+                OnMyEnventryUpdated?.Invoke(ItemType.Item, ownedItem);
                 return true;
             }
         }

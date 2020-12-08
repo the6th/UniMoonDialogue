@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 
 namespace UniMoonDialogue.Enventry
 {
@@ -21,6 +19,7 @@ namespace UniMoonDialogue.Enventry
             this.maxStore = maxStore;
         }
     }
+    [System.Serializable]
 
     public class Item : EnventryItemBase
     {
@@ -28,8 +27,10 @@ namespace UniMoonDialogue.Enventry
         {
             type = EnventryEngine.ItemType.Item;
             base.Entry(name, description, maxStore);
+
         }
     }
+    [System.Serializable]
 
     public class Mission : EnventryItemBase
     {
@@ -37,9 +38,6 @@ namespace UniMoonDialogue.Enventry
         {
             type = EnventryEngine.ItemType.Mission;
             base.Entry(name);
-
         }
     }
-
-    
 }

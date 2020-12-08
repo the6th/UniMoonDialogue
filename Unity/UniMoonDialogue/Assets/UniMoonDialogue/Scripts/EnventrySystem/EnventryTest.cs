@@ -17,7 +17,7 @@ namespace UniMoonDialogue.Enventry
         {
             enventry = EnventryEngine.Instance;
 
-            foreach (var item in enventry.GetAllItemList(EnventryEngine.ItemType.Item))
+            foreach (var item in enventry.GetAllItemList())
             {
                 Debug.Log($"{item.name}/{item.type}");
             }
@@ -26,18 +26,18 @@ namespace UniMoonDialogue.Enventry
         void Test2()
         {
             EnventryEngine.ItemStoreResult result;
-            enventry.GetItem(enventry.GetAllItemList(EnventryEngine.ItemType.Item)[0].name, EnventryEngine.ItemType.Item, out result);
+            enventry.GetItem(enventry.GetAllItemList()[0].name, out result);
             Debug.Log(result);
-            enventry.GetItem(enventry.GetAllItemList(EnventryEngine.ItemType.Item)[0].name, EnventryEngine.ItemType.Item, out result);
+            enventry.GetItem(enventry.GetAllItemList()[0].name, out result);
             Debug.Log(result);
-            enventry.GetItem(enventry.GetAllItemList(EnventryEngine.ItemType.Item)[0].name, EnventryEngine.ItemType.Item, out result);
+            enventry.GetItem(enventry.GetAllItemList()[0].name, out result);
             Debug.Log(result);
 
-            enventry.GetItem(enventry.GetAllItemList(EnventryEngine.ItemType.Item)[1].name, EnventryEngine.ItemType.Item, out result);
+            enventry.GetItem(enventry.GetAllItemList()[1].name, out result);
             Debug.Log(result);
-            enventry.GetItem(enventry.GetAllItemList(EnventryEngine.ItemType.Item)[1].name, EnventryEngine.ItemType.Item, out result);
+            enventry.GetItem(enventry.GetAllItemList()[1].name, out result);
             Debug.Log(result);
-            enventry.GetItem(enventry.GetAllItemList(EnventryEngine.ItemType.Item)[1].name, EnventryEngine.ItemType.Item, out result);
+            enventry.GetItem(enventry.GetAllItemList()[1].name, out result);
             Debug.Log(result);
 
             ShowMyIntentryItem();
@@ -47,19 +47,19 @@ namespace UniMoonDialogue.Enventry
         void Test3()
         {
             EnventryEngine.ItemStoreResult result;
-            enventry.UseItem(enventry.GetAllItemList(EnventryEngine.ItemType.Item)[0].name, EnventryEngine.ItemType.Item, out result);
+            enventry.UseItem(enventry.GetAllItemList()[0].name, out result);
             Debug.Log(result);
-            enventry.UseItem(enventry.GetAllItemList(EnventryEngine.ItemType.Item)[0].name, EnventryEngine.ItemType.Item, out result);
+            enventry.UseItem(enventry.GetAllItemList()[0].name, out result);
             Debug.Log(result);
-            enventry.UseItem(enventry.GetAllItemList(EnventryEngine.ItemType.Item)[1].name, EnventryEngine.ItemType.Item, out result);
+            enventry.UseItem(enventry.GetAllItemList()[1].name, out result);
             Debug.Log(result);
 
             ShowMyIntentryItem();
         }
 
-        void ShowMyIntentryItem(EnventryEngine.ItemType type = EnventryEngine.ItemType.Item)
+        void ShowMyIntentryItem()
         {
-            foreach (var item in enventry.GetMyItemList(type))
+            foreach (var item in enventry.GetMyItemList())
             {
                 Debug.Log($"[{item.type}]{item.name} ({item.currentStore}/{item.maxStore})");
             }
