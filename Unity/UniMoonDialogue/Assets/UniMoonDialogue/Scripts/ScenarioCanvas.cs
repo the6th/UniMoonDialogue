@@ -95,7 +95,7 @@ namespace UniMoonDialogue
             ScenarioEngine.Instance.isPaused = true;
             while (diff < durationToOpen)
             {
-                
+
                 //Canceled
                 if (!isCoroutineRunnning) yield break;
 
@@ -111,7 +111,7 @@ namespace UniMoonDialogue
             if (!b) dialoguePanel.gameObject.SetActive(false);
         }
 
-        private void OnMessageUpdate(EventData data, ScenarioEngine.ScenarioType arg0, string arg1, float progress)
+        private void OnMessageUpdate(EventData data, string arg1, float progress)
         {
             if (activeChoiceButtonList.Count > 0)
             {

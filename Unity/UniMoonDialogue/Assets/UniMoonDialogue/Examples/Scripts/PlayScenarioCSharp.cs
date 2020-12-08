@@ -60,7 +60,7 @@ namespace UniMoonDialogue
             if (scenario.dialogs.Keys.Max() >= index)
                 ShowDialogue(data, index);
             else
-                ScenarioEngine.Instance.StopScenario();
+                ScenarioEngine.Instance.StopScenario(data);
         }
         private void ShowDialogue(EventData data, int key)
         {

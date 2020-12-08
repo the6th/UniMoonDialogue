@@ -14,8 +14,35 @@ namespace UniMoonDialogue
 #endif
         public class EventData
         {
-            public GameObject gameObject;
-            public string displayName = "";
+            /// <summary>
+            /// GameObject of scenario owner
+            /// </summary>
+            public GameObject gameObject { private set; get; }
+
+            /// <summary>
+            /// owner name.
+            /// </summary>
+            public string displayName { private set; get; }
+
+            /// <summary>
+            /// current scenarioType
+            /// </summary>
+            public ScenarioType scenarioType
+            {
+                private set
+                {
+                    m_scenarioType = value;
+                }
+                get { return m_scenarioType; }
+            }
+
+            private ScenarioType m_scenarioType = ScenarioType.None;
+
+            /// <summary>
+            /// create new scenario event
+            /// </summary>
+            /// <param name="gameObject">GameObject of scenario owner</param>
+            /// <param name="displayName">owner name（無指定だとGameObjectの名前となる)</param>
             public EventData(GameObject gameObject, string displayName = "")
             {
                 this.gameObject = gameObject;
@@ -24,6 +51,8 @@ namespace UniMoonDialogue
                     this.displayName = gameObject.name;
                 else
                     this.displayName = displayName;
+
+                m_scenarioType = ScenarioType.None;
             }
 
             /// <summary>
@@ -32,6 +61,7 @@ namespace UniMoonDialogue
             /// <param name="mes"></param>
             public void msg(string mes)
             {
+                scenarioType = ScenarioType.TapToNext;
                 ScenarioEngine.Instance.UpdateScenario(
                     type: ScenarioType.TapToNext,
                     messages: new string[] { mes },
@@ -46,6 +76,7 @@ namespace UniMoonDialogue
             /// <param name="choices"></param>
             public void choice(string title, params string[] choices)
             {
+                scenarioType = ScenarioType.Select;
                 var message = new string[choices.Length + 1];
                 message[0] = title;
                 choices.CopyTo(message, 1);
@@ -54,6 +85,14 @@ namespace UniMoonDialogue
                     messages: message,
                     data: this
                 );
+            }
+
+            /// <summary>
+            /// シナリオを停止状態にする
+            /// </summary>
+            public void Stop()
+            {
+                scenarioType = ScenarioType.None;
             }
         }
 
@@ -68,23 +107,10 @@ namespace UniMoonDialogue
             None
         };
 
-        public ScenarioType scenarioType
-        {
-            private set
-            {
-                m_scenarioType = value;
-            }
-            get { return m_scenarioType; }
-        }
-        public EventData currentEventData { private set; get; }
-
-        [SerializeField]
-        private ScenarioType m_scenarioType = ScenarioType.None;
-
-        [SerializeField] private LuaTextAsset luaScript = null;
-        [SerializeField] private bool AutoStart = false;
         [SerializeField] private bool StepScenario = true;
         [SerializeField] private float stepSpeed = 0.1f;
+
+        public EventData currentEventData { private set; get; }
 
         private ScenarioChoice scenarioChoice = ScenarioChoice.None;
 #if ENABLE_MoonSharp
@@ -111,14 +137,21 @@ namespace UniMoonDialogue
             }
         }
 
-        //Step表示実行中か？
+        /// <summary>
+        /// Step 表示実行中か？
+        /// </summary>
         private bool isStepRunning = false;
         private bool isMonoRunning = false;
-        //Step表示を中止するか？（早送り表示)
+        
+        /// <summary>
+        /// Step 表示（早送り表示)を中止するか？
+        /// </summary>
         public bool skipStep { private set; get; } = false;
+        [HideInInspector]
         public bool isPaused = false;
 
-        public UnityAction<EventData, ScenarioType, string, float> OnMessageUpdate;
+
+        public UnityAction<EventData, string, float> OnMessageUpdate;
         public UnityAction<EventData> OnMessageStart;
         public UnityAction<EventData> OnMessageEnd;
         public UnityAction<EventData, string[]> OnChoiceStart;
@@ -126,15 +159,13 @@ namespace UniMoonDialogue
 
         private void UpdateScenario(ScenarioType type, string[] messages, EventData data)
         {
-            scenarioType = type;
             if (type == ScenarioType.Select)
             {
                 OnChoiceStart?.Invoke(data, messages);
             }
             else if (!StepScenario)
             {
-                currentText = messages[0];
-                OnMessageUpdate?.Invoke(data, scenarioType, currentText, 1f);
+                OnMessageUpdate?.Invoke(data, messages[0], 1f);
             }
             else
             {
@@ -165,7 +196,7 @@ namespace UniMoonDialogue
                     //最後まで読んだらタグ除去を解除する
                     currentText = currentMessages[0];
                     //選択式の場合は選択文も文字列に追加する
-                    if (scenarioType == ScenarioType.Select)
+                    if (data.scenarioType == ScenarioType.Select)
                     {
                         currentText += "\r\n";
                         for (int i = 1; i < currentMessages.Length; i++)
@@ -175,7 +206,7 @@ namespace UniMoonDialogue
                     }
                 }
 
-                OnMessageUpdate?.Invoke(data, scenarioType, currentText, progress);
+                OnMessageUpdate?.Invoke(data, currentText, progress);
 
                 if (skipStep)
                 {
@@ -223,20 +254,16 @@ namespace UniMoonDialogue
             OnMessageStart?.Invoke(currentEventData);
             return true;
         }
-        public void StopScenario()
+        public void StopScenario(EventData data)
         {
-            scenarioType = ScenarioType.None;
+            //currentEventData.scenarioType = ScenarioType.None;
+            data.Stop();
             isMonoRunning = false;
             OnMessageEnd?.Invoke(currentEventData);
         }
 
         #endregion
 
-
-        private void Start()
-        {
-            if (AutoStart) StartScenario(luaScript, gameObject);
-        }
 
         /// <summary>
         /// ユーザーイベント、クリックや選択が発生
@@ -245,7 +272,7 @@ namespace UniMoonDialogue
         public void ScenarioSelect(ScenarioChoice choice)
         {
             //Debug.Log("ScenarioSelect" + choice.ToString());
-            if (isRunning && scenarioType != ScenarioType.None)
+            if (isRunning && currentEventData.scenarioType != ScenarioType.None)
             {
                 if (StepScenario && isStepRunning)
                 {
@@ -260,9 +287,9 @@ namespace UniMoonDialogue
                     OnUserInput?.Invoke(currentEventData, scenarioChoice);
                 }
             }
-            else if (scenarioType != ScenarioType.None)
+            else if (currentEventData.scenarioType != ScenarioType.None)
             {
-                scenarioType = ScenarioType.None;
+                currentEventData.Stop();
 #if ENABLE_MoonSharp
                 coroutine = null;
 #endif
@@ -274,6 +301,5 @@ namespace UniMoonDialogue
         {
             return luaTextAsset.text;
         }
-
     }
 }
