@@ -1,4 +1,5 @@
-﻿using Bolt;
+﻿#if ENABLE_Bolt
+using Bolt;
 using Ludiq;
 using System.Collections.Generic;
 using UniMoonDialogue;
@@ -47,3 +48,4 @@ namespace UniMoonDialogue
         }
     }
 }
+#endif

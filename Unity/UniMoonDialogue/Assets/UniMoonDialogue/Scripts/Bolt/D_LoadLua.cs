@@ -1,4 +1,5 @@
-﻿using Bolt;
+﻿#if ENABLE_Bolt
+using Bolt;
 using Ludiq;
 using UniMoonDialogue;
 using UnityEngine;
@@ -72,3 +73,4 @@ namespace UniMoonDialogue
         }
     }
 }
+#endif

@@ -1,9 +1,13 @@
-﻿using Bolt;
+﻿#if ENABLE_Bolt
+using Bolt;
+#endif
 using UnityEngine;
 
 namespace UniMoonDialogue
 {
+#if ENABLE_Bolt
     [UnitCategory("UniMoonDialogue")]
+#endif
 
     public class ExampleCommon
     {

@@ -1,8 +1,10 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
+
+#if ENABLE_Bolt
 using Ludiq;
-using System.Collections;
 using Bolt;
+#endif
 
 namespace UniMoonDialogue.Inventry
 {
@@ -24,10 +26,11 @@ namespace UniMoonDialogue.Inventry
         }
     }
 
-
+#if ENABLE_Bolt
     [Inspectable]
     [CreateAssetMenu]
     [TypeIcon(typeof(Inv_Item))]
+#endif
     public class Inv_Item : InventryItemBase
     {
         public Inv_Item(string name, string description = "", int maxStore = 1)
@@ -37,10 +40,11 @@ namespace UniMoonDialogue.Inventry
         }
     }
 
+#if ENABLE_Bolt
     [CreateAssetMenu]
     [Inspectable]
     [TypeIcon(typeof(Item_Add))]
-
+#endif
     public class Inv_Mission : InventryItemBase
     {
         public Inv_Mission(string name)
@@ -49,6 +53,4 @@ namespace UniMoonDialogue.Inventry
             base.Entry(name);
         }
     }
-
-
 }

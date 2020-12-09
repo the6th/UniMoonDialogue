@@ -1,4 +1,5 @@
-﻿using Bolt;
+﻿#if ENABLE_Bolt
+using Bolt;
 using Ludiq;
 using UniMoonDialogue.Inventry;
 using UnityEngine;
@@ -62,3 +63,5 @@ namespace UniMoonDialogue
 
 
 }
+#endif
+

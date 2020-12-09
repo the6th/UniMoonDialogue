@@ -1,4 +1,5 @@
-﻿using Bolt;
+﻿#if ENABLE_Bolt
+using Bolt;
 using UniMoonDialogue;
 
 namespace UniMoonDialogue
@@ -18,3 +19,5 @@ namespace UniMoonDialogue
         }
     }
 }
+#endif
+

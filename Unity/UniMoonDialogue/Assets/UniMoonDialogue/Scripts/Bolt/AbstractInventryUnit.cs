@@ -1,4 +1,5 @@
-﻿using Bolt;
+﻿#if ENABLE_Bolt
+using Bolt;
 using Ludiq;
 using System.Collections;
 using UniMoonDialogue.Inventry;
@@ -7,7 +8,6 @@ using UnityEngine;
 namespace UniMoonDialogue
 {
     [UnitCategory("UniMoonDialogue")]
-
     public class AbstractInventryUnit : Unit
     {
 
@@ -41,3 +41,4 @@ namespace UniMoonDialogue
         }
     }
 }
+#endif
