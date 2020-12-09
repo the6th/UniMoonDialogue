@@ -121,6 +121,69 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &561782506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 561782509}
+  - component: {fileID: 561782508}
+  - component: {fileID: 561782507}
+  m_Layer: 0
+  m_Name: InventryTestBolt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &561782507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561782506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -57143145, guid: a040fb66244a7f54289914d98ea4ef7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"nest":{"source":"Embed","macro":null,"embed":{"variables":{"collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[],"valueOutputDefinitions":[],"title":null,"summary":null,"pan":{"x":483.5876,"y":-49.17043},"zoom":1.0,"elements":[{"coroutine":false,"defaultValues":{},"position":{"x":-252.0,"y":-156.0},"guid":"e9cffcb9-2752-42b4-a02d-384cddfb700f","$version":"A","$type":"Bolt.Start","$id":"10"},{"defaultValues":{"Item":null,"ammount":{"$content":1,"$type":"System.Int32"}},"position":{"x":48.0,"y":-240.0},"guid":"43cc2be7-865a-48b4-89e6-89880ba34427","$version":"A","$type":"UniMoonDialogue.Item_Add","$id":"12"},{"defaultValues":{"Item":null},"position":{"x":276.0,"y":-240.0},"guid":"0d6d1e2c-bef0-4fb2-9123-1f48d53e0aec","$version":"A","$type":"UniMoonDialogue.Item_Check","$id":"14"},{"defaultValues":{"Item":null,"ammount":{"$content":1,"$type":"System.Int32"}},"position":{"x":72.0,"y":-96.0},"guid":"f372e79b-3d0d-4ebf-b0be-eedcf387d7a4","$version":"A","$type":"UniMoonDialogue.Item_Take"},{"defaultValues":{"Mission":null},"position":{"x":372.0,"y":-504.0},"guid":"57dc90f3-3f48-4f7a-af05-6396c1c724fd","$version":"A","$type":"UniMoonDialogue.Mission_Add"},{"defaultValues":{"Mission":{"$content":0,"$type":"UnityEngine.Object"}},"position":{"x":528.0,"y":-348.0},"guid":"7040cb7b-7171-494d-9e4d-30250052745d","$version":"A","$type":"UniMoonDialogue.Mission_Check"},{"defaultValues":{"Mission":null},"position":{"x":660.0,"y":-492.0},"guid":"ea8f2bd9-093f-4f3f-9544-f8074595d4d0","$version":"A","$type":"UniMoonDialogue.Mission_Take"},{"sourceUnit":{"$ref":"10"},"sourceKey":"trigger","destinationUnit":{"$ref":"12"},"destinationKey":"","guid":"c76f9aea-d098-4a13-ba9d-aae2a39afad6","$type":"Bolt.ControlConnection"},{"sourceUnit":{"$ref":"12"},"sourceKey":"","destinationUnit":{"$ref":"14"},"destinationKey":"","guid":"559e1dfe-9a03-4101-a35b-44fe56060bb8","$type":"Bolt.ControlConnection"}],"$version":"A"}}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: 7e7e78af7f1f00e48a1ff35c9109a0aa, type: 2}
+--- !u!114 &561782508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561782506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1465209106, guid: c8d0ad23af520fe46aabe2b1fecf6462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"declarations":{"collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
+--- !u!4 &561782509
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561782506}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &768620002
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,6 +359,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1664237698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1664237700}
+  - component: {fileID: 1664237699}
+  m_Layer: 0
+  m_Name: InventryTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1664237699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664237698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaba447e36196b149836a4a8e5588729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1664237700
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664237698}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1855120762
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +412,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1855120764}
   - component: {fileID: 1855120765}
-  - component: {fileID: 1855120763}
   m_Layer: 0
   m_Name: InventryEngine
   m_TagString: Untagged
@@ -314,18 +419,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1855120763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855120762}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaba447e36196b149836a4a8e5588729, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1855120764
 Transform:
   m_ObjectHideFlags: 0
@@ -353,10 +446,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allItems:
-  - {fileID: 11400000, guid: 3ed3ea7ac22dce647a7d3354c93074ed, type: 2}
-  - {fileID: 11400000, guid: af9113844cfc6ba4eaf35d5098be5026, type: 2}
+  - {fileID: 11400000, guid: 227b2c1fb62dfa84ca7b474f6a21ff7e, type: 2}
+  - {fileID: 11400000, guid: 227b2c1fb62dfa84ca7b474f6a21ff7e, type: 2}
   AllMissions:
-  - {fileID: 11400000, guid: 49969e7aaba2e7c4fb938d55df1eeadd, type: 2}
+  - {fileID: 11400000, guid: 7e7e78af7f1f00e48a1ff35c9109a0aa, type: 2}
+  myItems: []
+  myMissions: []
 --- !u!1 &2097652438
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,9 +542,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
-    _objectReferences:
-    - {fileID: 11400000, guid: e820a653ab9a1004a962bf7894b92a50, type: 2}
+    _json: '{"nest":{"source":"Macro","macro":null,"embed":null}}'
+    _objectReferences: []
 --- !u!114 &2111510799
 MonoBehaviour:
   m_ObjectHideFlags: 0

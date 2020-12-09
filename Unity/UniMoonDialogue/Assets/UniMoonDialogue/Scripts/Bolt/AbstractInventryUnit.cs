@@ -1,7 +1,6 @@
 ﻿#if ENABLE_Bolt
 using Bolt;
 using Ludiq;
-using System.Collections;
 using UniMoonDialogue.Inventry;
 using UnityEngine;
 

@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace UniMoonDialogue
 {
+    [TypeIcon(typeof(Bolt.Add<int>))]
+
     public class Item_Add : AbstractInventryUnit
     {
         [DoNotSerialize] public ControlOutput CO_failed { get; private set; }
@@ -20,7 +22,7 @@ namespace UniMoonDialogue
 
         protected override void Definition()
         {
-            item = ValueInput<Inv_Item>("Item",null);
+            item = ValueInput<Item>("Item",null);
             ammount = ValueInput<int>("ammount", 1);
             status = ValueOutput<InventryEngine.ItemStoreResult>("Result", ReturnResultState);
             base.Definition();
@@ -30,14 +32,14 @@ namespace UniMoonDialogue
         protected override ControlOutput Enter(Flow flow)
         {
             var _ammount = flow.GetValue<int>(ammount);
-            var _item = flow.GetValue<Inv_Item>(item);
+            var _item = flow.GetValue<Item>(item);
 
             base.Enter(flow);
             if (_item == null) return OnFailed;
 
 
 
-            var _result = InventryEngine.Instance.AddItem(_item.name, out resultStatus, _ammount);
+            var _result = InventryEngine.Instance.AddItem(_item, out resultStatus, _ammount);
 
             Debug.Log($"アイテム追加{_item.name} :{_result}");
             if (_result)
@@ -48,18 +50,18 @@ namespace UniMoonDialogue
 
     }
 
-    [Descriptor(typeof(Item_Add))]
-    public class Item_AddDescriptor : UnitDescriptor<Item_Add>
-    {
-        public Item_AddDescriptor(Item_Add unit) : base(unit) { }
+    //[Descriptor(typeof(Item_Add))]
+    //public class Item_AddDescriptor : UnitDescriptor<Item_Add>
+    //{
+    //    public Item_AddDescriptor(Item_Add unit) : base(unit) { }
 
-        protected override EditorTexture DefinedIcon()
-        {
-            var texture = Resources.Load("BoltIcons/Inv_Item") as Texture2D;
+    //    protected override EditorTexture DefinedIcon()
+    //    {
+    //        var texture = Resources.Load("BoltIcons/Inv_Item") as Texture2D;
 
-            return EditorTexture.Single(texture);
-        }
-    }
+    //        return EditorTexture.Single(texture);
+    //    }
+    //}
 
 
 }
