@@ -555,7 +555,7 @@ PrefabInstance:
     - target: {fileID: 4148460489635138195, guid: b4f10dc152ce4f842a5ef776640c18d0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -40.000427
+      value: -40.00049
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4f10dc152ce4f842a5ef776640c18d0, type: 3}
@@ -1408,6 +1408,52 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4444067868220568550, guid: 51a8959c425c0f34abdc17a60c4c0876,
+        type: 3}
+      propertyPath: _data._objectReferences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444067868220568550, guid: 51a8959c425c0f34abdc17a60c4c0876,
+        type: 3}
+      propertyPath: _data._json
+      value: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4444067868220568550, guid: 51a8959c425c0f34abdc17a60c4c0876,
+        type: 3}
+      propertyPath: _data._objectReferences.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 07f72bfdf712eef4da2e4b793037421c,
+        type: 2}
+    - target: {fileID: 4444067868220568550, guid: 51a8959c425c0f34abdc17a60c4c0876,
+        type: 3}
+      propertyPath: _data._objectReferences.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: e0486e70b15964f41824633fc4056e81,
+        type: 2}
+    - target: {fileID: 4444067868220568550, guid: 51a8959c425c0f34abdc17a60c4c0876,
+        type: 3}
+      propertyPath: _data._objectReferences.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e40cd46ac2118e4bae345c1b3139a2e,
+        type: 2}
+    - target: {fileID: 4444067868220568550, guid: 51a8959c425c0f34abdc17a60c4c0876,
+        type: 3}
+      propertyPath: _data._objectReferences.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c28401f742d41e49b546c1314fde8b2,
+        type: 2}
+    - target: {fileID: 4444067868220568550, guid: 51a8959c425c0f34abdc17a60c4c0876,
+        type: 3}
+      propertyPath: _data._objectReferences.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: b25ef6f8e8ffc6e459b2f06a94c0169b,
+        type: 2}
+    - target: {fileID: 4444067868220568550, guid: 51a8959c425c0f34abdc17a60c4c0876,
+        type: 3}
+      propertyPath: _data._objectReferences.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 45165fc2457f79144b00a91127381bfd,
+        type: 2}
     - target: {fileID: 4444067868220568551, guid: 51a8959c425c0f34abdc17a60c4c0876,
         type: 3}
       propertyPath: m_LocalPosition.x

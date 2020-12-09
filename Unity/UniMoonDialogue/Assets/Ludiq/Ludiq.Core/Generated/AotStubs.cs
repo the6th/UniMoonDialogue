@@ -81,6 +81,7 @@ namespace Ludiq.Generated.Aot
 	// UniMoonDialogue.LuaScenarioLoader.op_Equality
 	// UniMoonDialogue.LuaScenarioLoader.op_Implicit
 	// UniMoonDialogue.LuaScenarioLoader.op_Inequality
+	// UniMoonDialogue.Mission..ctor
 	// UniMoonDialogue.Mission.op_Equality
 	// UniMoonDialogue.Mission.op_Implicit
 	// UniMoonDialogue.Mission.op_Inequality
@@ -1571,6 +1572,13 @@ namespace Ludiq.Generated.Aot
 			global::Ludiq.StaticFunctionInvoker<UnityEngine.Object, UnityEngine.Object, bool> optimized = new global::Ludiq.StaticFunctionInvoker<UnityEngine.Object, UnityEngine.Object, bool>(default(global::System.Reflection.MethodInfo));
 			optimized.Invoke(null, arg0, arg1);
 			optimized.Invoke(default(object[]));
+		}
+		
+		// UniMoonDialogue.Mission..ctor
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UniMoonDialogue_Mission_ctor()
+		{
+			new UniMoonDialogue.Mission();
 		}
 		
 		// UniMoonDialogue.Mission.op_Equality

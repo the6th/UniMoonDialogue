@@ -114,8 +114,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"collection":{"$content":[],"$version":"A"},"$version":"A"}}'
-    _objectReferences: []
+    _json: '{"declarations":{"collection":{"$content":[{"name":"Mission","value":{"$content":0,"$type":"UnityEngine.Object"},"$version":"A"},{"name":"Coin","value":{"$content":1,"$type":"UnityEngine.Object"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: 45165fc2457f79144b00a91127381bfd, type: 2}
+    - {fileID: 11400000, guid: 16cc05cd4705ae149af080dad68116a5, type: 2}
 --- !u!114 &4444067868220568550
 MonoBehaviour:
   m_ObjectHideFlags: 0
