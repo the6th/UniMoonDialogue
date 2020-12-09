@@ -28,6 +28,9 @@ namespace Ludiq.Generated.Aot
 	// Bolt.StateMacro.op_Equality
 	// Bolt.StateMacro.op_Implicit
 	// Bolt.StateMacro.op_Inequality
+	// DebugLogToText.op_Equality
+	// DebugLogToText.op_Implicit
+	// DebugLogToText.op_Inequality
 	// float.op_Equality
 	// float.op_GreaterThan
 	// float.op_GreaterThanOrEqual
@@ -40,6 +43,8 @@ namespace Ludiq.Generated.Aot
 	// Ludiq.LudiqScriptableObject.op_Equality
 	// Ludiq.LudiqScriptableObject.op_Implicit
 	// Ludiq.LudiqScriptableObject.op_Inequality
+	// string.Concat
+	// string.Concat
 	// string.op_Equality
 	// string.op_Inequality
 	// UniMoonDialogue.Blink.op_Equality
@@ -48,6 +53,9 @@ namespace Ludiq.Generated.Aot
 	// UniMoonDialogue.Example.PlayScenarioLua.op_Equality
 	// UniMoonDialogue.Example.PlayScenarioLua.op_Implicit
 	// UniMoonDialogue.Example.PlayScenarioLua.op_Inequality
+	// UniMoonDialogue.InventryEngine.CheckHaveAll
+	// UniMoonDialogue.InventryEngine.ClearAllItems
+	// UniMoonDialogue.InventryEngine.Instance
 	// UniMoonDialogue.InventryEngine.op_Equality
 	// UniMoonDialogue.InventryEngine.op_Implicit
 	// UniMoonDialogue.InventryEngine.op_Inequality
@@ -57,9 +65,19 @@ namespace Ludiq.Generated.Aot
 	// UniMoonDialogue.InventryTest.op_Equality
 	// UniMoonDialogue.InventryTest.op_Implicit
 	// UniMoonDialogue.InventryTest.op_Inequality
+	// UniMoonDialogue.Item..ctor
+	// UniMoonDialogue.Item.description
+	// UniMoonDialogue.Item.hideFlags
+	// UniMoonDialogue.Item.icon
+	// UniMoonDialogue.Item.key
+	// UniMoonDialogue.Item.maxStore
+	// UniMoonDialogue.Item.name
+	// UniMoonDialogue.Item.nameForDisplay
 	// UniMoonDialogue.Item.op_Equality
 	// UniMoonDialogue.Item.op_Implicit
 	// UniMoonDialogue.Item.op_Inequality
+	// UniMoonDialogue.Item.tag
+	// UniMoonDialogue.Item.type
 	// UniMoonDialogue.LuaScenarioLoader.op_Equality
 	// UniMoonDialogue.LuaScenarioLoader.op_Implicit
 	// UniMoonDialogue.LuaScenarioLoader.op_Inequality
@@ -273,6 +291,7 @@ namespace Ludiq.Generated.Aot
 	// UnityEngine.CustomRenderTexture.op_Equality
 	// UnityEngine.CustomRenderTexture.op_Implicit
 	// UnityEngine.CustomRenderTexture.op_Inequality
+	// UnityEngine.Debug.Log
 	// UnityEngine.DistanceJoint2D.op_Equality
 	// UnityEngine.DistanceJoint2D.op_Implicit
 	// UnityEngine.DistanceJoint2D.op_Inequality
@@ -936,6 +955,41 @@ namespace Ludiq.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
+		// DebugLogToText.op_Equality
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void DebugLogToText_op_Equality()
+		{
+			global::UnityEngine.Object arg0 = default(global::UnityEngine.Object);
+			global::UnityEngine.Object arg1 = default(global::UnityEngine.Object);
+			bool @operator = (arg0 == arg1);
+			global::Ludiq.StaticFunctionInvoker<UnityEngine.Object, UnityEngine.Object, bool> optimized = new global::Ludiq.StaticFunctionInvoker<UnityEngine.Object, UnityEngine.Object, bool>(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(null, arg0, arg1);
+			optimized.Invoke(default(object[]));
+		}
+		
+		// DebugLogToText.op_Implicit
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void DebugLogToText_op_Implicit()
+		{
+			global::UnityEngine.Object arg0 = default(global::UnityEngine.Object);
+			bool conversion = ((bool)(arg0));
+			global::Ludiq.StaticFunctionInvoker<UnityEngine.Object, bool> optimized = new global::Ludiq.StaticFunctionInvoker<UnityEngine.Object, bool>(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(null, arg0);
+			optimized.Invoke(default(object[]));
+		}
+		
+		// DebugLogToText.op_Inequality
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void DebugLogToText_op_Inequality()
+		{
+			global::UnityEngine.Object arg0 = default(global::UnityEngine.Object);
+			global::UnityEngine.Object arg1 = default(global::UnityEngine.Object);
+			bool @operator = (arg0 != arg1);
+			global::Ludiq.StaticFunctionInvoker<UnityEngine.Object, UnityEngine.Object, bool> optimized = new global::Ludiq.StaticFunctionInvoker<UnityEngine.Object, UnityEngine.Object, bool>(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(null, arg0, arg1);
+			optimized.Invoke(default(object[]));
+		}
+		
 		// float.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void float_op_Equality()
@@ -1078,6 +1132,31 @@ namespace Ludiq.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
+		// string.Concat
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void string_Concat()
+		{
+			object arg0 = default(object);
+			object arg1 = default(object);
+			object arg2 = default(object);
+			string.Concat(arg0, arg1, arg2);
+			global::Ludiq.StaticFunctionInvoker<object, object, object, string> optimized = new global::Ludiq.StaticFunctionInvoker<object, object, object, string>(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(null, arg0, arg1, arg2);
+			optimized.Invoke(default(object[]));
+		}
+		
+		// string.Concat
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void string_Concat_0()
+		{
+			object arg0 = default(object);
+			object arg1 = default(object);
+			string.Concat(arg0, arg1);
+			global::Ludiq.StaticFunctionInvoker<object, object, string> optimized = new global::Ludiq.StaticFunctionInvoker<object, object, string>(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(null, arg0, arg1);
+			optimized.Invoke(default(object[]));
+		}
+		
 		// string.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void string_op_Equality()
@@ -1170,6 +1249,39 @@ namespace Ludiq.Generated.Aot
 			global::Ludiq.StaticFunctionInvoker<UnityEngine.Object, UnityEngine.Object, bool> optimized = new global::Ludiq.StaticFunctionInvoker<UnityEngine.Object, UnityEngine.Object, bool>(default(global::System.Reflection.MethodInfo));
 			optimized.Invoke(null, arg0, arg1);
 			optimized.Invoke(default(object[]));
+		}
+		
+		// UniMoonDialogue.InventryEngine.CheckHaveAll
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UniMoonDialogue_InventryEngine_CheckHaveAll()
+		{
+			global::UniMoonDialogue.InventryEngine target = default(global::UniMoonDialogue.InventryEngine);
+			global::System.Collections.Generic.List<UniMoonDialogue.Item> arg0 = default(global::System.Collections.Generic.List<UniMoonDialogue.Item>);
+			target.CheckHaveAll(arg0);
+			global::Ludiq.InstanceFunctionInvoker<UniMoonDialogue.InventryEngine, System.Collections.Generic.List<UniMoonDialogue.Item>, bool> optimized = new global::Ludiq.InstanceFunctionInvoker<UniMoonDialogue.InventryEngine, System.Collections.Generic.List<UniMoonDialogue.Item>, bool>(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(default(global::UniMoonDialogue.InventryEngine), arg0);
+			optimized.Invoke(default(object[]));
+		}
+		
+		// UniMoonDialogue.InventryEngine.ClearAllItems
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UniMoonDialogue_InventryEngine_ClearAllItems()
+		{
+			global::UniMoonDialogue.InventryEngine target = default(global::UniMoonDialogue.InventryEngine);
+			string arg0 = default(string);
+			target.ClearAllItems(arg0);
+			global::Ludiq.InstanceFunctionInvoker<UniMoonDialogue.InventryEngine, string, int> optimized = new global::Ludiq.InstanceFunctionInvoker<UniMoonDialogue.InventryEngine, string, int>(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(default(global::UniMoonDialogue.InventryEngine), arg0);
+			optimized.Invoke(default(object[]));
+		}
+		
+		// UniMoonDialogue.InventryEngine.Instance
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UniMoonDialogue_InventryEngine_Instance()
+		{
+			global::UniMoonDialogue.InventryEngine accessor = global::UniMoonDialogue.SingletonMonoBehaviour<UniMoonDialogue.InventryEngine>.Instance;
+			global::Ludiq.StaticPropertyAccessor<UniMoonDialogue.InventryEngine> optimized = new global::Ludiq.StaticPropertyAccessor<UniMoonDialogue.InventryEngine>(default(global::System.Reflection.PropertyInfo));
+			optimized.GetValue(null);
 		}
 		
 		// UniMoonDialogue.InventryEngine.op_Equality
@@ -1277,6 +1389,97 @@ namespace Ludiq.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
+		// UniMoonDialogue.Item..ctor
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UniMoonDialogue_Item_ctor()
+		{
+			new UniMoonDialogue.Item();
+		}
+		
+		// UniMoonDialogue.Item.description
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UniMoonDialogue_Item_description()
+		{
+			global::UniMoonDialogue.InventryItemBase target = default(global::UniMoonDialogue.InventryItemBase);
+			string accessor = target.description;
+			target.description = default(string);
+			global::Ludiq.InstanceFieldAccessor<UniMoonDialogue.InventryItemBase, string> optimized = new global::Ludiq.InstanceFieldAccessor<UniMoonDialogue.InventryItemBase, string>(default(global::System.Reflection.FieldInfo));
+			optimized.GetValue(default(global::UniMoonDialogue.InventryItemBase));
+			optimized.SetValue(default(global::UniMoonDialogue.InventryItemBase), default(string));
+		}
+		
+		// UniMoonDialogue.Item.hideFlags
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UniMoonDialogue_Item_hideFlags()
+		{
+			global::UnityEngine.Object target = default(global::UnityEngine.Object);
+			global::UnityEngine.HideFlags accessor = target.hideFlags;
+			target.hideFlags = default(global::UnityEngine.HideFlags);
+			global::Ludiq.InstancePropertyAccessor<UnityEngine.Object, UnityEngine.HideFlags> optimized = new global::Ludiq.InstancePropertyAccessor<UnityEngine.Object, UnityEngine.HideFlags>(default(global::System.Reflection.PropertyInfo));
+			optimized.GetValue(default(global::UnityEngine.Object));
+			optimized.SetValue(default(global::UnityEngine.Object), default(global::UnityEngine.HideFlags));
+		}
+		
+		// UniMoonDialogue.Item.icon
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UniMoonDialogue_Item_icon()
+		{
+			global::UniMoonDialogue.InventryItemBase target = default(global::UniMoonDialogue.InventryItemBase);
+			global::UnityEngine.Sprite accessor = target.icon;
+			target.icon = default(global::UnityEngine.Sprite);
+			global::Ludiq.InstanceFieldAccessor<UniMoonDialogue.InventryItemBase, UnityEngine.Sprite> optimized = new global::Ludiq.InstanceFieldAccessor<UniMoonDialogue.InventryItemBase, UnityEngine.Sprite>(default(global::System.Reflection.FieldInfo));
+			optimized.GetValue(default(global::UniMoonDialogue.InventryItemBase));
+			optimized.SetValue(default(global::UniMoonDialogue.InventryItemBase), default(global::UnityEngine.Sprite));
+		}
+		
+		// UniMoonDialogue.Item.key
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UniMoonDialogue_Item_key()
+		{
+			global::UniMoonDialogue.InventryItemBase target = default(global::UniMoonDialogue.InventryItemBase);
+			string accessor = target.key;
+			target.key = default(string);
+			global::Ludiq.InstanceFieldAccessor<UniMoonDialogue.InventryItemBase, string> optimized = new global::Ludiq.InstanceFieldAccessor<UniMoonDialogue.InventryItemBase, string>(default(global::System.Reflection.FieldInfo));
+			optimized.GetValue(default(global::UniMoonDialogue.InventryItemBase));
+			optimized.SetValue(default(global::UniMoonDialogue.InventryItemBase), default(string));
+		}
+		
+		// UniMoonDialogue.Item.maxStore
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UniMoonDialogue_Item_maxStore()
+		{
+			global::UniMoonDialogue.Item target = default(global::UniMoonDialogue.Item);
+			int accessor = target.maxStore;
+			target.maxStore = default(int);
+			global::Ludiq.InstanceFieldAccessor<UniMoonDialogue.Item, int> optimized = new global::Ludiq.InstanceFieldAccessor<UniMoonDialogue.Item, int>(default(global::System.Reflection.FieldInfo));
+			optimized.GetValue(default(global::UniMoonDialogue.Item));
+			optimized.SetValue(default(global::UniMoonDialogue.Item), default(int));
+		}
+		
+		// UniMoonDialogue.Item.name
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UniMoonDialogue_Item_name()
+		{
+			global::UnityEngine.Object target = default(global::UnityEngine.Object);
+			string accessor = target.name;
+			target.name = default(string);
+			global::Ludiq.InstancePropertyAccessor<UnityEngine.Object, string> optimized = new global::Ludiq.InstancePropertyAccessor<UnityEngine.Object, string>(default(global::System.Reflection.PropertyInfo));
+			optimized.GetValue(default(global::UnityEngine.Object));
+			optimized.SetValue(default(global::UnityEngine.Object), default(string));
+		}
+		
+		// UniMoonDialogue.Item.nameForDisplay
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UniMoonDialogue_Item_nameForDisplay()
+		{
+			global::UniMoonDialogue.InventryItemBase target = default(global::UniMoonDialogue.InventryItemBase);
+			string accessor = target.nameForDisplay;
+			target.nameForDisplay = default(string);
+			global::Ludiq.InstanceFieldAccessor<UniMoonDialogue.InventryItemBase, string> optimized = new global::Ludiq.InstanceFieldAccessor<UniMoonDialogue.InventryItemBase, string>(default(global::System.Reflection.FieldInfo));
+			optimized.GetValue(default(global::UniMoonDialogue.InventryItemBase));
+			optimized.SetValue(default(global::UniMoonDialogue.InventryItemBase), default(string));
+		}
+		
 		// UniMoonDialogue.Item.op_Equality
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void UniMoonDialogue_Item_op_Equality()
@@ -1310,6 +1513,29 @@ namespace Ludiq.Generated.Aot
 			global::Ludiq.StaticFunctionInvoker<UnityEngine.Object, UnityEngine.Object, bool> optimized = new global::Ludiq.StaticFunctionInvoker<UnityEngine.Object, UnityEngine.Object, bool>(default(global::System.Reflection.MethodInfo));
 			optimized.Invoke(null, arg0, arg1);
 			optimized.Invoke(default(object[]));
+		}
+		
+		// UniMoonDialogue.Item.tag
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UniMoonDialogue_Item_tag()
+		{
+			global::UniMoonDialogue.Item target = default(global::UniMoonDialogue.Item);
+			string accessor = target.tag;
+			target.tag = default(string);
+			global::Ludiq.InstanceFieldAccessor<UniMoonDialogue.Item, string> optimized = new global::Ludiq.InstanceFieldAccessor<UniMoonDialogue.Item, string>(default(global::System.Reflection.FieldInfo));
+			optimized.GetValue(default(global::UniMoonDialogue.Item));
+			optimized.SetValue(default(global::UniMoonDialogue.Item), default(string));
+		}
+		
+		// UniMoonDialogue.Item.type
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UniMoonDialogue_Item_type()
+		{
+			global::UniMoonDialogue.InventryItemBase target = default(global::UniMoonDialogue.InventryItemBase);
+			global::UniMoonDialogue.InventryEngine.ItemType accessor = target.type;
+			global::Ludiq.InstancePropertyAccessor<UniMoonDialogue.InventryItemBase, UniMoonDialogue.InventryEngine.ItemType> optimized = new global::Ludiq.InstancePropertyAccessor<UniMoonDialogue.InventryItemBase, UniMoonDialogue.InventryEngine.ItemType>(default(global::System.Reflection.PropertyInfo));
+			optimized.GetValue(default(global::UniMoonDialogue.InventryItemBase));
+			optimized.SetValue(default(global::UniMoonDialogue.InventryItemBase), default(global::UniMoonDialogue.InventryEngine.ItemType));
 		}
 		
 		// UniMoonDialogue.LuaScenarioLoader.op_Equality
@@ -3796,6 +4022,17 @@ namespace Ludiq.Generated.Aot
 			bool @operator = (arg0 != arg1);
 			global::Ludiq.StaticFunctionInvoker<UnityEngine.Object, UnityEngine.Object, bool> optimized = new global::Ludiq.StaticFunctionInvoker<UnityEngine.Object, UnityEngine.Object, bool>(default(global::System.Reflection.MethodInfo));
 			optimized.Invoke(null, arg0, arg1);
+			optimized.Invoke(default(object[]));
+		}
+		
+		// UnityEngine.Debug.Log
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UnityEngine_Debug_Log()
+		{
+			object arg0 = default(object);
+			global::UnityEngine.Debug.Log(arg0);
+			global::Ludiq.StaticActionInvoker<object> optimized = new global::Ludiq.StaticActionInvoker<object>(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(null, arg0);
 			optimized.Invoke(default(object[]));
 		}
 		

@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/UniMoonDialogue/Examples/HelloUniMoonDialogue.unity
-    guid: eca261b39a85fae4ea88c9d5e2000d0d
+    path: Assets/UniMoonDialogue/Examples/OsushiQuest.unity
+    guid: a5d6d481953e11e449de7e6ea756f565
   m_configObjects: {}

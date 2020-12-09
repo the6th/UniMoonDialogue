@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 
 namespace UniMoonDialogue
@@ -60,3 +61,4 @@ namespace UniMoonDialogue
     }
 
 }
+#endif

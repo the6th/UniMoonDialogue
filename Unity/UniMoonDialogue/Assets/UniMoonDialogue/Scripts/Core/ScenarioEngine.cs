@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
-#if ENABLE_MoonSharp
+#if ENABLE_MOONSHARP
 using MoonSharp.Interpreter;
 #endif
 
@@ -9,7 +9,7 @@ namespace UniMoonDialogue
 {
     public class ScenarioEngine : SingletonMonoBehaviour<ScenarioEngine>
     {
-#if ENABLE_MoonSharp
+#if ENABLE_MOONSHARP
         [MoonSharp.Interpreter.MoonSharpUserData]
 #endif
         public class EventData
@@ -113,7 +113,7 @@ namespace UniMoonDialogue
         public EventData currentEventData { private set; get; }
 
         private ScenarioChoice scenarioChoice = ScenarioChoice.None;
-#if ENABLE_MoonSharp
+#if ENABLE_MOONSHARP
         private DynValue coroutine;
 #endif
         private string[] currentMessages;
@@ -127,7 +127,7 @@ namespace UniMoonDialogue
         {
             get
             {
-#if ENABLE_MoonSharp
+#if ENABLE_MOONSHARP
                 if (isMonoRunning == true) return true;
                 if (coroutine == null) return false;
                 return (coroutine.Coroutine.State != CoroutineState.Dead);
@@ -224,7 +224,7 @@ namespace UniMoonDialogue
 
         public void StartScenario(LuaTextAsset lua, GameObject owner, string displayOwnername = "")
         {
-#if !ENABLE_MoonSharp
+#if !ENABLE_MOONSHARP
             Debug.Assert(false, "Plugin [MoonSharp] is disabled. set symbol `ENABLE_MoonSharp` to scripting define symbols on Player Settings.. > Other settings > Scripting Define Symbols");
 #else
             if (coroutine != null || isMonoRunning) return;
@@ -281,7 +281,7 @@ namespace UniMoonDialogue
                 else
                 {
                     scenarioChoice = choice;
-#if ENABLE_MoonSharp
+#if ENABLE_MOONSHARP
                     coroutine?.Coroutine.Resume((int)scenarioChoice);
 #endif
                     OnUserInput?.Invoke(currentEventData, scenarioChoice);
@@ -290,7 +290,7 @@ namespace UniMoonDialogue
             else if (currentEventData.scenarioType != ScenarioType.None)
             {
                 currentEventData.Stop();
-#if ENABLE_MoonSharp
+#if ENABLE_MOONSHARP
                 coroutine = null;
 #endif
                 OnMessageEnd?.Invoke(currentEventData);

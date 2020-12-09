@@ -95,12 +95,16 @@ namespace UniMoonDialogue
                 if (ownedItem == null)
                 {
                     myMissions.Add(item);
+                    Debug.Log("Mission 追加:" + item.nameForDisplay);
+
                     result = ItemStoreResult.Success;
                     OnMyEnventryUpdated?.Invoke(ItemType.Mission, item);
                     return true;
                 }
                 else
                 {
+                    Debug.Log("Mission は既に追加されています。:" + item.nameForDisplay);
+
                     result = ItemStoreResult.AlreadyMax;
                     return true;
                 }

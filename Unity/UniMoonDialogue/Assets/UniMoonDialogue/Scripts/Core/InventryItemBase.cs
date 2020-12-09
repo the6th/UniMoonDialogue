@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
+using System;
 
-#if ENABLE_Bolt
+#if ENABLE_BOLT
 using Ludiq;
 #endif
 
 namespace UniMoonDialogue
 {
     [CreateAssetMenu(menuName = "Inventry/Create Item", fileName = "New Item")]
-#if ENABLE_Bolt
+#if ENABLE_BOLT
     [Inspectable]
 #endif
+    [Serializable]
     public class Item : InventryItemBase
     {
         /// <summary>
@@ -31,9 +33,10 @@ namespace UniMoonDialogue
 
     [CreateAssetMenu(menuName = "Inventry/Create Mission", fileName = "New Mission")]
 
-#if ENABLE_Bolt
+#if ENABLE_BOLT
     [Inspectable]
 #endif
+    [Serializable]
     public class Mission : InventryItemBase
     {
         public Mission()

@@ -35,6 +35,10 @@ namespace UniMoonDialogue
             NextButton.SetupChoiceButton("次へ", 0, audioSource);
 
             defaultDialoguePanelScaleX = dialoguePanel.localScale.x;
+        }
+
+        private void Start()
+        {
             dialoguePanel.gameObject.SetActive(false);
             choiceButtonSeed.gameObject.SetActive(false);
 
@@ -58,7 +62,6 @@ namespace UniMoonDialogue
                 }
             };
         }
-
         IEnumerator ShowDialoguePanel(bool b)
         {
             var startTime = Time.time;

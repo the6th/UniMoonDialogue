@@ -568,9 +568,11 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLWasmStreaming: 0
   scriptingDefineSymbols:
-    1: ENABLE_MoonSharp;ENABLE_Bolt
+    1: ENABLE_MOONSHARP;ENABLE_BOLT
+    13: ENABLE_BOLT
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Standalone: 1
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}

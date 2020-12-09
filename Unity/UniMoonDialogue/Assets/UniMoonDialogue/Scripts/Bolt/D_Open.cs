@@ -1,4 +1,4 @@
-﻿#if ENABLE_Bolt
+﻿#if ENABLE_BOLT
 using Bolt;
 using Ludiq;
 using UniMoonDialogue;

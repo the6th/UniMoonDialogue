@@ -1,4 +1,4 @@
-﻿#if ENABLE_Bolt
+﻿#if ENABLE_BOLT
 using Bolt;
 using Ludiq;
 using UnityEngine;
@@ -21,7 +21,7 @@ namespace UniMoonDialogue
 
         protected override void Definition()
         {
-            item = ValueInput<Item>("Item",null);
+            item = ValueInput<Item>("Item", null);
             ammount = ValueInput<int>("ammount", 1);
             status = ValueOutput<InventryEngine.ItemStoreResult>("Result", ReturnResultState);
             base.Definition();
@@ -35,8 +35,6 @@ namespace UniMoonDialogue
 
             base.Enter(flow);
             if (_item == null) return OnFailed;
-
-
 
             var _result = InventryEngine.Instance.AddItem(_item, out resultStatus, _ammount);
 

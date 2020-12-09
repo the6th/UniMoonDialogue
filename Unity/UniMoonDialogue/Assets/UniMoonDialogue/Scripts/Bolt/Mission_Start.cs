@@ -1,4 +1,4 @@
-﻿#if ENABLE_Bolt
+﻿#if ENABLE_BOLT
 using Bolt;
 using Ludiq;
 using UnityEngine;
@@ -29,10 +29,20 @@ namespace UniMoonDialogue
 
         protected override ControlOutput Enter(Flow flow)
         {
+            Debug.Log($"Mission_Start1");
             var _item = flow.GetValue<Mission>(item);
+            Debug.Log($"Mission_Start2");
 
             base.Enter(flow);
-            if (_item == null) return OnFailed;
+            Debug.Log($"Mission_Start3");
+
+            if (_item == null)
+            {
+                resultStatus = InventryEngine.ItemStoreResult.NotFound;
+                return OnFailed;
+            }
+
+            Debug.Log($"Mission_Start4");
 
             var _result = InventryEngine.Instance.AddMission(_item, out resultStatus);
 
