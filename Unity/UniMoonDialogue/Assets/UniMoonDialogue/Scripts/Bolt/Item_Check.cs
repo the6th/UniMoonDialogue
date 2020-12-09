@@ -32,7 +32,10 @@ namespace UniMoonDialogue
 
             numOfItems = InventryEngine.Instance.CheckItem(_item);
 
-            return CO_finished;
+            if (numOfItems < 1)
+                return CO_NoItems;
+            else
+                return CO_finished;
         }
     }
 }

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: New Item
+  m_Name: "\u3046\u306B\u306E\u8ECD\u8266"
   m_EditorClassIdentifier: Assembly-CSharp:UniMoonDialogue:Item
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 2ad5ac5f9a48f5c4b86292d565909f5f, type: 3}
   key: 
-  nameForDisplay: 
-  description: 
-  maxStore: 0
+  nameForDisplay: "\u3046\u306B\u306E\u8ECD\u8266"
+  description: "\u3046\u306B\u306E\u8ECD\u8266\u3067\u3059"
+  maxStore: 3
   currentStore: 0

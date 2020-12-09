@@ -24,6 +24,7 @@ namespace UniMoonDialogue
         protected override ControlOutput Enter(Flow flow)
         {
             base.Enter(flow);
+            
             if (ScenarioEngine.Instance.isRunning)
             {
                 Debug.Log("Scenario already running by " + ScenarioEngine.Instance.currentEventData.gameObject.name);
@@ -33,6 +34,8 @@ namespace UniMoonDialogue
             {
                 reference = flow.stack.ToReference();
                 m_transform = flow.GetValue<Transform>(transform);
+
+                if (m_transform == null) m_transform = reference.gameObject.transform;
 
                 var data = new EventData(gameObject: m_transform.gameObject);
                 ScenarioEngine.Instance.StartScenario(data);

@@ -41,14 +41,26 @@ namespace UniMoonDialogue
 
         public int CheckItem(Item item)
         {
-            var _item = allItems.First(x => x == item);
+            if (!myItems.Contains(item)) return 0;
+
+            var _item = myItems.First(x => x == item);
             return _item.currentStore;
+        }
+
+        public bool CheckHaveAll(List<Item> items)
+        {
+            foreach(var item in items)
+            {
+                if (!myItems.Contains(item))
+                    return false;
+
+            }
+            return true;
         }
 
         public bool CheckMission(Mission item)
         {
-            var _item = AllMissions.First(x => x == item);
-            return (_item != null);
+            return myMissions.Contains(item);
         }
 
         public bool AddMission(Mission _item, out ItemStoreResult result)
