@@ -4,7 +4,7 @@
 using Ludiq;
 #endif
 
-namespace UniMoonDialogue.Inventry
+namespace UniMoonDialogue
 {
     [CreateAssetMenu(menuName = "Inventry/Create Item", fileName = "New Item")]
 #if ENABLE_Bolt

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UniMoonDialogue.Inventry
+namespace UniMoonDialogue
 {
     public class InventryTest : MonoBehaviour
     {

@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace UniMoonDialogue.Inventry
+namespace UniMoonDialogue
 {
     public class InventryEngine : SingletonMonoBehaviour<InventryEngine>
     {

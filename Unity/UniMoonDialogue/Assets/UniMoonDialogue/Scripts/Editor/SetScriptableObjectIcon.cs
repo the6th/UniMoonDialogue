@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using UniMoonDialogue.Inventry;
 
 namespace UniMoonDialogue
 {
-
     [CustomEditor(typeof(Item))]
     public class SetItemIcon : Editor
     {
@@ -60,9 +58,5 @@ namespace UniMoonDialogue
             return final;
         }
     }
-    //[CreateAssetMenu]
-    //public class Example : ScriptableObject
-    //{
-    //    public Sprite icon;
-    //}
+
 }
