@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace UniMoonDialogue
 {
-    public class Item_Add : AbstractInventryUnit
+    public class Item_Take : AbstractInventryUnit
     {
         [DoNotSerialize] public ControlOutput CO_failed { get; private set; }
 
@@ -19,7 +19,7 @@ namespace UniMoonDialogue
 
         protected override void Definition()
         {
-            item = ValueInput<Inv_Item>("Item",null);
+            item = ValueInput<Inv_Item>("Item", null);
             ammount = ValueInput<int>("ammount", 1);
             status = ValueOutput<InventryEngine.ItemStoreResult>("Result", ReturnResultState);
             base.Definition();
@@ -28,17 +28,12 @@ namespace UniMoonDialogue
 
         protected override ControlOutput Enter(Flow flow)
         {
-            var _ammount = flow.GetValue<int>(ammount);
             var _item = flow.GetValue<Inv_Item>(item);
-
+            var _ammount = flow.GetValue<int>(ammount);
             base.Enter(flow);
-            if (_item == null) return OnFailed;
-
-
 
             var _result = InventryEngine.Instance.AddItem(_item.name, out resultStatus, _ammount);
 
-            Debug.Log($"アイテム追加{_item.name} :{_result}");
             if (_result)
                 return CO_finished;
             else
@@ -47,10 +42,10 @@ namespace UniMoonDialogue
 
     }
 
-    [Descriptor(typeof(Item_Add))]
-    public class Item_AddDescriptor : UnitDescriptor<Item_Add>
+    [Descriptor(typeof(Item_Take))]
+    public class Item_TakeDescriptor : UnitDescriptor<Item_Take>
     {
-        public Item_AddDescriptor(Item_Add unit) : base(unit) { }
+        public Item_TakeDescriptor(Item_Take unit) : base(unit) { }
 
         protected override EditorTexture DefinedIcon()
         {
@@ -59,6 +54,4 @@ namespace UniMoonDialogue
             return EditorTexture.Single(texture);
         }
     }
-
-
 }

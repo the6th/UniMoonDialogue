@@ -26,18 +26,18 @@ namespace UniMoonDialogue.Inventry
         void Test2()
         {
             InventryEngine.ItemStoreResult result;
-            enventry.GetItem(enventry.GetAllItemList()[0].name, out result);
+            enventry.AddItem(enventry.GetAllItemList()[0].name, out result);
             Debug.Log(result);
-            enventry.GetItem(enventry.GetAllItemList()[0].name, out result);
+            enventry.AddItem(enventry.GetAllItemList()[0].name, out result);
             Debug.Log(result);
-            enventry.GetItem(enventry.GetAllItemList()[0].name, out result);
+            enventry.AddItem(enventry.GetAllItemList()[0].name, out result);
             Debug.Log(result);
 
-            enventry.GetItem(enventry.GetAllItemList()[1].name, out result);
+            enventry.AddItem(enventry.GetAllItemList()[1].name, out result);
             Debug.Log(result);
-            enventry.GetItem(enventry.GetAllItemList()[1].name, out result);
+            enventry.AddItem(enventry.GetAllItemList()[1].name, out result);
             Debug.Log(result);
-            enventry.GetItem(enventry.GetAllItemList()[1].name, out result);
+            enventry.AddItem(enventry.GetAllItemList()[1].name, out result);
             Debug.Log(result);
 
             ShowMyIntentryItem();
@@ -47,11 +47,11 @@ namespace UniMoonDialogue.Inventry
         void Test3()
         {
             InventryEngine.ItemStoreResult result;
-            enventry.UseItem(enventry.GetAllItemList()[0].name, out result);
+            enventry.TakeItem(enventry.GetAllItemList()[0].name, out result);
             Debug.Log(result);
-            enventry.UseItem(enventry.GetAllItemList()[0].name, out result);
+            enventry.TakeItem(enventry.GetAllItemList()[0].name, out result);
             Debug.Log(result);
-            enventry.UseItem(enventry.GetAllItemList()[1].name, out result);
+            enventry.TakeItem(enventry.GetAllItemList()[1].name, out result);
             Debug.Log(result);
 
             ShowMyIntentryItem();

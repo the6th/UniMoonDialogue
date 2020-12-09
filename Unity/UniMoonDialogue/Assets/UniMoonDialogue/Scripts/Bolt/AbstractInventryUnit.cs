@@ -1,5 +1,6 @@
 ﻿using Bolt;
 using Ludiq;
+using System.Collections;
 using UniMoonDialogue.Inventry;
 using UnityEngine;
 
@@ -7,9 +8,9 @@ namespace UniMoonDialogue
 {
     [UnitCategory("UniMoonDialogue")]
 
-    [TypeIcon(typeof(TextAsset))]
     public class AbstractInventryUnit : Unit
     {
+
         [DoNotSerialize] public ControlInput CI_input { get; private set; }
         [DoNotSerialize] public ControlOutput CO_finished { get; private set; }
 

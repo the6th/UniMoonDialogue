@@ -18,7 +18,7 @@ namespace UniMoonDialogue.Inventry
         private List<Inv_Mission> myMissions = new List<Inv_Mission>();
 
         public enum ItemType { Item, Mission }
-        public enum ItemStoreResult { Success = 0, Notpermmit, NotFound, AlreadyMax }
+        public enum ItemStoreResult { Success = 0, NotPermmit, NotFound, AlreadyMax }
 
         public List<Inv_Item> GetAllItemList()
         {
@@ -37,7 +37,7 @@ namespace UniMoonDialogue.Inventry
             return myMissions;
         }
 
-        public bool GetItem(string itemName, out ItemStoreResult result)
+        public bool AddItem(string itemName, out ItemStoreResult result, int ammount = 1)
         {
             var item = allItems.First(x => x.name == itemName);
             if (item != null)
@@ -47,16 +47,16 @@ namespace UniMoonDialogue.Inventry
                 //持ってなかったら新規で取得
                 if (ownedItem == null)
                 {
-                    item.currentStore = 1;
+                    item.currentStore = Mathf.Min(ammount, item.maxStore);
                     myItems.Add(item);
                     result = ItemStoreResult.Success;
                     OnMyEnventryUpdated?.Invoke(ItemType.Item, item);
                     return true;
                 }
                 //持ってたら追加
-                else if (ownedItem.currentStore < ownedItem.maxStore)
+                else if (ownedItem.currentStore + ammount < ownedItem.maxStore)
                 {
-                    ownedItem.currentStore++;
+                    ownedItem.currentStore = Mathf.Min(ownedItem.currentStore + ammount, item.maxStore);
                     result = ItemStoreResult.Success;
                     OnMyEnventryUpdated?.Invoke(ItemType.Item, ownedItem);
 
@@ -74,7 +74,7 @@ namespace UniMoonDialogue.Inventry
             return false;
         }
 
-        public bool UseItem(string itemName, out ItemStoreResult result)
+        public bool TakeItem(string itemName, out ItemStoreResult result,int ammount = 1)
         {
             var ownedItem = myItems.FirstOrDefault(_ => _.name == itemName);
             //持ってない場合
@@ -83,9 +83,15 @@ namespace UniMoonDialogue.Inventry
                 result = ItemStoreResult.NotFound;
                 return false;
             }
-            else
+            //足りてない
+            else if(ownedItem.currentStore - ammount < 0)
             {
-                ownedItem.currentStore--;
+                result = ItemStoreResult.NotPermmit;
+                return false;
+            }
+            else 
+            {
+                ownedItem.currentStore -= ammount;
                 if (ownedItem.currentStore < 1)
                     myItems.Remove(ownedItem);
                 result = ItemStoreResult.Success;
