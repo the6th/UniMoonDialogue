@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: New Mission
-  m_EditorClassIdentifier: Assembly-CSharp:UniMoonDialogue.Inventry:Mission
-  icon: {fileID: 21300000, guid: e184fefcf881332418728adaf1587d18, type: 3}
-  guid: 
+  m_Name: "\u304A\u304B\u304B\u304A\u306B\u304E\u308A"
+  m_EditorClassIdentifier: Assembly-CSharp:UniMoonDialogue:Item
+  icon: {fileID: 0}
+  key: 
   nameForDisplay: 
   description: 
+  maxStore: 0
+  currentStore: 0
