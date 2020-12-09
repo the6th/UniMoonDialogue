@@ -16,5 +16,5 @@ MonoBehaviour:
   key: 
   nameForDisplay: 
   description: 
-  maxStore: 0
-  currentStore: 0
+  maxStore: 10000
+  tag: 

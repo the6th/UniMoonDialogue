@@ -16,15 +16,16 @@ namespace UniMoonDialogue
         /// 最大で保持できる数
         /// </summary>
         public int maxStore = 1;
-        /// <summary>
-        /// 現在の所有数
-        /// </summary>
-        public int currentStore = 0;
 
-        public Item(string name, string description = "", int maxStore = 1)
+        /// <summary>
+        /// アイテムのタグ、まとめて処理する時に使う
+        /// </summary>
+        public string tag;
+
+        public Item()
         {
             type = InventryEngine.ItemType.Item;
-            base.Entry(name, description, maxStore);
+
         }
     }
 
@@ -35,10 +36,9 @@ namespace UniMoonDialogue
 #endif
     public class Mission : InventryItemBase
     {
-        public Mission(string name)
+        public Mission()
         {
             type = InventryEngine.ItemType.Mission;
-            base.Entry(name);
         }
     }
 

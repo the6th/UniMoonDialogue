@@ -17,4 +17,5 @@ MonoBehaviour:
   nameForDisplay: "\u305F\u307E\u3054\u306E\u304A\u5BFF\u53F8"
   description: "\u305F\u307E\u3054\u306E\u304A\u5BFF\u53F8\u3067\u3059"
   maxStore: 3
-  currentStore: 0
+  currentStore: 1
+  tag: sushi

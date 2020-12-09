@@ -61,7 +61,7 @@ namespace UniMoonDialogue
         {
             foreach (var item in enventry.GetMyItemList())
             {
-                Debug.Log($"[{item.type}]{item.name} ({item.currentStore}/{item.maxStore})");
+                Debug.Log($"[{item.Key.type}]{item.Key.name} ({item.Value.currentStore}/{item.Key.maxStore})");
             }
         }
 
