@@ -9,4 +9,11 @@ namespace UniMoonDialogue
         public string _discription;
         public Sprite _icon;
     }
+
+    public class UserMisson
+    {
+        public Mission status;
+        public InventryEngine.ItemType type = InventryEngine.ItemType.Mission;
+    }
+
 }

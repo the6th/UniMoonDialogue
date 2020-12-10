@@ -1,7 +1,6 @@
 ﻿#if ENABLE_BOLT
 using Bolt;
 using Ludiq;
-using UnityEngine;
 
 namespace UniMoonDialogue
 {
@@ -10,7 +9,6 @@ namespace UniMoonDialogue
     public class Mission_Start : AbstractInventryUnit
     {
         [DoNotSerialize] public ControlOutput CO_failed { get; private set; }
-
         [DoNotSerialize] public ValueInput item { private set; get; }
         [DoNotSerialize] public ValueOutput status { private set; get; }
 
@@ -29,12 +27,9 @@ namespace UniMoonDialogue
 
         protected override ControlOutput Enter(Flow flow)
         {
-            Debug.Log($"Mission_Start1");
             var _item = flow.GetValue<Mission>(item);
-            Debug.Log($"Mission_Start2");
 
             base.Enter(flow);
-            Debug.Log($"Mission_Start3");
 
             if (_item == null)
             {
@@ -42,11 +37,8 @@ namespace UniMoonDialogue
                 return OnFailed;
             }
 
-            Debug.Log($"Mission_Start4");
-
             var _result = InventryEngine.Instance.AddMission(_item, out resultStatus);
 
-            Debug.Log($"アイテム追加{_item.name} :{_result}");
             if (_result)
                 return CO_finished;
             else

@@ -70,8 +70,6 @@ namespace Ludiq.Generated.Aot
 	// UniMoonDialogue.LuaScenarioLoader.op_Equality
 	// UniMoonDialogue.LuaScenarioLoader.op_Implicit
 	// UniMoonDialogue.LuaScenarioLoader.op_Inequality
-	// UniMoonDialogue.Mission..ctor
-	// UniMoonDialogue.Mission._name
 	// UniMoonDialogue.Mission.op_Equality
 	// UniMoonDialogue.Mission.op_Implicit
 	// UniMoonDialogue.Mission.op_Inequality
@@ -1130,9 +1128,10 @@ namespace Ludiq.Generated.Aot
 		{
 			object arg0 = default(object);
 			object arg1 = default(object);
-			string.Concat(arg0, arg1);
-			global::Ludiq.StaticFunctionInvoker<object, object, string> optimized = new global::Ludiq.StaticFunctionInvoker<object, object, string>(default(global::System.Reflection.MethodInfo));
-			optimized.Invoke(null, arg0, arg1);
+			object arg2 = default(object);
+			string.Concat(arg0, arg1, arg2);
+			global::Ludiq.StaticFunctionInvoker<object, object, object, string> optimized = new global::Ludiq.StaticFunctionInvoker<object, object, object, string>(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(null, arg0, arg1, arg2);
 			optimized.Invoke(default(object[]));
 		}
 		
@@ -1142,10 +1141,9 @@ namespace Ludiq.Generated.Aot
 		{
 			object arg0 = default(object);
 			object arg1 = default(object);
-			object arg2 = default(object);
-			string.Concat(arg0, arg1, arg2);
-			global::Ludiq.StaticFunctionInvoker<object, object, object, string> optimized = new global::Ludiq.StaticFunctionInvoker<object, object, object, string>(default(global::System.Reflection.MethodInfo));
-			optimized.Invoke(null, arg0, arg1, arg2);
+			string.Concat(arg0, arg1);
+			global::Ludiq.StaticFunctionInvoker<object, object, string> optimized = new global::Ludiq.StaticFunctionInvoker<object, object, string>(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(null, arg0, arg1);
 			optimized.Invoke(default(object[]));
 		}
 		
@@ -1433,25 +1431,6 @@ namespace Ludiq.Generated.Aot
 			global::Ludiq.StaticFunctionInvoker<UnityEngine.Object, UnityEngine.Object, bool> optimized = new global::Ludiq.StaticFunctionInvoker<UnityEngine.Object, UnityEngine.Object, bool>(default(global::System.Reflection.MethodInfo));
 			optimized.Invoke(null, arg0, arg1);
 			optimized.Invoke(default(object[]));
-		}
-		
-		// UniMoonDialogue.Mission..ctor
-		[global::UnityEngine.Scripting.PreserveAttribute()]
-		public static void UniMoonDialogue_Mission_ctor()
-		{
-			new UniMoonDialogue.Mission();
-		}
-		
-		// UniMoonDialogue.Mission._name
-		[global::UnityEngine.Scripting.PreserveAttribute()]
-		public static void UniMoonDialogue_Mission_name()
-		{
-			global::UniMoonDialogue.Mission target = default(global::UniMoonDialogue.Mission);
-			string accessor = target._name;
-			target._name = default(string);
-			global::Ludiq.InstanceFieldAccessor<UniMoonDialogue.Mission, string> optimized = new global::Ludiq.InstanceFieldAccessor<UniMoonDialogue.Mission, string>(default(global::System.Reflection.FieldInfo));
-			optimized.GetValue(default(global::UniMoonDialogue.Mission));
-			optimized.SetValue(default(global::UniMoonDialogue.Mission), default(string));
 		}
 		
 		// UniMoonDialogue.Mission.op_Equality

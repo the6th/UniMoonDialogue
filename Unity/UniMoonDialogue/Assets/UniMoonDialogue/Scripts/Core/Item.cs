@@ -12,4 +12,12 @@ namespace UniMoonDialogue
         public string Tag;
         public int maxStore;
     }
+
+    public class UserItem
+    {
+        public int currentStore = 0;
+        public Item status;
+        public InventryEngine.ItemType type = InventryEngine.ItemType.Item;
+    }
+
 }
