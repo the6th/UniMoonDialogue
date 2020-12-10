@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5925622428515374240}
   - component: {fileID: 5925622428515374241}
+  - component: {fileID: 1510782648451970814}
   m_Layer: 0
   m_Name: ScenarioEngine
   m_TagString: Untagged
@@ -43,11 +44,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be6a738c04bd3554aa13b5d7608830d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_scenarioType: 2
-  luaScript:
-    path: 
-    textString: 
-    byteString: 
-  AutoStart: 0
   StepScenario: 1
   stepSpeed: 0.1
+  isPaused: 0
+--- !u!114 &1510782648451970814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5925622428515374242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0697de6978bc61343979ce28b280f7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allItems:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  AllMissions:
+  - {fileID: 0}
+  myItems: []
+  myMissions: []

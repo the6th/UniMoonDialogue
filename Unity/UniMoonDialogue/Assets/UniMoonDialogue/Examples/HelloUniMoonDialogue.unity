@@ -674,6 +674,29 @@ Transform:
   m_Father: {fileID: 2055751150}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &996589922 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5925622428515374242, guid: e7c57afc01cdea94ba2e9376184c3dd2,
+    type: 3}
+  m_PrefabInstance: {fileID: 5925622429084829071}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &996589923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996589922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0697de6978bc61343979ce28b280f7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allItems:
+  - {fileID: 0}
+  - {fileID: 0}
+  AllMissions:
+  - {fileID: 0}
 --- !u!1 &1207480545
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,7 +915,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1529982874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1227,7 +1250,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!102 &2055751148
 TextMesh:
   serializedVersion: 3
@@ -1455,6 +1478,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4148460489635138195, guid: b4f10dc152ce4f842a5ef776640c18d0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -39.999878
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4f10dc152ce4f842a5ef776640c18d0, type: 3}

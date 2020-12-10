@@ -1,7 +1,7 @@
 # UniMoonDialogue
 
 * Unityで動作するノベル風シナリオ進行ダイアログのフレームワーク
-* C# と Lua でシナリオを記述できます。  
+* C# と BOLT Lua でシナリオを記述できます。  
     ![](docs/images/UniMoonDialogue.gif)
 
 * 開発中のプロジェクトなので、大幅な変更が入る可能性があります
@@ -9,8 +9,20 @@
 ## How to Use 
 ### C#による記述
 * 初期状態ではC#によるシナリオ記述にのみ対応しています。
-* サンプルの実行は Assets/UniMoonDialogue/Example/HelloUniMoonDialogue.scene をPlayして、右端の CshparのCubeをクリックしてください。
+* サンプルの実行は Assets/UniMoonDialogue/Example/HelloUniMoonDialogue.scene をPlayして、右端の CshrapのCubeをクリックしてください。
 * C# によるシナリオ記述方法は、以下、Example　> Csharpによる記述例を参考にしてください。
+
+### BOLTによる記述
+* Bolt はデフォルト状態では、利用できません。
+* 以下の手順で Boltの実行を有効にしてください。
+
+1. UnityAssetStoreから [Bolt 1.4.13をインポート](https://assetstore.unity.com/packages/tools/visual-scripting/bolt-163802?locale=ja-JP)
+1. ProjectSettings > Other Settings > Scripting Define Symbols に 'ENABLE_BOLT' を追加してください。  
+![](docs/images/Bolt_Setup1_TypeOptions.png)
+1. UniMoonDialogue/Examples/SushiQuest/SushiQuest.sceneがサンプルシーンになっています。 
+1. IC2CPPでビルドする際は `AoT Pre-build` を実行してください
+
+
 
 ### Lua による記述
 * Luaスクリプトの読み込みはデフォルト状態では、利用できません。
@@ -21,7 +33,7 @@
 
 2. MoonSharp_2.0.0.0.unitypackage をProjectにインポートしてください。/Plugins/MoonSharp/に配置されます。
 
-3. ProjectSettings > Other Settings > Scripting Define Symbols に 'ENABLE_MoonSharp' を追加してください。
+3. ProjectSettings > Other Settings > Scripting Define Symbols に 'ENABLE_MONOSHARP' を追加してください。
 
 4. Assets/UniMoonDialogue/Example/HelloUniMoonDialogue.scene をPlayして、中央のLua Sample1 のCubeをクリックしてください。
 ## Example
@@ -95,6 +107,14 @@ coroutine.yield()
 scene.msg( 'もうおわり' )
 end
 ```
+
+* BOLTによる記述例 
+
+![](docs/images/Bolt_Example.png)
+                            
 ## License
 * MIT License
-* Copyright (c) 2020 Tomoki Hayashi
+  - Copyright (c) 2020 Tomoki Hayashi
+
+* Sushi icons on Example Scene 
+   - Copyright ©dak :https://illustimage.com/help.php

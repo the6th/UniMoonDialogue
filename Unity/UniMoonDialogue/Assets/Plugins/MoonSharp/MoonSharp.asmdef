@@ -8,7 +8,7 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [
-        "ENABLE_MoonSharp"
+        "ENABLE_MOONSHARP"
     ],
     "versionDefines": [],
     "noEngineReferences": false
