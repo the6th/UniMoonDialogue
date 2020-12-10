@@ -92,4 +92,5 @@ Assets/Ludiq/Bolt.Flow/Generated/UnitOptions.db
 Assets/Ludiq/Bolt.Flow/Generated/UnitOptions.db.meta
 Assets/Ludiq/Ludiq.Core/Generated/Property Providers
 Assets/Ludiq/Ludiq.Core/Generated/Property Providers.meta
-    
+Assets/Ludiq/Ludiq.Core/Generated/AotStubs.cs
+Assets/Ludiq/Ludiq.Core/Generated/link.xml
