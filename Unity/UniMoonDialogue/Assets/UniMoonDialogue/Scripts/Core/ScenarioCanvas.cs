@@ -89,6 +89,7 @@ namespace UniMoonDialogue
             {
                 isCoroutineRunnning = false;
                 dialoguePanel.localScale = endScale;
+                ScenarioEngine.Instance.isPaused = false;
 
                 Debug.Log("Coroutine Cancelled");
                 yield break;

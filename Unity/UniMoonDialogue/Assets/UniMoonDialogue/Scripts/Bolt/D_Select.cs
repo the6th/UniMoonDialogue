@@ -43,6 +43,9 @@ namespace UniMoonDialogue
 
         private void OnUserInput(EventData data, ScenarioChoice choice)
         {
+            //選択肢以外が届いたら、無視する
+            if ((int)choice <= 0) return;
+
             answerID = (int)choice - 1;
             Flow.New(reference).Run(onFinished);
             ScenarioEngine.Instance.OnUserInput -= OnUserInput;
