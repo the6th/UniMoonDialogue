@@ -16,7 +16,7 @@ namespace UniMoonDialogue
         )
         {
             var obj = target as Item;
-            var icon = obj.icon;
+            var icon = obj._icon;
 
             if (icon == null)
             {
@@ -44,7 +44,7 @@ namespace UniMoonDialogue
         )
         {
             var obj = target as Mission;
-            var icon = obj.icon;
+            var icon = obj._icon;
 
             if (icon == null)
             {

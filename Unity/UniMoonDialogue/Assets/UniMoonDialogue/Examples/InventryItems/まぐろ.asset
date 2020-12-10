@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 338f3205b56496e49a10b84255ee708a, type: 3}
-  m_Name: "\u30B3\u30A4\u30F3"
+  m_Name: "\u307E\u3050\u308D"
   m_EditorClassIdentifier: 
-  _name: "\u30B3\u30A4\u30F3"
-  _discription: "\u30B3\u30A4\u30F3"
-  _icon: {fileID: 21300000, guid: 5dac3381bf5cdaf439933dae6990b680, type: 3}
-  Tag: 
-  maxStore: 1000
+  _name: "\u307E\u3050\u308D\u306E\u304A\u5BFF\u53F8"
+  _discription: "\u4E2D\u3068\u308D\u3067\u3059"
+  _icon: {fileID: 21300000, guid: 99be6b2d9973b6c4185b60642df9b200, type: 3}
+  Tag: sushi
+  maxStore: 10

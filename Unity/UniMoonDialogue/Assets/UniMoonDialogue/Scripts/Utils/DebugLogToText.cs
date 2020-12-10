@@ -13,7 +13,7 @@ public class DebugLogToText : MonoBehaviour
     private Queue<string> logStack = new Queue<string>(LOG_MAX);
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         Application.logMessageReceived += LogCallback;  // ログが書き出された時のコールバック設定
         Debug.LogWarning("DebugLogToText:start");   // テストでワーニングログをコール

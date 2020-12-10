@@ -139,10 +139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"collection":{"$content":[{"name":"sushi","value":{"$content":0,"$type":"UnityEngine.Object"},"$version":"A"},{"name":"Mission","value":{"$content":1,"$type":"UnityEngine.Object"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
-    _objectReferences:
-    - {fileID: 11400000, guid: b25ef6f8e8ffc6e459b2f06a94c0169b, type: 2}
-    - {fileID: 11400000, guid: 45165fc2457f79144b00a91127381bfd, type: 2}
+    _json: '{"declarations":{"collection":{"$content":[{"name":"Item","value":null,"$version":"A"}],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
 --- !u!114 &4341585298285565060
 MonoBehaviour:
   m_ObjectHideFlags: 0

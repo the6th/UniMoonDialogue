@@ -7,12 +7,10 @@ namespace UniMoonDialogue
 {
     public class InventryEngine : SingletonMonoBehaviour<InventryEngine>
     {
-        public class UserItem 
-        {
-            public int currentStore = 0;
-        }
 
-        public UnityAction<ItemType, InventryItemBase> OnMyEnventryUpdated;
+
+        public UnityAction<ItemType, UserItem> OnMyEnventryUpdated;
+        public UnityAction<ItemType, UserMisson> OnMyMissionUpdated;
 
         [SerializeField]
         private List<Item> allItems = null;
@@ -20,10 +18,10 @@ namespace UniMoonDialogue
         private List<Mission> AllMissions = null;
 
         [SerializeField]
-        private Dictionary<Item, UserItem> myItems = new Dictionary<Item, UserItem>();
+        private List<UserItem> myItems = new List<UserItem>();
 
         [SerializeField]
-        private List<Mission> myMissions = new List<Mission>();
+        private List<UserMisson> myMissions = new List<UserMisson>();
 
         public enum ItemType { Item, Mission }
         public enum ItemStoreResult { Success = 0, NotPermmit, NotFound, AlreadyMax }
@@ -36,30 +34,29 @@ namespace UniMoonDialogue
         {
             return AllMissions;
         }
-        public Dictionary<Item, UserItem> GetMyItemList()
+        public List<UserItem> GetMyItemList()
         {
             return myItems;
         }
-        public List<Mission> GetMyMission()
+        public List<UserMisson> GetMyMission()
         {
             return myMissions;
         }
 
         public int CheckItem(Item item)
         {
-            if (!myItems.Keys.Contains(item)) return -10;
+            if (!myItems.Select(_ => _).Any(_ => _.status == item)) return 0;
 
-            var _item = myItems.Keys.First(x => x == item);
-            return myItems[_item].currentStore;
+            var _item = myItems.First(_ => _.status == item);
+            return _item.currentStore;
         }
 
         public bool CheckHaveAll(List<Item> items)
         {
             foreach (var item in items)
             {
-                if (!myItems.Keys.Contains(item))
+                if (!myItems.Select(_ => _).Any(_ => _.status == item))
                     return false;
-
             }
             return true;
         }
@@ -68,11 +65,11 @@ namespace UniMoonDialogue
         {
             int cnt = 0;
 
-            foreach(var item in myItems.Reverse())
+            for (int i = myItems.Count - 1; i >= 0; i--)
             {
-                if (tag == "" || item.Key.tag == tag)
+                if (tag == "" || myItems[i].status.Tag == tag)
                 {
-                    myItems.Remove(item.Key);
+                    myItems.RemoveAt(i);
                     cnt++;
                 }
             }
@@ -81,7 +78,7 @@ namespace UniMoonDialogue
 
         public bool CheckMission(Mission item)
         {
-            return myMissions.Contains(item);
+            return (myMissions.Select(_ => _).Any(_ => _.status == item));
         }
 
         public bool AddMission(Mission _item, out ItemStoreResult result)
@@ -89,21 +86,22 @@ namespace UniMoonDialogue
             var item = AllMissions.First(x => x == _item);
             if (item != null)
             {
-                var ownedItem = myMissions.FirstOrDefault(_ => _ == item);
+                var ownedItem = myMissions.FirstOrDefault(_ => _.status == item);
 
                 //持ってなかったら新規で取得
                 if (ownedItem == null)
                 {
-                    myMissions.Add(item);
-                    Debug.Log("Mission 追加:" + item.nameForDisplay);
+                    var uMission = new UserMisson { status = item };
+                    myMissions.Add(uMission);
+                    Debug.Log("Mission 追加:" + item._name);
 
                     result = ItemStoreResult.Success;
-                    OnMyEnventryUpdated?.Invoke(ItemType.Mission, item);
+                    OnMyMissionUpdated?.Invoke(ItemType.Mission, uMission);
                     return true;
                 }
                 else
                 {
-                    Debug.Log("Mission は既に追加されています。:" + item.nameForDisplay);
+                    Debug.Log("Mission は既に追加されています。:" + item._name);
 
                     result = ItemStoreResult.AlreadyMax;
                     return true;
@@ -116,7 +114,7 @@ namespace UniMoonDialogue
 
         public bool TakeMission(Mission _item, out ItemStoreResult result)
         {
-            var ownedItem = myMissions.FirstOrDefault(_ => _ == _item);
+            var ownedItem = myMissions.FirstOrDefault(_ => _.status == _item);
             //持ってない場合
             if (ownedItem == null)
             {
@@ -125,10 +123,10 @@ namespace UniMoonDialogue
             }
             else
             {
-                Debug.Log("Mission 削除:" + ownedItem.nameForDisplay);
+                Debug.Log("Mission 削除:" + ownedItem.status._name);
                 myMissions.Remove(ownedItem);
                 result = ItemStoreResult.Success;
-                OnMyEnventryUpdated?.Invoke(ItemType.Mission, ownedItem);
+                OnMyMissionUpdated?.Invoke(ItemType.Mission, ownedItem);
                 return true;
             }
         }
@@ -138,24 +136,22 @@ namespace UniMoonDialogue
             var item = allItems.First(x => x == _item);
             if (item != null)
             {
-                var ownedItem = myItems.Keys.FirstOrDefault(_ => _ == item);
+                var ownedItem = myItems.FirstOrDefault(_ => _.status == item);
 
                 //持ってなかったら新規で取得
                 if (ownedItem == null)
                 {
-                    myItems.Add(
-                        item,
-                        new UserItem() { currentStore = Mathf.Min(ammount, item.maxStore) }
-                    );
+                    var userItem = new UserItem() { status = item, currentStore = Mathf.Min(ammount, item.maxStore) };
+                    myItems.Add(userItem);
 
                     result = ItemStoreResult.Success;
-                    OnMyEnventryUpdated?.Invoke(ItemType.Item, item);
+                    OnMyEnventryUpdated?.Invoke(ItemType.Item, userItem);
                     return true;
                 }
                 //持ってたら追加
-                else if (myItems[ownedItem].currentStore + ammount < ownedItem.maxStore)
+                else if (ownedItem.currentStore + ammount < ownedItem.status.maxStore)
                 {
-                    myItems[ownedItem].currentStore = Mathf.Min(myItems[ownedItem].currentStore + ammount, item.maxStore);
+                    ownedItem.currentStore = Mathf.Min(ownedItem.currentStore + ammount, item.maxStore);
                     result = ItemStoreResult.Success;
                     OnMyEnventryUpdated?.Invoke(ItemType.Item, ownedItem);
 
@@ -175,7 +171,7 @@ namespace UniMoonDialogue
 
         public bool TakeItem(Item _item, out ItemStoreResult result, int ammount = 1)
         {
-            var ownedItem = myItems.Keys.FirstOrDefault(_ => _ == _item);
+            var ownedItem = myItems.FirstOrDefault(_ => _.status == _item);
             //持ってない場合
             if (ownedItem == null)
             {
@@ -183,15 +179,15 @@ namespace UniMoonDialogue
                 return false;
             }
             //足りてない
-            else if (myItems[ownedItem].currentStore - ammount < 0)
+            else if (ownedItem.currentStore - ammount < 0)
             {
                 result = ItemStoreResult.NotPermmit;
                 return false;
             }
             else
             {
-                myItems[ownedItem].currentStore -= ammount;
-                if (myItems[ownedItem].currentStore < 1)
+                ownedItem.currentStore -= ammount;
+                if (ownedItem.currentStore < 1)
                     myItems.Remove(ownedItem);
                 result = ItemStoreResult.Success;
 
