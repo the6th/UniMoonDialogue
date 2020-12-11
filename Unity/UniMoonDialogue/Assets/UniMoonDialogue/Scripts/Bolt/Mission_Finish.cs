@@ -30,7 +30,7 @@ namespace UniMoonDialogue
             var _item = flow.GetValue<Mission>(item);
             base.Enter(flow);
 
-            var _result = InventryEngine.Instance.TakeMission(_item, out resultStatus);
+            var _result = InventryEngine.Instance.PopMyMission(_item, out resultStatus);
 
             if (_result)
                 return CO_finished;

@@ -26,7 +26,7 @@ namespace UniMoonDialogue
             var _item = flow.GetValue<Mission>(item);
             base.Enter(flow);
 
-            hasMission = InventryEngine.Instance.CheckMission(_item);
+            hasMission = InventryEngine.Instance.IsMyMission(_item);
 
             if (hasMission)
                 return CO_finished;

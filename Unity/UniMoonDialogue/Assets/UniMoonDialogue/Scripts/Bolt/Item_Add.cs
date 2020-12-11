@@ -36,7 +36,7 @@ namespace UniMoonDialogue
             base.Enter(flow);
             if (_item == null) return OnFailed;
 
-            var _result = InventryEngine.Instance.AddItem(_item, out resultStatus, _ammount);
+            var _result = InventryEngine.Instance.PushMyItem(_item, out resultStatus, _ammount);
 
             Debug.Log($"アイテム追加{_item.name} :{_result}");
             if (_result)

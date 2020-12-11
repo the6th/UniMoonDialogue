@@ -30,7 +30,7 @@ namespace UniMoonDialogue
             var _item = flow.GetValue<Item>(item);
             base.Enter(flow);
 
-            numOfItems = InventryEngine.Instance.CheckItem(_item);
+            numOfItems = InventryEngine.Instance.GetAmmountMyItem(_item);
 
             if (numOfItems < 1)
                 return CO_NoItems;

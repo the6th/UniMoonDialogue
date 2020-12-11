@@ -32,7 +32,7 @@ namespace UniMoonDialogue
             var _ammount = flow.GetValue<int>(ammount);
             base.Enter(flow);
 
-            var _result = InventryEngine.Instance.AddItem(_item, out resultStatus, _ammount);
+            var _result = InventryEngine.Instance.PushMyItem(_item, out resultStatus, _ammount);
 
             if (_result)
                 return CO_finished;

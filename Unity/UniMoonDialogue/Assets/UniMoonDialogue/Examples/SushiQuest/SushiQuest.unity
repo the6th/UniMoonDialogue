@@ -697,12 +697,12 @@ PrefabInstance:
     - target: {fileID: 1510782648451970814, guid: e7c57afc01cdea94ba2e9376184c3dd2,
         type: 3}
       propertyPath: m_AllItems.Array.size
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1510782648451970814, guid: e7c57afc01cdea94ba2e9376184c3dd2,
         type: 3}
       propertyPath: m_AllMissions.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1510782648451970814, guid: e7c57afc01cdea94ba2e9376184c3dd2,
         type: 3}

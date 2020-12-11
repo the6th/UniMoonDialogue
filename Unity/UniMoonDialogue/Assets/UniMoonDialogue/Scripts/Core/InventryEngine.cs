@@ -11,8 +11,17 @@ namespace UniMoonDialogue
         public UnityAction<UserItem> OnMyItemUpdated;
         public UnityAction<UserMisson> OnMyMissionUpdated;
 
-        public List<Item> AllItems => m_AllItems;
-        public List<Mission> AllMissions => m_AllMissions;
+        public List<Item> AllItems
+        {
+            set { m_AllItems = value; }
+            get { return m_AllItems; }
+        }
+
+        public List<Mission> AllMissions
+        {
+            set { m_AllMissions = value; }
+            get { return m_AllMissions; }
+        }
 
         public List<UserItem> MyItems { private set; get; } = new List<UserItem>();
         public List<UserMisson> MyMissions { private set; get; } = new List<UserMisson>();
@@ -27,7 +36,7 @@ namespace UniMoonDialogue
         private List<Mission> m_AllMissions = new List<Mission>();
 
 
-        public int CheckItem(Item item)
+        public int GetAmmountMyItem(Item item)
         {
             if (!MyItems.Select(_ => _).Any(_ => _.status == item)) return 0;
 
@@ -35,17 +44,18 @@ namespace UniMoonDialogue
             return _item.currentStore;
         }
 
-        public bool CheckHaveAll(List<Item> items)
+        public bool IsCompliteItems(List<Item> items)
         {
             foreach (var item in items)
             {
                 if (!MyItems.Select(_ => _).Any(_ => _.status == item))
                     return false;
             }
+
             return true;
         }
 
-        public int ClearAllItems(string tag = "")
+        public int ClearAllMyItems(string tag = "")
         {
             int cnt = 0;
 
@@ -61,12 +71,12 @@ namespace UniMoonDialogue
             return cnt;
         }
 
-        public bool CheckMission(Mission item)
+        public bool IsMyMission(Mission item)
         {
             return (MyMissions.Select(_ => _).Any(_ => _.status == item));
         }
 
-        public bool AddMission(Mission _item, out InventyStatus result)
+        public bool PushMyMission(Mission _item, out InventyStatus result)
         {
             if (!AllMissions.Contains(_item))
             {
@@ -96,7 +106,7 @@ namespace UniMoonDialogue
             }
         }
 
-        public bool TakeMission(Mission _item, out InventyStatus result)
+        public bool PopMyMission(Mission _item, out InventyStatus result)
         {
             var myMission = MyMissions.FirstOrDefault(_ => _.status == _item);
             //持ってない場合
@@ -115,7 +125,7 @@ namespace UniMoonDialogue
             }
         }
 
-        public bool AddItem(Item item, out InventyStatus result, int ammount = 1)
+        public bool PushMyItem(Item item, out InventyStatus result, int ammount = 1)
         {
             if (!AllItems.Contains(item))
             {
@@ -151,7 +161,7 @@ namespace UniMoonDialogue
             }
         }
 
-        public bool TakeItem(Item _item, out InventyStatus result, int ammount = 1)
+        public bool PopMyItem(Item _item, out InventyStatus result, int ammount = 1)
         {
             var ownedItem = MyItems.FirstOrDefault(_ => _.status == _item);
             //持ってない場合

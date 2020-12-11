@@ -37,7 +37,7 @@ namespace UniMoonDialogue
                 return OnFailed;
             }
 
-            var _result = InventryEngine.Instance.AddMission(_item, out resultStatus);
+            var _result = InventryEngine.Instance.PushMyMission(_item, out resultStatus);
 
             if (_result)
                 return CO_finished;

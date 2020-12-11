@@ -35,18 +35,18 @@ namespace UniMoonDialogue
         void Test2()
         {
             InventryEngine.InventyStatus result;
-            Inventry.AddItem(Inventry.AllItems[0], out result);
+            Inventry.PushMyItem(Inventry.AllItems[0], out result);
             Debug.Log(result);
-            Inventry.AddItem(Inventry.AllItems[0], out result);
+            Inventry.PushMyItem(Inventry.AllItems[0], out result);
             Debug.Log(result);
-            Inventry.AddItem(Inventry.AllItems[0], out result);
+            Inventry.PushMyItem(Inventry.AllItems[0], out result);
             Debug.Log(result);
 
-            Inventry.AddItem(Inventry.AllItems[1], out result);
+            Inventry.PushMyItem(Inventry.AllItems[1], out result);
             Debug.Log(result);
-            Inventry.AddItem(Inventry.AllItems[1], out result);
+            Inventry.PushMyItem(Inventry.AllItems[1], out result);
             Debug.Log(result);
-            Inventry.AddItem(Inventry.AllItems[1], out result);
+            Inventry.PushMyItem(Inventry.AllItems[1], out result);
             Debug.Log(result);
 
             ShowMyIntentryItem();
@@ -56,11 +56,11 @@ namespace UniMoonDialogue
         void Test3()
         {
             InventryEngine.InventyStatus result;
-            Inventry.TakeItem(Inventry.AllItems[0], out result);
+            Inventry.PopMyItem(Inventry.AllItems[0], out result);
             Debug.Log(result);
-            Inventry.TakeItem(Inventry.AllItems[0], out result);
+            Inventry.PopMyItem(Inventry.AllItems[0], out result);
             Debug.Log(result);
-            Inventry.TakeItem(Inventry.AllItems[1], out result);
+            Inventry.PopMyItem(Inventry.AllItems[1], out result);
             Debug.Log(result);
 
             ShowMyIntentryItem();
