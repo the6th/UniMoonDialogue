@@ -4,40 +4,49 @@ namespace UniMoonDialogue
 {
     public class InventryTest : MonoBehaviour
     {
-        InventryEngine enventry;
+        InventryEngine Inventry;
         // Start is called before the first frame update
         void Start()
         {
-            Test1();
-            Test2();
-            Test3();
+            if (Test1())
+            {
+                Test2();
+                Test3();
+            }
         }
 
-        void Test1()
+        bool Test1()
         {
-            enventry = InventryEngine.Instance;
+            Inventry = InventryEngine.Instance;
 
-            foreach (var item in enventry.GetAllItemList())
+            if(Inventry.AllItems.Count < 1)
+            {
+                Debug.LogError("Itemが登録されていません");
+                return false;
+            }
+
+            foreach (var item in Inventry.AllItems)
             {
                 Debug.Log($"{item.name}");
             }
+            return true;
         }
 
         void Test2()
         {
-            InventryEngine.ItemStoreResult result;
-            enventry.AddItem(enventry.GetAllItemList()[0], out result);
+            InventryEngine.InventyStatus result;
+            Inventry.AddItem(Inventry.AllItems[0], out result);
             Debug.Log(result);
-            enventry.AddItem(enventry.GetAllItemList()[0], out result);
+            Inventry.AddItem(Inventry.AllItems[0], out result);
             Debug.Log(result);
-            enventry.AddItem(enventry.GetAllItemList()[0], out result);
+            Inventry.AddItem(Inventry.AllItems[0], out result);
             Debug.Log(result);
 
-            enventry.AddItem(enventry.GetAllItemList()[1], out result);
+            Inventry.AddItem(Inventry.AllItems[1], out result);
             Debug.Log(result);
-            enventry.AddItem(enventry.GetAllItemList()[1], out result);
+            Inventry.AddItem(Inventry.AllItems[1], out result);
             Debug.Log(result);
-            enventry.AddItem(enventry.GetAllItemList()[1], out result);
+            Inventry.AddItem(Inventry.AllItems[1], out result);
             Debug.Log(result);
 
             ShowMyIntentryItem();
@@ -46,12 +55,12 @@ namespace UniMoonDialogue
 
         void Test3()
         {
-            InventryEngine.ItemStoreResult result;
-            enventry.TakeItem(enventry.GetAllItemList()[0], out result);
+            InventryEngine.InventyStatus result;
+            Inventry.TakeItem(Inventry.AllItems[0], out result);
             Debug.Log(result);
-            enventry.TakeItem(enventry.GetAllItemList()[0], out result);
+            Inventry.TakeItem(Inventry.AllItems[0], out result);
             Debug.Log(result);
-            enventry.TakeItem(enventry.GetAllItemList()[1], out result);
+            Inventry.TakeItem(Inventry.AllItems[1], out result);
             Debug.Log(result);
 
             ShowMyIntentryItem();
@@ -59,7 +68,7 @@ namespace UniMoonDialogue
 
         void ShowMyIntentryItem()
         {
-            foreach (var item in enventry.GetMyItemList())
+            foreach (var item in Inventry.MyItems)
             {
                 Debug.Log($"{item.status.name} ({item.currentStore}/{item.status.maxStore})");
             }

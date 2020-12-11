@@ -17,7 +17,6 @@ namespace UniMoonDialogue
     {
         public int currentStore = 0;
         public Item status;
-        public InventryEngine.ItemType type = InventryEngine.ItemType.Item;
     }
 
 }

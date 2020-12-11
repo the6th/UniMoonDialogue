@@ -16,14 +16,14 @@ namespace UniMoonDialogue
         [DoNotSerialize] public ValueOutput status { private set; get; }
 
         private ControlOutput OnFailed => CO_failed;
-        private InventryEngine.ItemStoreResult resultStatus;
-        private InventryEngine.ItemStoreResult ReturnResultState(Flow flow) => resultStatus;
+        private InventryEngine.InventyStatus resultStatus;
+        private InventryEngine.InventyStatus ReturnResultState(Flow flow) => resultStatus;
 
         protected override void Definition()
         {
             item = ValueInput<Item>("Item", null);
             ammount = ValueInput<int>("ammount", 1);
-            status = ValueOutput<InventryEngine.ItemStoreResult>("Result", ReturnResultState);
+            status = ValueOutput<InventryEngine.InventyStatus>("Result", ReturnResultState);
             base.Definition();
             CO_failed = ControlOutput("failed");
         }

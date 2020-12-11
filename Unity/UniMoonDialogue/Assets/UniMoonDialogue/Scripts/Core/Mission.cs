@@ -13,7 +13,6 @@ namespace UniMoonDialogue
     public class UserMisson
     {
         public Mission status;
-        public InventryEngine.ItemType type = InventryEngine.ItemType.Mission;
     }
 
 }

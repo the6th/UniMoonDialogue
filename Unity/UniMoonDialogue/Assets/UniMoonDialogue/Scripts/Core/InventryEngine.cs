@@ -7,45 +7,31 @@ namespace UniMoonDialogue
 {
     public class InventryEngine : SingletonMonoBehaviour<InventryEngine>
     {
-        public UnityAction<ItemType, UserItem> OnMyEnventryUpdated;
-        public UnityAction<ItemType, UserMisson> OnMyMissionUpdated;
+        //UnityAction
+        public UnityAction<UserItem> OnMyItemUpdated;
+        public UnityAction<UserMisson> OnMyMissionUpdated;
+
+        public List<Item> AllItems => m_AllItems;
+        public List<Mission> AllMissions => m_AllMissions;
+
+        public List<UserItem> MyItems { private set; get; } = new List<UserItem>();
+        public List<UserMisson> MyMissions { private set; get; } = new List<UserMisson>();
+
+        public enum InventyStatus { Success = 0, NotEnough, NotFound, AlreadyMax }
+
 
         [SerializeField]
-        private List<Item> allItems = null;
-        [SerializeField]
-        private List<Mission> AllMissions = null;
+        private List<Item> m_AllItems = new List<Item>();
 
         [SerializeField]
-        private List<UserItem> myItems = new List<UserItem>();
+        private List<Mission> m_AllMissions = new List<Mission>();
 
-        [SerializeField]
-        private List<UserMisson> myMissions = new List<UserMisson>();
-
-        public enum ItemType { Item, Mission }
-        public enum ItemStoreResult { Success = 0, NotPermmit, NotFound, AlreadyMax }
-
-        public List<Item> GetAllItemList()
-        {
-            return allItems;
-        }
-        public List<Mission> GetAllMissions()
-        {
-            return AllMissions;
-        }
-        public List<UserItem> GetMyItemList()
-        {
-            return myItems;
-        }
-        public List<UserMisson> GetMyMission()
-        {
-            return myMissions;
-        }
 
         public int CheckItem(Item item)
         {
-            if (!myItems.Select(_ => _).Any(_ => _.status == item)) return 0;
+            if (!MyItems.Select(_ => _).Any(_ => _.status == item)) return 0;
 
-            var _item = myItems.First(_ => _.status == item);
+            var _item = MyItems.First(_ => _.status == item);
             return _item.currentStore;
         }
 
@@ -53,7 +39,7 @@ namespace UniMoonDialogue
         {
             foreach (var item in items)
             {
-                if (!myItems.Select(_ => _).Any(_ => _.status == item))
+                if (!MyItems.Select(_ => _).Any(_ => _.status == item))
                     return false;
             }
             return true;
@@ -63,133 +49,131 @@ namespace UniMoonDialogue
         {
             int cnt = 0;
 
-            for (int i = myItems.Count - 1; i >= 0; i--)
+            for (int i = MyItems.Count - 1; i >= 0; i--)
             {
-                if (tag == "" || myItems[i].status.Tag == tag)
+                if (tag == "" || MyItems[i].status.Tag == tag)
                 {
-                    myItems.RemoveAt(i);
+                    MyItems.RemoveAt(i);
                     cnt++;
                 }
             }
+
             return cnt;
         }
 
         public bool CheckMission(Mission item)
         {
-            return (myMissions.Select(_ => _).Any(_ => _.status == item));
+            return (MyMissions.Select(_ => _).Any(_ => _.status == item));
         }
 
-        public bool AddMission(Mission _item, out ItemStoreResult result)
+        public bool AddMission(Mission _item, out InventyStatus result)
         {
-            var item = AllMissions.First(x => x == _item);
-            if (item != null)
+            if (!AllMissions.Contains(_item))
             {
-                var ownedItem = myMissions.FirstOrDefault(_ => _.status == item);
-
-                //持ってなかったら新規で取得
-                if (ownedItem == null)
-                {
-                    var uMission = new UserMisson { status = item };
-                    myMissions.Add(uMission);
-                    Debug.Log("Mission 追加:" + item._name);
-
-                    result = ItemStoreResult.Success;
-                    OnMyMissionUpdated?.Invoke(ItemType.Mission, uMission);
-                    return true;
-                }
-                else
-                {
-                    Debug.Log("Mission は既に追加されています。:" + item._name);
-
-                    result = ItemStoreResult.AlreadyMax;
-                    return true;
-                }
+                result = InventyStatus.NotFound;
+                return false;
             }
 
-            result = ItemStoreResult.NotFound;
-            return false;
-        }
+            var myMission = MyMissions.FirstOrDefault(_ => _.status == _item);
 
-        public bool TakeMission(Mission _item, out ItemStoreResult result)
-        {
-            var ownedItem = myMissions.FirstOrDefault(_ => _.status == _item);
-            //持ってない場合
-            if (ownedItem == null)
+            //持ってなかったら新規で取得
+            if (myMission == null)
             {
-                result = ItemStoreResult.NotFound;
-                return false;
+                var uMission = new UserMisson { status = _item };
+                MyMissions.Add(uMission);
+                Debug.Log("Mission 追加:" + _item._name);
+
+                result = InventyStatus.Success;
+                OnMyMissionUpdated?.Invoke(uMission);
+                return true;
             }
             else
             {
-                Debug.Log("Mission 削除:" + ownedItem.status._name);
-                myMissions.Remove(ownedItem);
-                result = ItemStoreResult.Success;
-                OnMyMissionUpdated?.Invoke(ItemType.Mission, ownedItem);
+                Debug.Log("Mission は既に追加されています。:" + _item._name);
+
+                result = InventyStatus.AlreadyMax;
                 return true;
             }
         }
 
-        public bool AddItem(Item _item, out ItemStoreResult result, int ammount = 1)
+        public bool TakeMission(Mission _item, out InventyStatus result)
         {
-            var item = allItems.First(x => x == _item);
-            if (item != null)
+            var myMission = MyMissions.FirstOrDefault(_ => _.status == _item);
+            //持ってない場合
+            if (myMission == null)
             {
-                var ownedItem = myItems.FirstOrDefault(_ => _.status == item);
-
-                //持ってなかったら新規で取得
-                if (ownedItem == null)
-                {
-                    var userItem = new UserItem() { status = item, currentStore = Mathf.Min(ammount, item.maxStore) };
-                    myItems.Add(userItem);
-
-                    result = ItemStoreResult.Success;
-                    OnMyEnventryUpdated?.Invoke(ItemType.Item, userItem);
-                    return true;
-                }
-                //持ってたら追加
-                else if (ownedItem.currentStore + ammount < ownedItem.status.maxStore)
-                {
-                    ownedItem.currentStore = Mathf.Min(ownedItem.currentStore + ammount, item.maxStore);
-                    result = ItemStoreResult.Success;
-                    OnMyEnventryUpdated?.Invoke(ItemType.Item, ownedItem);
-
-                    return true;
-                }
-                //もう持てなかったらエラー
-                else
-                {
-                    result = ItemStoreResult.AlreadyMax;
-                    return false;
-                }
+                result = InventyStatus.NotFound;
+                return false;
             }
-
-            result = ItemStoreResult.NotFound;
-            return false;
+            else
+            {
+                Debug.Log("Mission 削除:" + myMission.status._name);
+                MyMissions.Remove(myMission);
+                result = InventyStatus.Success;
+                OnMyMissionUpdated?.Invoke(myMission);
+                return true;
+            }
         }
 
-        public bool TakeItem(Item _item, out ItemStoreResult result, int ammount = 1)
+        public bool AddItem(Item item, out InventyStatus result, int ammount = 1)
         {
-            var ownedItem = myItems.FirstOrDefault(_ => _.status == _item);
+            if (!AllItems.Contains(item))
+            {
+                result = InventyStatus.NotFound;
+                return false;
+            }
+
+            var myItem = MyItems.FirstOrDefault(_ => _.status == item);
+
+            //持ってなかったら新規で取得
+            if (myItem == null)
+            {
+                var userItem = new UserItem() { status = item, currentStore = Mathf.Min(ammount, item.maxStore) };
+                MyItems.Add(userItem);
+
+                result = InventyStatus.Success;
+                OnMyItemUpdated?.Invoke(userItem);
+                return true;
+            }
+            //持ってたら追加
+            else if (myItem.currentStore + ammount < myItem.status.maxStore)
+            {
+                myItem.currentStore = Mathf.Min(myItem.currentStore + ammount, item.maxStore);
+                result = InventyStatus.Success;
+                OnMyItemUpdated?.Invoke(myItem);
+                return true;
+            }
+            //もう持てなかったらエラー
+            else
+            {
+                result = InventyStatus.AlreadyMax;
+                return false;
+            }
+        }
+
+        public bool TakeItem(Item _item, out InventyStatus result, int ammount = 1)
+        {
+            var ownedItem = MyItems.FirstOrDefault(_ => _.status == _item);
             //持ってない場合
             if (ownedItem == null)
             {
-                result = ItemStoreResult.NotFound;
+                result = InventyStatus.NotFound;
                 return false;
             }
             //足りてない
             else if (ownedItem.currentStore - ammount < 0)
             {
-                result = ItemStoreResult.NotPermmit;
+                result = InventyStatus.NotEnough;
                 return false;
             }
             else
             {
                 ownedItem.currentStore -= ammount;
                 if (ownedItem.currentStore < 1)
-                    myItems.Remove(ownedItem);
-                result = ItemStoreResult.Success;
+                    MyItems.Remove(ownedItem);
+                result = InventyStatus.Success;
 
-                OnMyEnventryUpdated?.Invoke(ItemType.Item, ownedItem);
+                OnMyItemUpdated?.Invoke(ownedItem);
                 return true;
             }
         }
