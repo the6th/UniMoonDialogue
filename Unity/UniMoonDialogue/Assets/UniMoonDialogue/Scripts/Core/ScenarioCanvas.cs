@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using static UniMoonDialogue.ScenarioEngine;
@@ -13,14 +14,16 @@ namespace UniMoonDialogue
         [SerializeField] private ScenarioChoiceButton choiceButtonSeed = null;
         [SerializeField] private Text messageText = null;
         [SerializeField] private ScenarioChoiceButton NextButton = null;
-
+        [SerializeField] private string NextButtonText = "次へ";
         [SerializeField] private AudioClip voiceClip = null;
-
         private AudioSource audioSource = null;
         private ScenarioEngine engine = null;
         private float defaultDialoguePanelScaleX = 0f;
         private float durationToOpen = 0.5f;
         private bool isCoroutineRunnning = false;
+        [Header("Observe (Optional)")]
+        [SerializeField]
+        private ScenarioObserver observer = null;
 
         private List<ScenarioChoiceButton> activeChoiceButtonList = new List<ScenarioChoiceButton>();
         private void Awake()
@@ -33,9 +36,15 @@ namespace UniMoonDialogue
             audioSource.volume = 0.5f;
             audioSource.pitch = 2f;
 
-            NextButton.SetupChoiceButton("次へ", 0, audioSource);
+            NextButton.SetupChoiceButton(NextButtonText, 0, audioSource);
 
             defaultDialoguePanelScaleX = dialoguePanel.localScale.x;
+
+            if (observer == null) gameObject.TryGetComponent<ScenarioObserver>(out observer);
+
+            if (observer != null && observer.observables.Count < 1)
+                Debug.LogError("Observer Component にobservablesが設定されていません。Observerを削除するか、購読対象のobservablesを追加してください。");
+
         }
 
         private void Start()
@@ -45,13 +54,30 @@ namespace UniMoonDialogue
 
             engine = ScenarioEngine.Instance;
 
-            engine.OnMessageStart += (_) => StartCoroutine("ShowDialoguePanel", true);
-            engine.OnMessageEnd += (_) => StartCoroutine("ShowDialoguePanel", false);
+            engine.OnMessageStart += (_) =>
+            {
+                if (!isOverveTarget(_)) return;
+                StartCoroutine("ShowDialoguePanel", true);
+            };
 
-            engine.OnMessageUpdate += OnMessageUpdate;
+            engine.OnMessageEnd += (_) =>
+            {
+                if (!isOverveTarget(_)) return;
+
+                StartCoroutine("ShowDialoguePanel", false);
+            };
+
+            engine.OnMessageUpdate += (EventData data, string arg1, float progress) =>
+            {
+                if (!isOverveTarget(data)) return;
+
+                OnMessageUpdate(data, arg1, progress);
+            };
 
             engine.OnChoiceStart += (EventData data, string[] messages) =>
             {
+                if (!isOverveTarget(data)) return;
+
                 NextButton.gameObject.SetActive(false);
                 activeChoiceButtonList.Clear();
                 messageText.text = $"<i>[質問]:</i>\r\n{messages[0]}";
@@ -63,6 +89,15 @@ namespace UniMoonDialogue
                 }
             };
         }
+
+        bool isOverveTarget(EventData data)
+        {
+            if (observer == null) return true;
+
+            var b = (observer.observables.FirstOrDefault(_ => _.gameObject == data.gameObject) != null);
+            return b;
+        }
+
         IEnumerator ShowDialoguePanel(bool b)
         {
             var startTime = Time.time;

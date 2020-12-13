@@ -116,6 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4148460487640660239}
   - component: {fileID: 4148460487640660238}
+  - component: {fileID: 3934260030415615899}
   - component: {fileID: 4148460487640660224}
   - component: {fileID: 4148460487640660225}
   - component: {fileID: 4148460487640660226}
@@ -163,7 +164,23 @@ MonoBehaviour:
   choiceButtonSeed: {fileID: 4148460489299378105}
   messageText: {fileID: 4148460489635138194}
   NextButton: {fileID: 4148460487959634069}
+  NextButtonText: "\u6B21\u3078"
   voiceClip: {fileID: 8300000, guid: d19d803e4ea20444098bc6338024f50b, type: 3}
+  observer: {fileID: 3934260030415615899}
+--- !u!114 &3934260030415615899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4148460487640660227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b699ca072bf05c84d957bc493eee58af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_GroupName: ObserverName
+  observables: []
 --- !u!223 &4148460487640660224
 Canvas:
   m_ObjectHideFlags: 0
