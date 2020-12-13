@@ -1,6 +1,8 @@
 ﻿#if ENABLE_BOLT
 using Bolt;
 using Ludiq;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static UniMoonDialogue.ScenarioEngine;
 
@@ -12,6 +14,8 @@ namespace UniMoonDialogue
         [NullMeansSelf] public ValueInput transform { private set; get; }
         private ControlOutput OnFailed => CO_failed;
 
+        private List<EventData> eventData = new List<EventData>();
+        private bool init = false;
         protected override void Definition()
         {
             transform = ValueInput<Transform>("owner", null);
@@ -23,22 +27,36 @@ namespace UniMoonDialogue
         protected override ControlOutput Enter(Flow flow)
         {
             base.Enter(flow);
-            
-            if (ScenarioEngine.Instance.isRunning)
+
+            reference = flow.stack.ToReference();
+            m_transform = flow.GetValue<Transform>(transform);
+
+            if (m_transform == null) m_transform = reference.gameObject.transform;
+
+            var data = new EventData(gameObject: m_transform.gameObject);
+            if (!init)
             {
-                Debug.Log("Scenario already running by " + ScenarioEngine.Instance.currentEventData.gameObject.name);
+                ScenarioEngine.Instance.OnMessageStart += OnMessageStart;
+                init = true;
+            }
+            eventData.Add(data);
+
+            if (!ScenarioEngine.Instance.StartScenario(data))
+            {
+                eventData.Remove(data);
                 return OnFailed;
             }
-            else
+            return null;
+        }
+
+        private void OnMessageStart(EventData _event)
+        {
+            var _data = eventData.FirstOrDefault(_ => _.guid == _event.guid);
+
+            if (_data != null)
             {
-                reference = flow.stack.ToReference();
-                m_transform = flow.GetValue<Transform>(transform);
-
-                if (m_transform == null) m_transform = reference.gameObject.transform;
-
-                var data = new EventData(gameObject: m_transform.gameObject);
-                ScenarioEngine.Instance.StartScenario(data);
-                return CO_finished;
+                eventData.Remove(_data);
+                Flow.New(reference).Run(CO_finished);
             }
         }
     }

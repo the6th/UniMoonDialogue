@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4444067868220568549}
   - component: {fileID: 4444067868220568550}
   - component: {fileID: 4444067868220568548}
-  - component: {fileID: 4444067868220568547}
   m_Layer: 0
   m_Name: CapsuleMan
   m_TagString: Untagged
@@ -116,8 +115,8 @@ MonoBehaviour:
   _data:
     _json: '{"declarations":{"collection":{"$content":[{"name":"Mission","value":{"$content":0,"$type":"UnityEngine.Object"},"$version":"A"},{"name":"Coin","value":{"$content":1,"$type":"UnityEngine.Object"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
-    - {fileID: 11400000, guid: 45165fc2457f79144b00a91127381bfd, type: 2}
-    - {fileID: 11400000, guid: 16cc05cd4705ae149af080dad68116a5, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
 --- !u!114 &4444067868220568550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,22 +176,6 @@ MonoBehaviour:
             m_StringArgument: click
             m_BoolArgument: 0
           m_CallState: 2
---- !u!54 &4444067868220568547
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4444067868220568555}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &4444067868648504635
 GameObject:
   m_ObjectHideFlags: 0

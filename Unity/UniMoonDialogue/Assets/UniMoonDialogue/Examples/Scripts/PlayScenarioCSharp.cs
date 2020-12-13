@@ -27,20 +27,18 @@ namespace UniMoonDialogue
             }
         );
 
+        private void Awake()
+        {
+            ScenarioEngine.Instance.OnMessageStart += OnMessageStart;
+            ScenarioEngine.Instance.OnMessageEnd += OnMessageEnd;
+            ScenarioEngine.Instance.OnUserInput += OnUserInput;
+        }
+
         public void StartScenario()
         {
-            if (ScenarioEngine.Instance.isRunning) return;
-
             var data = new EventData(gameObject);
-            if (ScenarioEngine.Instance.StartScenario(data))
-            {
-                ScenarioEngine.Instance.OnMessageStart += OnMessageStart;
-                ScenarioEngine.Instance.OnMessageEnd += OnMessageEnd;
-                ScenarioEngine.Instance.OnUserInput += OnUserInput;
-
-                index = scenario.dialogs.Keys.Min();
-                ShowDialogue(data, index);
-            }
+            index = scenario.dialogs.Keys.Min();
+            ScenarioEngine.Instance.StartScenario(data, CallType.Queue);
         }
 
         private void OnUserInput(EventData data, ScenarioChoice choice)
@@ -80,7 +78,9 @@ namespace UniMoonDialogue
         private void OnMessageStart(ScenarioEngine.EventData data)
         {
             if (data.gameObject != gameObject) return;
+
             //Debug.Log("OnMessageStart" + data.displayName);
+            ShowDialogue(data, index);
             ExampleCommon.RotateByForce(gameObject, true);
         }
 
@@ -88,10 +88,6 @@ namespace UniMoonDialogue
         {
             if (data.gameObject != gameObject) return;
 
-            //Debug.Log("OnMessageEnd" + data.displayName);
-            ScenarioEngine.Instance.OnMessageStart -= OnMessageStart;
-            ScenarioEngine.Instance.OnMessageEnd -= OnMessageEnd;
-            ScenarioEngine.Instance.OnUserInput -= OnUserInput;
             ExampleCommon.RotateByForce(gameObject, false);
         }
     }

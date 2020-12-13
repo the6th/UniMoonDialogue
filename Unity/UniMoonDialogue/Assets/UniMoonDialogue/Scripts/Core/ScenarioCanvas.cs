@@ -8,6 +8,7 @@ namespace UniMoonDialogue
 {
     public class ScenarioCanvas : MonoBehaviour
     {
+        [Header("UIComponents")]
         [SerializeField] private RectTransform dialoguePanel = null;
         [SerializeField] private ScenarioChoiceButton choiceButtonSeed = null;
         [SerializeField] private Text messageText = null;

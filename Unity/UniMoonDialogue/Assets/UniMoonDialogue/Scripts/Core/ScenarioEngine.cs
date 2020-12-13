@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 #if ENABLE_MOONSHARP
@@ -14,6 +17,7 @@ namespace UniMoonDialogue
 #endif
         public class EventData
         {
+            public Guid guid;
             /// <summary>
             /// GameObject of scenario owner
             /// </summary>
@@ -45,6 +49,7 @@ namespace UniMoonDialogue
             /// <param name="displayName">owner name（無指定だとGameObjectの名前となる)</param>
             public EventData(GameObject gameObject, string displayName = "")
             {
+                guid = Guid.NewGuid();
                 this.gameObject = gameObject;
 
                 if (displayName == "")
@@ -97,6 +102,9 @@ namespace UniMoonDialogue
         }
 
         public enum ScenarioType { TapToNext, Select, None };
+
+        public enum CallType { Stack, Queue, CancelWhenRunning, CallByHistory }
+
         public enum ScenarioChoice
         {
             SKIP = 0,
@@ -111,6 +119,8 @@ namespace UniMoonDialogue
         [SerializeField] private float stepSpeed = 0.1f;
 
         public EventData currentEventData { private set; get; }
+        [SerializeField]
+        private List<EventData> eventStack = new List<EventData>();
 
         private ScenarioChoice scenarioChoice = ScenarioChoice.None;
 #if ENABLE_MOONSHARP
@@ -141,8 +151,9 @@ namespace UniMoonDialogue
         /// Step 表示実行中か？
         /// </summary>
         private bool isStepRunning = false;
+        [SerializeField]
         private bool isMonoRunning = false;
-        
+
         /// <summary>
         /// Step 表示（早送り表示)を中止するか？
         /// </summary>
@@ -245,13 +256,57 @@ namespace UniMoonDialogue
 #endif
         }
 
-        public bool StartScenario(EventData data)
+        public bool StartScenario(EventData data, CallType callType = CallType.CancelWhenRunning)
         {
-            if (isRunning) return false;
+            EventData _data;
+            switch (callType)
+            {
+                case CallType.CancelWhenRunning:
+                    if (isRunning) return false;
 
-            isMonoRunning = true;
-            currentEventData = data;
-            OnMessageStart?.Invoke(currentEventData);
+                    eventStack.Add(data);
+                    isMonoRunning = true;
+                    currentEventData = eventStack[0];
+                    OnMessageStart?.Invoke(currentEventData);
+
+                    break;
+                case CallType.Stack:
+                    _data = eventStack.FirstOrDefault(x => x.gameObject == data.gameObject);
+                    if (_data != null) return false;
+
+                    eventStack.Insert(0, data);
+                    if (!isRunning)
+                    {
+                        isMonoRunning = true;
+
+                        currentEventData = eventStack[0];
+                        OnMessageStart?.Invoke(currentEventData);
+                        Debug.Log("Start Stack");
+                    }
+
+                    break;
+                case CallType.Queue:
+                    _data = eventStack.FirstOrDefault(x => x.gameObject == data.gameObject);
+                    if (_data != null) return false;
+
+                    eventStack.Add(data);
+                    if (!isRunning)
+                    {
+                        isMonoRunning = true;
+                        currentEventData = eventStack[0];
+                        OnMessageStart?.Invoke(currentEventData);
+                    }
+
+                    break;
+                case CallType.CallByHistory:
+                    Debug.Log("StartFromHistory2");
+
+                    isMonoRunning = true;
+                    currentEventData = eventStack[0];
+                    OnMessageStart?.Invoke(currentEventData);
+                    break;
+            }
+            //Debug.Log($"{data.gameObject.name}を追加({callType.ToString()}) {eventStack.Count}");
             return true;
         }
         public void StopScenario(EventData data)
@@ -260,6 +315,21 @@ namespace UniMoonDialogue
             data.Stop();
             isMonoRunning = false;
             OnMessageEnd?.Invoke(currentEventData);
+            eventStack.Remove(data);
+            if (eventStack.Count > 0)
+            {
+                Invoke("StartFromHistory", 1f);
+            }
+        }
+
+        private void StartFromHistory()
+        {
+            if (isPaused)
+            {
+                Invoke("StartFromHistory", 1f);
+            }
+            StartScenario(eventStack[0], CallType.CallByHistory);
+            CancelInvoke("StartFromHistory");
         }
 
         #endregion
